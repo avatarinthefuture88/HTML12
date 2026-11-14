@@ -3752,7 +3752,7 @@
 
     <!-- 4 CORE PEDAGOGY MODES (CV 5512) -->
         <!-- 5 CORE PEDAGOGY MODES (TRỌN VẸN 5 PHẦN TRÊN 1 HÀNG) -->
-    <nav class="modes-nav">
+    <div class="modes-nav">
       <button class="mode-btn active" id="btnMode_lego" onclick="switchMode('lego')">
         <div class="mode-btn-content">
           <span class="mode-title">1. LẮP GHÉP CẤU TRÚC</span>
@@ -3787,7 +3787,7 @@
           <span class="mode-sub">KỸ THUẬT BẢN ĐỒ KHÁI NIỆM</span>
         </div>
       </button>
-    </nav>
+    </div>
 
     <!-- WORKSPACE -->
     <section class="workspace-card" id="workspaceCard">
@@ -4356,10 +4356,10 @@
               <td style="padding:8px 12px;text-align:center;font-weight:800;color:#1e40af;"><span style="background:#eff6ff;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;">Bài 18</span></td>
             </tr>
             <tr>
-              <td style="padding:8px 12px;font-family:var(--font-code);font-weight:bold;color:#475569;">&lt;nav&gt;&lt;a href=&quot;...&quot;&gt;Trang chủ&lt;/a&gt;&lt;/nav&gt;</td>
-              <td style="padding:8px 12px;font-weight:600;color:#334155;">Thanh điều hướng Menu</td>
-              <td style="padding:8px 12px;color:#1e293b;line-height:1.5;">Thẻ ngữ nghĩa chứa các liên kết điều hướng chính trong website (Menu ngang, Menu dọc)</td>
-              <td style="padding:8px 12px;text-align:center;font-weight:800;color:#1e40af;"><span style="background:#eff6ff;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;">Bài 18</span></td>
+              <td style="padding:8px 12px;font-family:var(--font-code);font-weight:bold;color:#475569;">&lt;div class=&quot;menu&quot;&gt;...&lt;/div&gt;</td>
+              <td style="padding:8px 12px;font-weight:600;color:#334155;">Khối phân chia Menu</td>
+              <td style="padding:8px 12px;color:#1e293b;line-height:1.5;">Thẻ khối &lt;div&gt; kết hợp với class để gom nhóm và định dạng khu vực Menu liên kết</td>
+              <td style="padding:8px 12px;text-align:center;font-weight:800;color:#1e40af;"><span style="background:#eff6ff;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;">Bài 16, 18</span></td>
             </tr>
             <tr style="background:#f8fafc;">
               <td style="padding:8px 12px;font-family:var(--font-code);font-weight:bold;color:#475569;">&lt;main&gt;Nội dung chính&lt;/main&gt;</td>
@@ -4424,7 +4424,7 @@
             <tr style="background:#f8fafc;">
               <td style="padding:8px 12px;font-family:var(--font-code);font-weight:bold;color:#2563eb;">#ten_id { thuoc_tinh: gia_tri; }</td>
               <td style="padding:8px 12px;font-weight:600;color:#334155;">Bộ chọn ID (#tên_id)</td>
-              <td style="padding:8px 12px;color:#1e293b;line-height:1.5;">Áp dụng cho phần tử duy nhất có id=&quot;ten_id&quot;. Ví dụ: #menu { height: 60px; } áp dụng cho &lt;nav id=&quot;menu&quot;&gt;</td>
+              <td style="padding:8px 12px;color:#1e293b;line-height:1.5;">Áp dụng cho phần tử duy nhất có id=&quot;ten_id&quot;. Ví dụ: #menu { height: 60px; } áp dụng cho &lt;div id=&quot;menu&quot;&gt;</td>
               <td style="padding:8px 12px;text-align:center;font-weight:800;color:#1e40af;"><span style="background:#eff6ff;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;">Bài 13, 16</span></td>
             </tr>
             <tr>
@@ -4440,9 +4440,9 @@
               <td style="padding:8px 12px;text-align:center;font-weight:800;color:#1e40af;"><span style="background:#eff6ff;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;">Bài 13, 14</span></td>
             </tr>
             <tr>
-              <td style="padding:8px 12px;font-family:var(--font-code);font-weight:bold;color:#2563eb;">nav a { color: white; }</td>
+              <td style="padding:8px 12px;font-family:var(--font-code);font-weight:bold;color:#2563eb;">.menu a { color: white; }</td>
               <td style="padding:8px 12px;font-weight:600;color:#334155;">Bộ chọn con phân cấp (Khoảng trắng)</td>
-              <td style="padding:8px 12px;color:#1e293b;line-height:1.5;">Chọn các thẻ &lt;a&gt; nằm bên trong thẻ cha &lt;nav&gt; (Descendant selector). Ví dụ: div.card p { font-size: 14px; }</td>
+              <td style="padding:8px 12px;color:#1e293b;line-height:1.5;">Chọn các thẻ &lt;a&gt; nằm bên trong phần tử cha có class &lt;.menu&gt; (Descendant selector). Ví dụ: div.card p { font-size: 14px; }</td>
               <td style="padding:8px 12px;text-align:center;font-weight:800;color:#1e40af;"><span style="background:#eff6ff;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;">Bài 15, 18</span></td>
             </tr>
             <tr style="background:#f8fafc;">
@@ -4890,7 +4890,10 @@
                 <option value="12A4">12A4</option>
                 <option value="12A5">12A5</option>
                 <option value="12A6">12A6</option>
-                <option value="Khác">Lớp khác</option>
+                <option value="12A7">12A7</option>
+                <option value="12A8">12A8</option>
+                <option value="12A9">12A9</option>
+                <option value="12A10">12A10</option>
               </select>
             </div>
           </div>
@@ -6193,114 +6196,42 @@
     ]
 },
     "golf": {
-      "title": "HTML Golf: Hệ Thống Menu Điều Hướng & Bookmark",
-      "goalDesc": "Mục tiêu: Đạt 100% khớp sản phẩm mẫu: link ngoài mở tab mới (target='_blank'), link neo nhảy tới id='chuong4' và link gọi điện thoại tel:.",
-      "targetCode": "<nav>\n  <a href=\"https://moet.gov.vn\" target=\"_blank\">Cổng Bộ GD&ĐT</a> |\n  <a href=\"#chuong4\">Nhảy tới Chủ đề 4</a> |\n  <a href=\"tel:02438695712\">Hotline Tư Vấn</a>\n</nav>\n<h2 id=\"chuong4\">Chủ đề 4: Ứng dụng Tin học</h2>",
-      "initialCode": "<nav>\n  <!-- 1. Thêm link mở tab mới tới https://moet.gov.vn -->\n  <!-- 2. Thêm link bookmark nhảy tới #chuong4 -->\n  <!-- 3. Thêm link gọi điện thoại tới tel:02438695712 -->\n</nav>\n<h2 id=\"chuong4\">Chủ đề 4: Ứng dụng Tin học</h2>",
-      "chips": [
-        {
-          "label": "<a href=\"https://moet.gov.vn\" target=\"_blank\">Cổng Bộ GD&ĐT</a> |",
-          "snippet": "  <a href=\"https://moet.gov.vn\" target=\"_blank\">Cổng Bộ GD&ĐT</a> |"
-        },
-        {
-          "label": "<a href=\"#chuong4\">Nhảy tới Chủ đề 4</a> |",
-          "snippet": "  <a href=\"#chuong4\">Nhảy tới Chủ đề 4</a> |"
-        },
-        {
-          "label": "<a href=\"tel:02438695712\">Hotline Tư Vấn</a>",
-          "snippet": "  <a href=\"tel:02438695712\">Hotline Tư Vấn</a>"
-        },
-        {
-          "label": "target=\"_blank\"",
-          "snippet": "target=\"_blank\""
-        }
-      ],
-      "template": [
-        {
-          "type": "code",
-          "text": "<nav>\n"
-        },
-        {
-          "type": "slot",
-          "id": "s1",
-          "label": "<!-- 1. Thêm link mở tab mới tới https://moet.gov.vn (target='_blank'): -->",
-          "placeholder": "Kéo đáp án phù hợp vào đây",
-          "default": ""
-        },
-        {
-          "type": "slot",
-          "id": "s2",
-          "label": "<!-- 2. Thêm link bookmark nhảy tới #chuong4: -->",
-          "placeholder": "Kéo đáp án phù hợp vào đây",
-          "default": ""
-        },
-        {
-          "type": "slot",
-          "id": "s3",
-          "label": "<!-- 3. Thêm link gọi điện thoại tới tel:02438695712: -->",
-          "placeholder": "Kéo đáp án phù hợp vào đây",
-          "default": ""
-        },
-        {
-          "type": "code",
-          "text": "</nav>\n<h2 id=\"chuong4\">Chủ đề 4: Ứng dụng Tin học</h2>"
-        }
-      ],
-      "rules": [
-        {
-          "id": "r_blank",
-          "name": "Mở tab mới target='_blank'",
-          "weight": 30,
-          "regex": "target=[\"']?_blank[\"']?",
-          "hint": "Thêm thuộc tính target='_blank' vào thẻ liên kết ngoài."
-        },
-        {
-          "id": "r_bm",
-          "name": "Liên kết neo #chuong4",
-          "weight": 35,
-          "regex": "href=[\"']?#chuong4[\"']?",
-          "hint": "Khai báo href='#chuong4' để khớp với phần tử có id='chuong4' bên dưới."
-        },
-        {
-          "id": "r_tel",
-          "name": "Gọi điện thoại tel:",
-          "weight": 35,
-          "regex": "href=[\"']?tel:[0-9]+[\"']?",
-          "hint": "Khai báo tiền tố tel: cùng số điện thoại trong thuộc tính href."
-        }
-      ],
+      "title": "Thực Hành Tạo Trang Web: Bảng Tổng Hợp 4 Dạng Liên Kết HTML",
+      "goalDesc": "Mục tiêu: Sắp xếp các câu lệnh theo thứ tự trực quan: Tiêu đề trang ➡ 1. Liên kết ngoài (Mở tab mới) ➡ 2. Liên kết nội bộ (Trang giới thiệu) ➡ 3. Liên kết gửi email (mailto:) ➡ 4. Liên kết gọi điện thoại (tel:).",
+      "targetCode": "<h2>🌐 BẢNG TỔNG HỢP CÁC LOẠI LIÊN KẾT HTML</h2>\n<p>1. Liên kết ngoài: <a href=\"https://moet.gov.vn\" target=\"_blank\">Cổng thông tin Bộ GD&ĐT (Mở tab mới)</a></p>\n<p>2. Liên kết nội bộ: <a href=\"gioithieu.html\">Xem trang giới thiệu nhà trường</a></p>\n<p>3. Liên kết gửi email: <a href=\"mailto:admin@thpt.edu.vn\">Gửi thư điện tử cho ban giám hiệu</a></p>\n<p>4. Liên kết gọi điện thoại: <a href=\"tel:02613884123\">Hotline hỗ trợ: 0261.3884.123 (Bấm để gọi)</a></p>",
+      "initialCode": "<!-- Sắp xếp theo thứ tự: Tiêu đề trang -> 1. Liên kết ngoài -> 2. Liên kết nội bộ -> 3. Liên kết email -> 4. Liên kết gọi điện thoại -->",
       "statements": [
         {
-                "id": "b10_1",
-                "order": 1,
-                "code": "<nav>",
-                "label": "<nav>"
+          "id": "b10_1",
+          "order": 1,
+          "code": "<h2>🌐 BẢNG TỔNG HỢP CÁC LOẠI LIÊN KẾT HTML</h2>",
+          "label": "<h2>🌐 BẢNG TỔNG HỢP CÁC LOẠI LIÊN KẾT HTML</h2>"
         },
         {
-                "id": "b10_2",
-                "order": 2,
-                "code": "  <a href=\"https://moet.gov.vn\" target=\"_blank\">🌐 Cổng Bộ GD&ĐT (Tab mới)</a> |",
-                "label": "<a href=\"https://moet.gov.vn\" target=\"_blank\">🌐 Cổng Bộ GD&ĐT (Tab mới)</a> |"
+          "id": "b10_2",
+          "order": 2,
+          "code": "<p>1. Liên kết ngoài: <a href=\"https://moet.gov.vn\" target=\"_blank\">Cổng thông tin Bộ GD&ĐT (Mở tab mới)</a></p>",
+          "label": "<p>1. Liên kết ngoài: <a href=\"https://moet.gov.vn\" target=\"_blank\">Cổng thông tin Bộ GD&ĐT (Mở tab mới)</a></p>"
         },
         {
-                "id": "b10_3",
-                "order": 3,
-                "code": "  <a href=\"#chuong4\">⬇ Nhảy tới Chủ đề 4</a> |",
-                "label": "<a href=\"#chuong4\">⬇ Nhảy tới Chủ đề 4</a> |"
+          "id": "b10_3",
+          "order": 3,
+          "code": "<p>2. Liên kết nội bộ: <a href=\"gioithieu.html\">Xem trang giới thiệu nhà trường</a></p>",
+          "label": "<p>2. Liên kết nội bộ: <a href=\"gioithieu.html\">Xem trang giới thiệu nhà trường</a></p>"
         },
         {
-                "id": "b10_4",
-                "order": 4,
-                "code": "  <a href=\"tel:02438695712\">📞 Hotline: 024.3869.5712</a>\n</nav>",
-                "label": "<a href=\"tel:02438695712\">📞 Hotline: 024.3869.5712</a>\n</nav>"
+          "id": "b10_4",
+          "order": 4,
+          "code": "<p>3. Liên kết gửi email: <a href=\"mailto:admin@thpt.edu.vn\">Gửi thư điện tử cho ban giám hiệu</a></p>",
+          "label": "<p>3. Liên kết gửi email: <a href=\"mailto:admin@thpt.edu.vn\">Gửi thư điện tử cho ban giám hiệu</a></p>"
         },
         {
-                "id": "b10_5",
-                "order": 5,
-                "code": "<h2 id=\"chuong4\">📍 Chủ đề 4: Ứng dụng Tin học 12</h2>\n<p>Trang giới thiệu chương trình Tin học 12 (Kết nối tri thức).</p>",
-                "label": "<h2 id=\"chuong4\">📍 Chủ đề 4: Ứng dụng Tin học 12</h2>\n<p>Trang giới thiệu chương trình Tin học 12 (Kết nối tri thức).</p>"
+          "id": "b10_5",
+          "order": 5,
+          "code": "<p>4. Liên kết gọi điện thoại: <a href=\"tel:02613884123\">Hotline hỗ trợ: 0261.3884.123 (Bấm để gọi)</a></p>",
+          "label": "<p>4. Liên kết gọi điện thoại: <a href=\"tel:02613884123\">Hotline hỗ trợ: 0261.3884.123 (Bấm để gọi)</a></p>"
         }
-]
+      ]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -8275,20 +8206,20 @@
         {
                 "id": "b17_1",
                 "order": 1,
-                "code": "<style>\n  nav { text-align: right; background-color: #0f172a; padding: 10px; border-radius: 8px; }\n  nav ul { list-style: none; margin: 0; padding: 0; }\n  nav li { display: inline-block; margin-left: 10px; }\n  nav a { color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; background-color: #2563eb; transition: 0.2s; }",
-                "label": "<style>\n  nav { text-align: right; background-color: #0f172a; padding: 10px; border-radius: 8px; }\n  nav ul { list-style: none; margin: 0; padding: 0; }\n  nav li { display: inline-block; margin-left: 10px; }\n  nav a { color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; background-color: #2563eb; transition: 0.2s; }"
+        "code": "<style>\n  .menu { text-align: right; background-color: #0f172a; padding: 10px; border-radius: 8px; }\n  .menu ul { list-style: none; margin: 0; padding: 0; }\n  .menu li { display: inline-block; margin-left: 10px; }\n  .menu a { color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; background-color: #2563eb; transition: 0.2s; }",
+        "label": "<style>\n  .menu { text-align: right; background-color: #0f172a; padding: 10px; border-radius: 8px; }\n  .menu ul { list-style: none; margin: 0; padding: 0; }\n  .menu li { display: inline-block; margin-left: 10px; }\n  .menu a { color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; background-color: #2563eb; transition: 0.2s; }"
         },
         {
                 "id": "b17_2",
                 "order": 2,
-                "code": "  nav a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>",
-                "label": "  nav a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>"
+        "code": "  .menu a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>",
+        "label": "  .menu a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>"
         },
         {
                 "id": "b17_3",
                 "order": 3,
-                "code": "<nav>\n  <ul>\n    <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n    <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n  </ul>\n</nav>",
-                "label": "<nav>\n  <ul>\n    <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n    <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n  </ul>\n</nav>"
+        "code": "<div class=\"menu\">\n  <ul>\n    <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n    <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n  </ul>\n</div>",
+        "label": "<div class=\"menu\">\n  <ul>\n    <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n    <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n  </ul>\n</div>"
         },
         {
                 "id": "b17_4",
@@ -8502,7 +8433,7 @@
         {
             "id": "b_nav",
             "type": "lay_nav",
-            "label": "nav a { display: inline-block; text-decoration: none; padding: 10px 15px; }",
+            "label": ".menu a { display: inline-block; text-decoration: none; padding: 10px 15px; }",
             "color": "#0369a1"
         },
         {
@@ -8570,24 +8501,24 @@
                 "root": "BÀI 18: THỰC HÀNH TỔNG HỢP THIẾT KẾ TRANG WEB",
                 "branches": [
                         {
-                                "id": "br1",
-                                "title": "1. Thẻ bố cục ngữ nghĩa HTML5",
-                                "items": [
-                                        "<header> chứa phần đầu trang, logo và khẩu hiệu website",
-                                        "<main> chứa nội dung trọng tâm độc nhất của trang web",
-                                        "<footer> chứa thông tin chân trang, bản quyền và liên hệ"
-                                ],
-                                "missing": {
-                                        "id": "b18_m1",
-                                        "question": "Thẻ ngữ nghĩa chuẩn HTML5 nào dùng để bao bọc thanh menu điều hướng?",
-                                        "correct": "<nav>",
-                                        "label": "<nav> chứa thanh menu điều hướng liên kết",
-                                        "options": [
-                                                "<nav>",
-                                                "<menu>",
-                                                "<header>"
-                                        ]
-                                }
+                        "id": "br1",
+                        "title": "1. Thẻ bố cục ngữ nghĩa HTML5",
+                        "items": [
+                                "<header> chứa phần đầu trang, logo và khẩu hiệu website",
+                                "<section> chứa từng phân đoạn hoặc đề mục nội dung độc lập",
+                                "<footer> chứa thông tin chân trang, bản quyền và liên hệ"
+                        ],
+                        "missing": {
+                                "id": "b18_m1",
+                                "question": "Thẻ ngữ nghĩa chuẩn HTML5 nào dùng để chứa phần nội dung trọng tâm độc nhất của trang web?",
+                                "correct": "<main>",
+                                "label": "<main> chứa nội dung trọng tâm độc nhất",
+                                "options": [
+                                        "<main>",
+                                        "<section>",
+                                        "<div>"
+                                ]
+                        }
                         },
                         {
                                 "id": "br2",
@@ -8613,7 +8544,7 @@
                                 "id": "br3",
                                 "title": "3. Thiết kế menu điều hướng ngang",
                                 "items": [
-                                        "Sử dụng cấu trúc danh sách kết hợp <nav>, <ul> và <li>",
+                                        "Sử dụng cấu trúc danh sách kết hợp thẻ <ul> và <li> tạo các mục liên kết",
                                         "text-decoration: none bỏ đường gạch chân cho các thẻ <a>",
                                         "a:hover tạo hiệu ứng đổi màu nền tương tác sinh động khi rê chuột"
                                 ],
@@ -8799,7 +8730,7 @@ const totalSlots = cmap.branches.length;
                   </button>
                 ` : `
                   <span style="font-size:0.86rem;color:#64748b;font-weight:600;background:#f8fafc;padding:7px 14px;border-radius:6px;border:1px dashed #cbd5e1;display:inline-flex;align-items:center;gap:6px;">
-                    <span>🔒</span> <span>Nút Nộp Bài sẽ mở khi hoàn thành đủ 5 phần</span>
+                    <span>🔒</span> <span>Em hãy hoàn thành các kiến thức để nộp bài</span>
                   </span>
                 `}
               </div>
@@ -11320,10 +11251,10 @@ const totalSlots = cmap.branches.length;
             title: "Chỉ dùng toàn thẻ <div> thay vì các thẻ ngữ nghĩa HTML5",
             category: "Cấu trúc Ngữ nghĩa",
             symptoms: "Mã nguồn trang web dày đặc <div class='div1'>, <div class='div2'> rất khó đọc, khó phân biệt đầu trang, thân trang, chân trang.",
-            cause: "Chưa hình thành thói quen sử dụng hệ thống thẻ ngữ nghĩa chuẩn (Header, Navigation, Main, Footer).",
+            cause: "Chưa hình thành thói quen sử dụng hệ thống thẻ ngữ nghĩa chuẩn trong SGK (Header, Section, Main, Footer).",
             badCode: "<div class=\"header\">...</div>\n<div class=\"menu\">...</div>\n<div class=\"content\">...</div>\n<div class=\"footer\">...</div>",
-            goodCode: "<header>...</header>\n<nav>...</nav>\n<main>\n  <section>...</section>\n</main>\n<footer>...</footer>",
-            prescription: "Một website chuyên nghiệp (như dự án Website CLB) nên dùng thẻ ngữ nghĩa rõ ràng: <header>, <nav>, <main>, <section>, <footer>."
+goodCode: "<header>...</header>\n<main>\n  <section>...</section>\n</main>\n<footer>...</footer>",
+            prescription: "Một website chuyên nghiệp (như dự án Website CLB) nên dùng thẻ ngữ nghĩa rõ ràng trong SGK: <header>, <main>, <section>, <footer>."
           },
           {
             id: "b18_e2",
