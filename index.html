@@ -542,6 +542,18 @@
     .lego-block:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     .lego-block.dragging { opacity: 0.5; }
     .lego-block.selected { outline: 3px solid #2563eb; background: #eff6ff; }
+    .lego-snapped-tag {
+      display: inline-block;
+      max-width: 100%;
+      font-weight: 800;
+      color: #065f46;
+      background: #d1fae5;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1.5px solid #10b981;
+      font-size: 1.02rem;
+      white-space: nowrap;
+    }
     .lego-assembly {
       background: white;
       border: 1.5px solid var(--slate-200);
@@ -1954,7 +1966,7 @@
       box-shadow: 0 4px 12px rgba(217, 119, 6, 0.6);
     }
     .attendance-pill-btn {
-      background: linear-gradient(135deg, #d97706, #b45309);
+      background: linear-gradient(135deg, #ea580c, #f97316) !important;
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -1962,14 +1974,14 @@
       padding: 5px 12px;
       border-radius: 20px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      box-shadow: 0 3px 8px rgba(234, 88, 12, 0.45) !important;
       transition: all 0.2s ease;
       user-select: none;
-      border: 1.5px solid #fde68a;
+      border: 1.5px solid #ffedd5 !important;
     }
     .attendance-pill-btn:hover {
       transform: scale(1.04);
-      background: linear-gradient(135deg, #b45309, #92400e);
+      background: linear-gradient(135deg, #c2410c, #ea580c) !important;
     }
     .attendance-pill-icon {
       background: #ffffff;
@@ -2336,24 +2348,40 @@
     border-radius: 6px !important;
   }
   .lego-block {
-    display: block;
+    display: block !important;
     width: 100% !important;
-  }
-  .lego-block.snapped-used, .lego-block[style*="display: none"] {
-    display: none !important;
     box-sizing: border-box !important;
-    font-size: 0.72rem !important;
-    padding: 5px 6px !important;
-    border-radius: 5px !important;
+    font-size: 0.80rem !important; /* ĐÃ GIẢM KÍCH THƯỚC FONT CHỮ THEO YÊU CẦU CỦA CÔ */
+    padding: 6px 8px !important;
+    border-radius: 6px !important;
     border: 1.5px solid #0284c7 !important;
-    line-height: 1.2 !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
     margin: 0 !important;
     text-align: center !important;
     white-space: normal !important;
     word-break: break-word !important;
     cursor: pointer !important;
     background: #ffffff !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    color: #0369a1 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+  }
+  .lego-block:hover, .lego-block:active {
+    background: #eff6ff !important;
+  }
+  .lego-block.selected {
+    outline: 2.5px solid #2563eb !important;
+    background: #dbeafe !important;
+  }
+  .lego-block.snapped-used, .lego-block[style*="display: none"] {
+    display: none !important;
+  }
+  .lego-snapped-tag {
+    font-size: 0.80rem !important;
+    padding: 3px 6px !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
   .lego-assembly {
     width: 100% !important;
@@ -3280,10 +3308,24 @@
   .att-btn-submit,
   .att-btn-reset {
     width: 100% !important;
-    padding: 7px 12px !important;
-    font-size: 0.80rem !important;
+    padding: 10px 16px !important;
+    font-size: 0.90rem !important;
     border-radius: 8px !important;
     box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  #attendanceModal .modal-body > div:last-child {
+    flex-direction: column-reverse !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  #attendanceModal .modal-body > div:last-child > div {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
   }
 
   /* 5. THANH ĐIỀU HƯỚNG DƯỚI CÙNG THU GỌN VÀ HIỂN THỊ NHÃN GỌN GÀNG */
@@ -3783,11 +3825,11 @@
             </div>
           </div>
 
-          <!-- ĐIỂM DANH & NỘP BÀI GOOGLE SHEET (MÀU VÀNG CAM) -->
-          <div class="attendance-pill-btn" id="attendanceTrigger" onclick="openAttendanceModal()" title="Bấm để Nộp bài và điểm danh gửi kết quả của bạn cho giáo viên">
+          <!-- NỘP BÀI (MÀU VÀNG CAM) -->
+          <div class="attendance-pill-btn" id="attendanceTrigger" onclick="openAttendanceModal()" title="Bấm để Nộp bài gửi kết quả của bạn cho giáo viên">
             <div class="attendance-pill-icon">📊</div>
             <div class="robot-label">
-              <span class="robot-line-1"><span class="label-full">NỘP BÀI &amp; ĐIỂM DANH</span><span class="label-mobile">Nộp bài</span></span>
+              <span class="robot-line-1"><span class="label-full">NỘP BÀI</span><span class="label-mobile">Nộp bài</span></span>
             </div>
           </div>
         </div>
@@ -4823,7 +4865,7 @@
         <div style="display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 1.6rem;">📊</span>
           <div>
-            <h3 style="color:#ffffff; margin:0; font-size:1.25rem; font-weight:900;">BẢNG VÀNG NỘP BÀI &amp; ĐIỂM DANH KẾT QUẢ</h3>
+            <h3 style="color:#ffffff; margin:0; font-size:1.25rem; font-weight:900;">BÁO CÁO KẾT QUẢ HỌC TẬP</h3>
             
           </div>
         </div>
@@ -4919,8 +4961,8 @@
             <button id="btnSyncOffline" onclick="syncOfflineSubmissions()" style="display:none; background:#0284c7; color:white; border:none; padding:10px 16px; border-radius:8px; font-weight:800; cursor:pointer; font-size:0.9rem;">
               🔄 Đồng bộ (<span id="offlineCount">0</span>) kết quả Offline
             </button>
-            <button id="btnSendAttendance" onclick="submitAttendanceToSheet()" style="background:linear-gradient(135deg, #16a34a, #15803d); color:white; border:none; padding:11px 22px; border-radius:8px; font-weight:900; cursor:pointer; font-size:0.95rem; box-shadow:0 3px 8px rgba(22, 163, 74, 0.4); display:flex; align-items:center; gap:8px;">
-              <span>🚀 NỘP BÀI VÀ ĐIỂM DANH VỀ GOOGLE SHEETS</span>
+            <button id="btnSendAttendance" class="att-btn-submit" onclick="submitAttendanceToSheet()" style="background:linear-gradient(135deg, #ea580c, #f97316); color:white; border:none; padding:12px 26px; border-radius:8px; font-weight:900; cursor:pointer; font-size:1rem; box-shadow:0 4px 12px rgba(234, 88, 12, 0.45); display:flex; align-items:center; gap:8px;">
+              <span>🚀 NỘP BÀI</span>
             </button>
           </div>
         </div>
@@ -8736,9 +8778,12 @@
                 </span>
                 ${isAllDone ? '<span class="cmap-celebrate-text">🎉 XUẤT SẮC! ĐÃ HOÀN TẤT TOÀN BỘ SƠ ĐỒ TƯ DUY!</span>' : ''}
               </div>
-              <div style="display:flex;gap:12px;">
-                <button class="action-btn btn-secondary cmap-btn-reset" onclick="resetConceptMap()">
+              <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <button class="action-btn btn-secondary cmap-btn-reset" onclick="resetConceptMap()" style="padding:8px 18px;font-size:0.92rem;font-weight:700;color:#000000;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:6px;cursor:pointer;">
                   ↺ Đặt Lại Sơ Đồ
+                </button>
+                <button class="action-btn btn-primary" onclick="openAttendanceModal()" style="padding:8px 22px;font-size:0.95rem;font-weight:800;background:linear-gradient(135deg,#ea580c,#f97316);border:none;border-radius:6px;color:#ffffff;box-shadow:0 3px 10px rgba(234,88,12,0.4);cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+                  <span>📊</span> <span>Nộp Bài</span>
                 </button>
               </div>
             </div>
@@ -8802,11 +8847,8 @@
           scrollToCmapBranch(nextIdx);
         } else {
           // Hoàn thành cả 4 phần
-          showAlert("success", "🎉 <b>XUẤT SẮC!</b> Em đã hoàn thành trọn vẹn cả 4 phần của sơ đồ tư duy!");
-          setTimeout(() => {
-            const footer = document.querySelector(".cmap-footer-actions");
-            if (footer) footer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 300);
+          hideAlert();
+          openSynthesisResultModal();
         }
       } else {
         AudioEngine.playRepel();
@@ -9033,7 +9075,9 @@
       loadLesson(startLesson);
       switchMode(startMode, true);
 
-      if (params.get("modal") === "help") {
+      if (params.get("modal") === "attendance") {
+        openAttendanceModal();
+      } else if (params.get("modal") === "help") {
         openHelpModal();
       } else if (params.get("modal") === "golfWrong") {
         checkGolfResult();
@@ -9067,6 +9111,12 @@
       } else if (params.get("modal") === "escapeWrong") {
         document.getElementById("erInput").value = "sai_dap_an";
         submitEscapeAnswer();
+      } else if (params.get("modal") === "legoWrong") {
+        submitLegoResult();
+      } else if (params.get("modal") === "speedRunResult") {
+        submitSpeedRun();
+      } else if (params.get("modal") === "synthesisResult") {
+        openSynthesisResultModal();
       }
     });
 
@@ -9418,16 +9468,8 @@
       const nextBtn = document.getElementById("btnSrNextPart");
       if (nextBtn) nextBtn.style.display = "inline-flex";
 
-      if (correctPicks === totalRequired && wrongPicks === 0) {
-        AudioEngine.playSuccess();
-        showAlert("success", `🎉 <b>XUẤT SẮC!</b> Em đã chọn đúng <b>${correctPicks}/${totalRequired}</b> phương án chính xác! Em có thể bấm <b>'Sang Phần 4: Vận Dụng ➡'</b> để tiếp tục.`);
-      } else {
-        AudioEngine.playRepel();
-        let msg = `⚠️ <b>KẾT QUẢ ĐÃ GHI NHẬN: ${correctPicks}/${totalRequired} ĐÁP ÁN ĐÚNG</b><br>`;
-        if (wrongPicks > 0) msg += `Có ${wrongPicks} phương án chọn sai (thẻ viền đỏ). `;
-        msg += `Em có thể bấm <b>'↺ Làm Lại'</b> để chọn lại, hoặc bấm <b>'Sang Phần 4: Vận Dụng ➡'</b> để tiếp tục bài học nhé!`;
-        showAlert("warning", msg);
-      }
+      hideAlert();
+      openSpeedRunResultModal(correctPicks, totalRequired, wrongPicks);
     }
 
     // ==========================================
@@ -9569,13 +9611,8 @@
       const nextBtn = document.getElementById("btnLegoNextPart");
       if (nextBtn) nextBtn.style.display = "inline-flex";
 
-      if (correctCount === totalSlots) {
-        AudioEngine.playSuccess();
-        showAlert("success", `🎉 <b>XUẤT SẮC!</b> Em đã ghép đúng hoàn toàn <b>${correctCount}/${totalSlots}</b> khối HTML. Em có thể bấm <b>'Sang Phần 2: Thực Hành ➡'</b> để tiếp tục!`);
-      } else {
-        AudioEngine.playPop();
-        showAlert("warning", `⚠️ <b>KẾT QUẢ ĐÃ GHI NHẬN: ${correctCount}/${totalSlots} KHỐI ĐÚNG</b><br>Em có thể bấm <b>'↺ Làm Lại'</b> để xếp lại, hoặc bấm <b>'Sang Phần 2: Thực Hành ➡'</b> để tiếp tục bài học nhé!`);
-      }
+      hideAlert();
+      openLegoResultModal(correctCount, totalSlots);
     }
 
     function processSnap(slotEl, blockEl) {
@@ -9600,7 +9637,7 @@
         slotEl.classList.add("snapped");
 
         slotEl.querySelector(".lego-slot-content").innerHTML = `
-          <div style="display:inline-block;max-width:100%;font-weight:800;color:#065f46;background:#d1fae5;padding:4px 10px;border-radius:6px;border:1.5px solid #10b981;font-size:1.02rem;white-space:nowrap;">
+          <div class="lego-snapped-tag">
             ✓ ${escapeHtml(blockEl.textContent.trim())}
           </div>
         `;
@@ -9628,9 +9665,10 @@
         if (currentCount === total) {
           AudioEngine.playSuccess();
           if (nextBtn) nextBtn.style.display = "inline-flex";
-          showAlert("success", `🎉 <b>XUẤT SẮC!</b> Em đã hoàn thành chính xác 100% (${total}/${total} khối)! Bấm <b>'Sang Phần 2: Thực Hành ➡'</b> để tiếp tục.`);
+          hideAlert();
+          openLegoResultModal(total, total);
         } else {
-          showAlert("info", `✓ Đã khớp chính xác! Em đã ghép đúng <b>${currentCount}/${total}</b> khối. Tiếp tục ghép các khối còn lại nhé!`);
+          hideAlert();
         }
       } else {
         AudioEngine.playRepel();
@@ -9982,6 +10020,197 @@
       const modal = document.getElementById("golfResultModal");
       if (modal) modal.classList.remove("open");
       stopFireworks();
+    }
+
+    // ==========================================
+    // BẢNG THÔNG BÁO KẾT QUẢ Ở GIỮA MÀN HÌNH (CENTER MODALS) CHO CẢ 5 PHẦN
+    // ==========================================
+    function openLegoResultModal(correctCount, totalSlots) {
+      const modal = document.getElementById("golfResultModal");
+      const box = document.getElementById("golfResultBox");
+      if (!modal || !box) return;
+
+      const isAllCorrect = (correctCount === totalSlots && totalSlots > 0);
+
+      if (isAllCorrect) {
+        AudioEngine.playSuccess();
+        box.innerHTML = `
+          <div class="result-header" style="position:relative;background:linear-gradient(135deg,#059669,#10b981);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <button onclick="closeGolfResultModal()" style="position:absolute;top:10px;right:14px;background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;line-height:1;" title="Đóng">&times;</button>
+            <div class="result-emoji" style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">🎉 🎆 ✨</div>
+            <h2 class="result-title" style="margin:0;font-size:1.50rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;">BẠN TRẢ LỜI ĐÚNG!</h2>
+            <div class="result-subtitle" style="font-size:1.02rem;color:#ecfdf5;margin-top:6px;font-weight:700;">Kết quả: ${correctCount}/${totalSlots} khối chính xác (100%)</div>
+          </div>
+          <div class="modal-body" style="padding:22px 24px;text-align:center;">
+            <p style="color:#334155;font-size:0.95rem;margin:0 0 18px 0;line-height:1.5;">
+              Chúc mừng em đã nhận diện và lắp ghép chính xác toàn bộ cấu trúc các thẻ HTML cho bài học này!<br>
+              Hãy bấm <b>"Sang Phần 2: Thực Hành ➡"</b> để tiếp tục bài học nhé!
+            </p>
+            <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+              <button class="action-btn btn-secondary" onclick="closeGolfResultModal(); renderLego(LESSONS_DATA[currentLessonKey].lego);" style="font-size:0.95rem;padding:9px 22px;font-weight:700;color:#000000;border:1.5px solid #cbd5e1;background:#ffffff;border-radius:6px;cursor:pointer;">
+                ↺ Làm Lại
+              </button>
+              <button class="action-btn btn-primary" onclick="closeGolfResultModal(); switchMode('golf');" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);font-size:0.95rem;padding:9px 24px;font-weight:800;border:none;border-radius:6px;color:#ffffff;box-shadow:0 3px 10px rgba(37,99,235,0.3);cursor:pointer;">
+                Sang Phần 2: Thực Hành ➡️
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        AudioEngine.playRepel();
+        box.innerHTML = `
+          <div class="result-header" style="position:relative;background:linear-gradient(135deg,#b91c1c,#ef4444);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <button onclick="closeGolfResultModal()" style="position:absolute;top:10px;right:14px;background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;line-height:1;" title="Đóng">&times;</button>
+            <div class="result-emoji" style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">⚠️ 📋</div>
+            <h2 class="result-title" style="margin:0;font-size:1.50rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;">KẾT QUẢ ĐÃ GHI NHẬN: ${correctCount}/${totalSlots} KHỐI ĐÚNG</h2>
+            <div class="result-subtitle" style="font-size:0.98rem;color:#fee2e2;margin-top:6px;font-weight:600;">Kết quả thực tế của em đã được lưu vào hệ thống.</div>
+          </div>
+          <div class="modal-body" style="padding:22px 24px;text-align:center;">
+            <p style="color:#475569;font-size:0.95rem;margin:0 0 18px 0;line-height:1.5;">
+              ${correctCount === 0 ? 'Em chưa lắp ghép khối thẻ nào hoặc chưa đúng vị trí.' : `Em đã ghép đúng ${correctCount}/${totalSlots} khối thẻ.`}<br>
+              Em có thể bấm <b>"↺ Làm Lại"</b> để lắp ghép lại, hoặc bấm <b>"Sang Phần 2: Thực Hành ➡"</b> để tiếp tục bài học!
+            </p>
+            <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+              <button class="action-btn btn-secondary" onclick="closeGolfResultModal(); renderLego(LESSONS_DATA[currentLessonKey].lego);" style="font-size:0.95rem;padding:9px 22px;font-weight:700;color:#000000;border:1.5px solid #cbd5e1;background:#ffffff;border-radius:6px;cursor:pointer;">
+                ↺ Làm Lại
+              </button>
+              <button class="action-btn btn-primary" onclick="closeGolfResultModal(); switchMode('golf');" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);font-size:0.95rem;padding:9px 24px;font-weight:800;border:none;border-radius:6px;color:#ffffff;box-shadow:0 3px 10px rgba(37,99,235,0.3);cursor:pointer;">
+                Sang Phần 2: Thực Hành ➡️
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      modal.classList.add("open");
+    }
+
+    function openSpeedRunResultModal(correctPicks, totalRequired, wrongPicks) {
+      const modal = document.getElementById("golfResultModal");
+      const box = document.getElementById("golfResultBox");
+      if (!modal || !box) return;
+
+      const isAllCorrect = (correctPicks === totalRequired && wrongPicks === 0);
+
+      if (isAllCorrect) {
+        AudioEngine.playSuccess();
+        box.innerHTML = `
+          <div class="result-header" style="position:relative;background:linear-gradient(135deg,#059669,#10b981);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <button onclick="closeGolfResultModal()" style="position:absolute;top:10px;right:14px;background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;line-height:1;" title="Đóng">&times;</button>
+            <div class="result-emoji" style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">🎉 🎆 ✨</div>
+            <h2 class="result-title" style="margin:0;font-size:1.50rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;">BẠN TRẢ LỜI ĐÚNG!</h2>
+            <div class="result-subtitle" style="font-size:1.02rem;color:#ecfdf5;margin-top:6px;font-weight:700;">Kết quả: ${correctPicks}/${totalRequired} phương án chính xác (100%)</div>
+          </div>
+          <div class="modal-body" style="padding:22px 24px;text-align:center;">
+            <p style="color:#334155;font-size:0.95rem;margin:0 0 18px 0;line-height:1.5;">
+              Xuất sắc! Em đã nhận biết chính xác và toàn diện các câu trả lời đúng của bài học.<br>
+              Hãy bấm <b>"Sang Phần 4: Vận Dụng ➡"</b> để tiếp tục thử thách nhé!
+            </p>
+            <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+              <button class="action-btn btn-secondary" onclick="closeGolfResultModal(); renderSpeedRun(LESSONS_DATA[currentLessonKey].speedRun);" style="font-size:0.95rem;padding:9px 22px;font-weight:700;color:#000000;border:1.5px solid #cbd5e1;background:#ffffff;border-radius:6px;cursor:pointer;">
+                ↺ Làm Lại
+              </button>
+              <button class="action-btn btn-primary" onclick="closeGolfResultModal(); switchMode('escapeRoom');" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);font-size:0.95rem;padding:9px 24px;font-weight:800;border:none;border-radius:6px;color:#ffffff;box-shadow:0 3px 10px rgba(37,99,235,0.3);cursor:pointer;">
+                Sang Phần 4: Vận Dụng ➡️
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        AudioEngine.playRepel();
+        box.innerHTML = `
+          <div class="result-header" style="position:relative;background:linear-gradient(135deg,#b91c1c,#ef4444);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <button onclick="closeGolfResultModal()" style="position:absolute;top:10px;right:14px;background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;line-height:1;" title="Đóng">&times;</button>
+            <div class="result-emoji" style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">⚠️ 📋</div>
+            <h2 class="result-title" style="margin:0;font-size:1.50rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;">KẾT QUẢ ĐÃ GHI NHẬN: ${correctPicks}/${totalRequired} ĐÁP ÁN ĐÚNG</h2>
+            <div class="result-subtitle" style="font-size:0.98rem;color:#fee2e2;margin-top:6px;font-weight:600;">Kết quả thực tế của em đã được lưu vào hệ thống.</div>
+          </div>
+          <div class="modal-body" style="padding:22px 24px;text-align:center;">
+            <p style="color:#475569;font-size:0.95rem;margin:0 0 18px 0;line-height:1.5;">
+              ${wrongPicks > 0 ? `Có <b>${wrongPicks}</b> phương án chọn chưa chính xác (viền đỏ). ` : ''}
+              ${correctPicks < totalRequired ? `Em cần chọn đủ <b>${totalRequired}</b> phương án đúng. ` : ''}<br>
+              Em có thể bấm <b>"↺ Làm Lại"</b> để chọn lại, hoặc bấm <b>"Sang Phần 4: Vận Dụng ➡"</b> để tiếp tục bài học!
+            </p>
+            <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+              <button class="action-btn btn-secondary" onclick="closeGolfResultModal(); renderSpeedRun(LESSONS_DATA[currentLessonKey].speedRun);" style="font-size:0.95rem;padding:9px 22px;font-weight:700;color:#000000;border:1.5px solid #cbd5e1;background:#ffffff;border-radius:6px;cursor:pointer;">
+                ↺ Làm Lại
+              </button>
+              <button class="action-btn btn-primary" onclick="closeGolfResultModal(); switchMode('escapeRoom');" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);font-size:0.95rem;padding:9px 24px;font-weight:800;border:none;border-radius:6px;color:#ffffff;box-shadow:0 3px 10px rgba(37,99,235,0.3);cursor:pointer;">
+                Sang Phần 4: Vận Dụng ➡️
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      modal.classList.add("open");
+    }
+
+    function openSynthesisResultModal() {
+      const modal = document.getElementById("golfResultModal");
+      const box = document.getElementById("golfResultBox");
+      if (!modal || !box) return;
+
+      const scores = getLessonDetailedScores(currentLessonKey);
+      const lessonData = LESSONS_DATA[currentLessonKey] || {};
+      const lessonTitle = lessonData.title || ("Bài " + currentLessonKey.replace("b", ""));
+
+      AudioEngine.playSuccess();
+      box.innerHTML = `
+        <div class="result-header" style="position:relative;background:linear-gradient(135deg,#059669,#10b981);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
+          <button onclick="closeGolfResultModal()" style="position:absolute;top:10px;right:14px;background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;line-height:1;" title="Đóng">&times;</button>
+          <div class="result-emoji" style="font-size:3.2rem;margin-bottom:6px;animation:pulse 1s infinite;">🎉 🏆 🌟</div>
+          <h2 class="result-title" style="margin:0;font-size:1.50rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;">HOÀN THÀNH TOÀN BỘ BÀI HỌC!</h2>
+          <div class="result-subtitle" style="font-size:1.02rem;color:#ecfdf5;margin-top:6px;font-weight:700;">
+            Em đã hoàn thành xuất sắc Sơ đồ tư duy (4/4 mắt xích) và trọn vẹn 5 phần học tập của ${escapeHtml(lessonTitle)}!
+          </div>
+        </div>
+        <div class="modal-body" style="padding:20px 22px;text-align:center;">
+          <div style="background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:10px;padding:12px 14px;margin-bottom:16px;text-align:left;">
+            <div style="font-weight:800;color:#1e293b;margin-bottom:8px;font-size:0.92rem;display:flex;align-items:center;gap:6px;">
+              <span>📋</span> <span>KẾT QUẢ ĐÃ ĐẠT ĐƯỢC:</span>
+              <span style="margin-left:auto;color:#059669;font-weight:900;font-size:1rem;">Tổng điểm: ${scores.totalScore}/10</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:0.80rem;">
+              <div style="flex:1 1 calc(50% - 6px);min-width:95px;background:#ffffff;padding:6px 6px;border-radius:6px;border:1px solid #e2e8f0;text-align:center;box-sizing:border-box;">
+                <span style="color:#64748b;display:block;font-size:0.70rem;">Phần 1: Lắp ghép</span>
+                <b style="color:#059669;font-size:0.88rem;">${scores.p1.text}</b>
+              </div>
+              <div style="flex:1 1 calc(50% - 6px);min-width:95px;background:#ffffff;padding:6px 6px;border-radius:6px;border:1px solid #e2e8f0;text-align:center;box-sizing:border-box;">
+                <span style="color:#64748b;display:block;font-size:0.70rem;">Phần 2: Thực hành</span>
+                <b style="color:#059669;font-size:0.88rem;">${scores.p2.text}</b>
+              </div>
+              <div style="flex:1 1 calc(50% - 6px);min-width:95px;background:#ffffff;padding:6px 6px;border-radius:6px;border:1px solid #e2e8f0;text-align:center;box-sizing:border-box;">
+                <span style="color:#64748b;display:block;font-size:0.70rem;">Phần 3: Củng cố</span>
+                <b style="color:#059669;font-size:0.88rem;">${scores.p3.text}</b>
+              </div>
+              <div style="flex:1 1 calc(50% - 6px);min-width:95px;background:#ffffff;padding:6px 6px;border-radius:6px;border:1px solid #e2e8f0;text-align:center;box-sizing:border-box;">
+                <span style="color:#64748b;display:block;font-size:0.70rem;">Phần 4: Vận dụng</span>
+                <b style="color:#059669;font-size:0.88rem;">${scores.p4.text}</b>
+              </div>
+              <div style="flex:1 1 100%;background:#ffffff;padding:6px 6px;border-radius:6px;border:1px solid #e2e8f0;text-align:center;box-sizing:border-box;">
+                <span style="color:#64748b;display:block;font-size:0.70rem;">Phần 5: Sơ đồ tư duy</span>
+                <b style="color:#059669;font-size:0.88rem;">${scores.p5.text}</b>
+              </div>
+            </div>
+          </div>
+
+          <p style="color:#334155;font-size:0.95rem;margin:0 0 16px 0;line-height:1.5;">
+            Hãy bấm nút <b>"NỘP BÀI"</b> để gửi kết quả bài học về cho giáo viên trên Google Sheets, hoặc bấm <b>"↺ Làm Lại"</b> nếu em muốn hoàn thiện lại sơ đồ tư duy!
+          </p>
+
+          <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+            <button class="action-btn btn-secondary" onclick="closeGolfResultModal(); resetConceptMap();" style="font-size:0.95rem;padding:9px 20px;font-weight:700;color:#000000;border:1.5px solid #cbd5e1;background:#ffffff;border-radius:6px;cursor:pointer;">
+              ↺ Làm Lại Sơ Đồ
+            </button>
+            <button class="action-btn btn-primary" onclick="closeGolfResultModal(); openAttendanceModal();" style="background:linear-gradient(135deg,#ea580c,#f97316);font-size:1.02rem;padding:10px 24px;font-weight:900;border:none;border-radius:6px;color:#ffffff;box-shadow:0 4px 14px rgba(234,88,12,0.45);cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+              <span>📊</span> <span>NỘP BÀI 🚀</span>
+            </button>
+          </div>
+        </div>
+      `;
+
+      modal.classList.add("open");
     }
 
     function applyGolfSolution() {
@@ -11692,7 +11921,7 @@
       } finally {
         if (btn) {
           btn.disabled = false;
-          btn.innerHTML = "<span>🚀 GỬI KẾT QUẢ CỦA BẠN CHO GIÁO VIÊN</span>";
+          btn.innerHTML = "<span>🚀 NỘP BÀI</span>";
         }
         checkOfflineCount();
       }
