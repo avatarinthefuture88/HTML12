@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Học liệu số tương tác đa nền tảng - Hỗ trợ dạy học tích cực, quản lý &amp; tự học HTML/CSS (Tin học 12)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #2563eb;
@@ -406,6 +409,7 @@
     .alert-banner.success { background: #ecfdf5; color: #065f46; border: 1.5px solid #a7f3d0; }
     .alert-banner.error { background: #fef2f2; color: #991b1b; border: 1.5px solid #fecaca; }
     .alert-banner.info { background: #eff6ff; color: #1e40af; border: 1.5px solid #bfdbfe; }
+    .alert-banner.warning { background: #fffbeb !important; color: #92400e !important; border: 1.5px solid #fde68a !important; }
 
     /* ACTION BUTTONS */
     .action-btn {
@@ -484,7 +488,7 @@
     .sr-opt-card.correct { border-color: #10b981; background: #ecfdf5; }
     .sr-opt-card.wrong { border-color: #ef4444; background: #fef2f2; }
     .sr-tag-text {
-      font-family: var(--font-code), "Times New Roman", serif;
+      font-family: Consolas, Arial, monospace !important;
       font-weight: 800;
       font-size: 1.15rem; /* Tăng 10% font chữ, in đậm rõ nét */
       color: #1e3a8a;
@@ -1410,6 +1414,85 @@
     }
     
     /* 1. CONCEPT MAP STYLES (ENLARGED TYPOGRAPHY & IN-PLACE SELECTION) */
+        .cmap-step-bar {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .cmap-step-btn {
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 0.80rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .cmap-step-btn.done {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #047857;
+      font-weight: 800;
+    }
+    .cmap-step-btn:hover {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+    .cmap-branch-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+    }
+    .cmap-branch-header-row .cmap-branch-title {
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+    }
+    .cmap-badge-done {
+      font-size: 0.70rem;
+      font-weight: 800;
+      color: #047857;
+      background: #d1fae5;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid #a7f3d0;
+      white-space: nowrap;
+    }
+    .cmap-badge-pending {
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: #2563eb;
+      background: #eff6ff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid #bfdbfe;
+      white-space: nowrap;
+    }
+    .cmap-branch-box {
+      scroll-margin-top: 60px;
+      transition: all 0.25s ease;
+    }
+    .cmap-branch-box.cmap-branch-active {
+      border-color: #2563eb !important;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.3) !important;
+      animation: cmapPulse 1.2s ease;
+    }
+    @keyframes cmapPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
     .cmap-card {
       background: #ffffff;
       border: 2px solid #cbd5e1;
@@ -2074,35 +2157,47 @@
    MOBILE & TABLET RESPONSIVE ENHANCEMENTS (MAX-WIDTH: 768px)
    ========================================================== */
 @media (max-width: 768px) {
-  .label-mobile { display: inline !important; }
-  .label-full { display: none !important; }
+  /* ==============================================================
+     ĐIỆN THOẠI DI ĐỘNG: FONT CHỮ TIẾNG VIỆT CHUẨN ARIAL / ROBOTO (KHÔNG LỖI FONT)
+     ============================================================== */
+  html {
+    font-size: 14px !important;
+    -webkit-text-size-adjust: 100% !important;
+  }
+
+  *, *::before, *::after,
+  body, button, input, select, textarea, label, span, p, a, h1, h2, h3, h4, h5, h6, div, table, th, td {
+    font-family: Arial, 'Roboto', Helvetica, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    letter-spacing: normal !important;
+  }
+
+  .golf-textarea, .er-code-panel, .lego-block, .lego-slot-content, pre, code, .p3-cmd-card, .p3-assembled-row, .sr-tag-text, .p3-cmd-code, .p3-row-code {
+    font-family: Consolas, Arial, monospace !important;
+  }
 
   html, body {
     overflow-x: hidden !important;
     width: 100% !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
     position: relative !important;
     -webkit-overflow-scrolling: touch !important;
-    font-size: 14px !important;
   }
 
-  /* ==============================================================
-     HEADER: ULTRA-COMPACT (Tiết kiệm chiều dọc tối đa)
-     ============================================================== */
+  /* HEADER & BRAND COMPACT */
   .app-header {
-    padding: 3px 5px !important;
+    padding: 4px 6px !important;
   }
   .header-main-bar {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 1px !important;
+    gap: 2px !important;
     width: 100% !important;
   }
   .brand-logo {
-    min-width: 0 !important;
-    font-size: 1.05rem !important;
-    text-align: center !important;
+    font-size: 1.10rem !important;
     line-height: 1.1 !important;
+    text-align: center !important;
   }
   .header-center-title {
     width: 100% !important;
@@ -2110,7 +2205,7 @@
     text-align: center !important;
   }
   .brand-title {
-    font-size: 0.70rem !important;
+    font-size: 0.72rem !important;
     line-height: 1.15 !important;
     font-weight: 800 !important;
   }
@@ -2127,31 +2222,29 @@
     margin-top: 2px !important;
     padding-top: 2px !important;
     width: 100% !important;
-    gap: 3px !important;
+    gap: 4px !important;
   }
   .lesson-dropdown {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
     font-size: 0.74rem !important;
-    padding: 3px 6px !important;
+    padding: 4px 6px !important;
     box-sizing: border-box !important;
     border-radius: 5px !important;
   }
 
-  /* ==============================================================
-     5-MODE TABS: COMPACT SWIPE BAR
-     ============================================================== */
+  /* 5-MODE TABS: SWIPE BAR */
   .modes-nav {
     display: flex !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     flex-wrap: nowrap !important;
-    gap: 3px !important;
-    padding: 2px 3px !important;
+    gap: 4px !important;
+    padding: 3px 4px !important;
     width: 100% !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
     scrollbar-width: none !important;
   }
@@ -2159,648 +2252,1361 @@
     display: none !important;
   }
   .mode-btn {
-    flex: 0 0 110px !important;
-    min-width: 110px !important;
-    max-width: 125px !important;
-    padding: 3px 4px !important;
-    border-radius: 5px !important;
+    flex: 0 0 auto !important;
+    min-width: 82px !important;
+    max-width: none !important;
+    padding: 5px 6px !important;
+    border-radius: 6px !important;
     box-sizing: border-box !important;
   }
   .mode-title {
-    font-size: 0.66rem !important;
+    font-size: 0.70rem !important;
     white-space: normal !important;
     line-height: 1.15 !important;
+    text-align: center !important;
+    font-weight: 800 !important;
   }
   .mode-sub {
     font-size: 0.54rem !important;
     line-height: 1.05 !important;
     display: block !important;
+    text-align: center !important;
+    opacity: 0.85 !important;
   }
 
-  /* ==============================================================
-     MAIN WRAPPER & WORKSPACE CARD
-     ============================================================== */
+  /* WORKSPACE CARD */
   .main-wrapper {
     width: 100% !important;
-    max-width: 100vw !important;
-    padding: 2px 2px 50px 2px !important;
+    max-width: 100% !important;
+    padding: 2px 2px 48px 2px !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
   }
   .workspace-card {
-    padding: 5px 5px 48px 5px !important;
-    border-radius: 7px !important;
+    padding: 6px 6px 48px 6px !important;
+    border-radius: 8px !important;
     min-height: auto !important;
     width: 100% !important;
-    max-width: 100vw !important;
     box-sizing: border-box !important;
-  }
-  .workspace-card.is-expanded {
-    padding: 4px 4px 48px 4px !important;
-    width: 100vw !important;
-    height: calc(100vh - 48px) !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden !important;
-  }
-
-  /* Tiêu đề phần trong Workspace */
-  .fs-part-header {
-    margin-bottom: 3px !important;
-    padding-bottom: 2px !important;
-  }
-  .fs-part-title {
-    font-size: 0.88rem !important;
-    line-height: 1.15 !important;
-    margin: 1px 0 !important;
-  }
-  .fs-part-sub {
-    font-size: 0.62rem !important;
-    line-height: 1.1 !important;
-    margin: 0 !important;
   }
 
   /* ==============================================================
-     MODE 1: LEGO (LẮP RÁP CẤU TRÚC HTML) - COMPACT CHIPS & SLOTS
+     PHẦN 1 (LEGO): BỐ TRÍ 2 CỘT SONG SONG NẰM NGANG (ĐÃ ỔN ĐỊNH THEO Ý CÔ)
      ============================================================== */
   .lego-container {
     width: 100% !important;
     box-sizing: border-box !important;
   }
   .lego-split {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 5px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1.25fr !important;
+    gap: 6px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    align-items: start !important;
   }
   .lego-split > div {
     width: 100% !important;
-    max-width: 100% !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
   }
   .lego-split div[style*="font-size:1.02rem"] {
-    font-size: 0.72rem !important;
-    margin-bottom: 2px !important;
+    font-size: 0.68rem !important;
+    margin-bottom: 3px !important;
     font-weight: 800 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
-  /* Kho thẻ: Dạng Chip dàn ngang đa cột gọn gàng */
   .lego-pool {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    gap: 3px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
     padding: 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    max-height: calc(100vh - 200px) !important;
+    min-height: 220px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
     background: #f1f5f9 !important;
     border: 1.5px dashed #0284c7 !important;
     border-radius: 6px !important;
-    max-height: 110px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
   }
   .lego-block {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 0.68rem !important;
-    padding: 2px 5px !important;
-    border-radius: 4px !important;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 0.72rem !important;
+    padding: 5px 6px !important;
+    border-radius: 5px !important;
     border: 1.5px solid #0284c7 !important;
-    line-height: 1.15 !important;
+    line-height: 1.2 !important;
     margin: 0 !important;
-    white-space: nowrap !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: break-word !important;
     cursor: pointer !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06) !important;
-    user-select: none !important;
-    -webkit-user-select: none !important;
     background: #ffffff !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
   }
-  .lego-block.selected {
-    outline: 2px solid #0284c7 !important;
-    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.4) !important;
-    background: #e0f2fe !important;
-    transform: scale(1.05) !important;
-  }
-  /* Vùng lắp ráp cấu trúc HTML: Compact rows */
   .lego-assembly {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 4px !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 3px !important;
-    padding: 4px !important;
+    gap: 4px !important;
+    max-height: calc(100vh - 200px) !important;
+    min-height: 220px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
     background: #f8fafc !important;
     border: 1.5px solid #cbd5e1 !important;
     border-radius: 6px !important;
-    max-height: 200px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
   }
   .lego-slot {
-    min-height: 28px !important;
-    padding: 2px 5px !important;
+    min-height: 38px !important;
+    padding: 4px 6px !important;
     margin-bottom: 0 !important;
     border-radius: 5px !important;
     border-width: 1.5px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
     gap: 3px !important;
   }
   .lego-slot-label {
-    font-size: 0.64rem !important;
-    margin-bottom: 0 !important;
-    line-height: 1.1 !important;
-  }
-  .lego-slot-content {
     font-size: 0.66rem !important;
-    min-height: 20px !important;
+    margin-bottom: 0 !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
-  .lego-slot-content div, .lego-snapped-pill {
+  .lego-slot.snapped {
+    min-height: 32px !important;
+    padding: 3px 5px !important;
+    background: #ecfdf5 !important;
+    border-color: #10b981 !important;
+    justify-content: center !important;
+  }
+  .lego-container > div:last-child {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+    margin-top: 6px !important;
+    width: 100% !important;
+  }
+  .lego-container > div:last-child > div {
+    font-size: 0.72rem !important;
+    margin-right: 4px !important;
+  }
+  .lego-container > div:last-child > div b {
+    font-size: 0.85rem !important;
+  }
+  .lego-container > div:last-child button {
+    padding: 4px 8px !important;
     font-size: 0.68rem !important;
-    padding: 1px 5px !important;
-    border-radius: 4px !important;
-    line-height: 1.15 !important;
+    height: 28px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
   }
 
   /* ==============================================================
-     MODE 2: GOLF (3-COLUMNS COMPACT & INTUITIVE)
+     PHẦN 2 (GHÉP MÃ): KHẮC PHỤC TRIỆT ĐỂ LỖI QUÁ NHỎ & BỊ ẨN MẤT CODE HTML
+     Xếp dọc 100% độ rộng (Full Width) cho Cột 1 và Cột 2:
+     - Cột 1 ở trên: Danh sách các câu lệnh với đầy đủ mã HTML rõ nét, nhấp chạm là tự ghép sang Cột 2
+     - Cột 2 ở dưới: Ô trống ghép mã hiển thị trọn vẹn từng dòng HTML + nút lên/xuống/xóa không bị khuất
+     - Cột 3 dưới cùng: Khung xem kết quả web trực tiếp
      ============================================================== */
-  .p3-container {
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
   .p3-instruction-bar {
-    padding: 3px 5px !important;
-    font-size: 0.65rem !important;
-    line-height: 1.2 !important;
-    margin-bottom: 4px !important;
-    border-radius: 5px !important;
-  }
-  .p3-instruction-bar span {
-    font-size: 0.65rem !important;
+    font-size: 0.70rem !important;
+    padding: 6px 8px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+    border-radius: 6px !important;
   }
   .p3-three-columns {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 5px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* 2 BEN NAM NGANG COT 1 VA COT 2 */
+    gap: 6px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    align-items: start !important;
   }
   .p3-col {
     width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    min-height: auto !important;
-    border-radius: 6px !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
+    padding: 4px !important;
+    border-radius: 6px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+  }
+  .p3-col:first-child {
+    overflow: hidden !important;
+    height: auto !important;
   }
   .p3-col-header {
     padding: 3px 5px !important;
-    font-size: 0.68rem !important;
-    line-height: 1.15 !important;
+    font-size: 0.66rem !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 3px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
   }
   .p3-badge {
-    font-size: 0.60rem !important;
-    padding: 1px 3px !important;
-    border-radius: 3px !important;
-  }
-  /* Cột 1: Kho câu lệnh dàn Chip gọn */
-  .p3-commands-pool {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 3px !important;
-    padding: 4px !important;
-    max-height: 100px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  .p3-cmd-card {
-    padding: 2px 5px !important;
-    border-radius: 4px !important;
-    border-width: 1px !important;
-    margin: 0 !important;
-    cursor: pointer !important;
-  }
-  .p3-cmd-code {
-    font-size: 0.64rem !important;
-    line-height: 1.15 !important;
-    white-space: nowrap !important;
-  }
-  /* Cột 2: Ô lắp ráp gọn gàng */
-  .p3-assembled-area {
-    min-height: 60px !important;
-    max-height: 120px !important;
-    padding: 3px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 2px !important;
-  }
-  .p3-placeholder-guide {
-    padding: 6px 3px !important;
-    font-size: 0.64rem !important;
-    line-height: 1.15 !important;
-  }
-  .p3-placeholder-guide div {
-    font-size: 1.0rem !important;
-  }
-  .p3-placeholder-guide b {
-    font-size: 0.70rem !important;
-  }
-  .p3-assembled-row {
-    padding: 2px 4px !important;
-    min-height: 22px !important;
-    gap: 3px !important;
-    margin-bottom: 2px !important;
-    border-radius: 4px !important;
-  }
-  .p3-row-index {
-    font-size: 0.60rem !important;
-    min-width: 14px !important;
-  }
-  .p3-row-code {
-    font-size: 0.64rem !important;
-    line-height: 1.15 !important;
-  }
-  .p3-action-btn-sm {
-    width: 19px !important;
-    height: 19px !important;
     font-size: 0.58rem !important;
+    padding: 1px 4px !important;
     border-radius: 3px !important;
-  }
-  /* Cột 3: Live Preview gọn */
-  .p3-live-preview-box {
-    min-height: 60px !important;
-    max-height: 90px !important;
-    padding: 3px !important;
-  }
-  #p3LiveIframe {
-    height: 70px !important;
-    min-height: 70px !important;
   }
 
-  /* ==============================================================
-     MODE 3: SPEEDRUN (THỬ THÁCH TỐC ĐỘ) - FIX CHỮ TO
-     ============================================================== */
-  .sr-container {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 2px !important;
-  }
-  .sr-header {
-    padding: 6px 8px !important;
-    border-radius: 6px !important;
-    margin-bottom: 6px !important;
-  }
-  .sr-header h3 {
-    font-size: 0.76rem !important;
-    margin-bottom: 4px !important;
-  }
-  /* Giảm triệt để font-size của đoạn văn bản câu hỏi từ 1.47rem -> 0.78rem */
-  .sr-situation-text {
-    font-size: 0.78rem !important;
-    line-height: 1.3 !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    margin: 0 !important;
-  }
-  .sr-options-grid {
+  /* CỘT 1: CÁC CÂU LỆNH (BÊN TRÁI) */
+  .p3-commands-pool {
+    padding: 3px !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 4px !important;
-    margin: 5px 0 !important;
-  }
-  .sr-options-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 4px !important;
-    justify-content: center !important;
-  }
-  .sr-opt-card {
-    padding: 4px 7px !important;
-    font-size: 0.70rem !important;
-    min-height: 28px !important;
-    border-radius: 5px !important;
-    flex: 0 0 auto !important;
-  }
-  .sr-tag-text {
-    font-size: 0.70rem !important;
-    line-height: 1.15 !important;
-  }
-
-  /* ==============================================================
-     MODE 4: ESCAPE ROOM (MẬT MÃ TRỐN THOÁT) - FIX CHỮ TO
-     ============================================================== */
-  .er-container {
-    width: 100% !important;
+    max-height: calc(100vh - 350px) !important;
+    min-height: 220px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: #f8fafc !important;
     box-sizing: border-box !important;
-  }
-  .er-chamber-card {
-    padding: 5px !important;
+    border: 1.5px dashed #0284c7 !important;
     border-radius: 6px !important;
   }
-  .er-riddle-tablet {
-    padding: 5px !important;
-    font-size: 0.70rem !important;
+  .p3-cmd-card {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 5px 6px !important;
     border-radius: 5px !important;
+    border: 1.5px solid #0284c7 !important;
+    background: #ffffff !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    transition: all 0.15s ease !important;
   }
-  /* Giảm triệt để font-size của câu hỏi câu đố từ 1.25rem -> 0.76rem */
-  .er-riddle-tablet > div:first-child,
-  .er-riddle-tablet div[style*="font-size:1.25rem"] {
-    font-size: 0.76rem !important;
+  .p3-cmd-card:active {
+    background: #eff6ff !important;
+    transform: scale(0.99) !important;
+  }
+  .p3-cmd-code {
+    font-size: 0.68rem !important;
     line-height: 1.25 !important;
-    padding: 0 0 3px 0 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    margin: 0 !important;
   }
-  .er-code-panel {
-    padding: 4px 6px !important;
-    font-size: 0.66rem !important;
-    line-height: 1.2 !important;
-    margin: 3px 0 !important;
-    max-height: 95px !important;
+  /* Khi thẻ đã được đưa vào Cột 2: ẩn khỏi Cột 1 để giao diện 2 bên luôn gọn gàng */
+  .p3-cmd-card.used {
+    display: none !important;
+  }
+
+  /* CỘT 2: Ô GHÉP MÃ THEO THỨ TỰ (BÊN PHẢI) */
+  .p3-assembled-workspace {
+    padding: 3px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    max-height: calc(100vh - 380px) !important;
+    min-height: 180px !important;
     overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+    background: #0f172a !important;
+    border: 1.5px dashed #3b82f6 !important;
+    border-radius: 6px !important;
+  }
+  .p3-placeholder-guide {
+    padding: 14px 4px !important;
+    text-align: center !important;
+  }
+  .p3-placeholder-guide div {
+    font-size: 1.3rem !important;
+  }
+  .p3-placeholder-guide b {
+    font-size: 0.70rem !important;
+    color: #93c5fd !important;
+  }
+  .p3-placeholder-guide span {
+    font-size: 0.58rem !important;
+    line-height: 1.15 !important;
+    color: #94a3b8 !important;
+  }
+
+  /* MỖI THẺ ĐÃ GHÉP TRONG CỘT 2: HÀNG TRÊN LÀ SỐ THỨ TỰ & NÚT, HÀNG DƯỚI LÀ MÃ CODE RỘNG RÃI */
+  .p3-assembled-row {
+    padding: 4px 6px !important;
+    gap: 2px !important;
+    border-radius: 5px !important;
+    display: flex !important;
+    flex-wrap: wrap !important; /* CHO PHÉP XUỐNG DÒNG */
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: #1e293b !important;
+    border: 1.5px solid #3b82f6 !important;
+  }
+  .p3-row-index {
+    order: 1 !important;
+    font-size: 0.62rem !important;
+    min-width: 18px !important;
+    padding: 1px 3px !important;
+    font-weight: 800 !important;
+    color: #38bdf8 !important;
+    background: rgba(56,189,248,0.2) !important;
+    border-radius: 3px !important;
+    text-align: center !important;
+    flex: 0 0 auto !important;
+  }
+  .p3-row-actions {
+    order: 2 !important;
+    display: flex !important;
+    gap: 3px !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+  }
+  .p3-action-btn-sm {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    font-size: 0.60rem !important;
+    padding: 0 !important;
+    border-radius: 3px !important;
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border: 1px solid #64748b !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+  }
+  .p3-action-btn-sm.btn-del {
+    background: #991b1b !important;
+    color: #fecaca !important;
+    border-color: #b91c1c !important;
+  }
+  .p3-row-code {
+    order: 3 !important;
+    font-size: 0.68rem !important;
+    line-height: 1.25 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    color: #f8fafc !important;
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    margin: 2px 0 0 0 !important;
+    padding-top: 2px !important;
+    border-top: 1px dashed rgba(255,255,255,0.15) !important;
+  }
+  .p3-col2-footer {
+    margin-top: 4px !important;
+    display: flex !important;
+    gap: 4px !important;
+    padding: 0 !important;
+  }
+  .p3-col2-footer button {
+    padding: 4px 6px !important;
+    font-size: 0.68rem !important;
+    height: 26px !important;
+    flex: 1 !important;
     border-radius: 4px !important;
+    font-weight: 800 !important;
+  }
+
+  /* CỘT 3: KẾT QUẢ HIỂN THỊ Ở DƯỚI CÙNG (TRẢI RỘNG 100%) */
+  .p3-col:nth-child(3) {
+    grid-column: 1 / -1 !important;
+    margin-top: 4px !important;
+  }
+  .p3-preview-browser {
+    border-radius: 6px !important;
+  }
+  .p3-browser-bar {
+    padding: 3px 6px !important;
+    gap: 6px !important;
+  }
+  .p3-browser-tab {
+    font-size: 0.64rem !important;
+    padding: 2px 5px !important;
+  }
+  .p3-browser-url {
+    font-size: 0.58rem !important;
+    padding: 1px 5px !important;
+  }
+  .p3-preview-content {
+    min-height: 65px !important;
+    max-height: 100px !important;
+    padding: 4px !important;
+    background: #ffffff !important;
+  }
+
+  /* MODE 3: SPEEDRUN */
+  .sr-container {
+    padding: 4px 2px !important;
+  }
+  .sr-situation-text {
+    font-size: 0.82rem !important;
+    line-height: 1.3 !important;
+  }
+  .sr-opt-card {
+    padding: 6px 8px !important;
+    min-height: 40px !important;
+  }
+  .sr-tag-text {
+    font-size: 0.78rem !important;
+  }
+
+  /* MODE 4: ESCAPE ROOM */
+  .er-situation {
+    font-size: 0.78rem !important;
+    line-height: 1.3 !important;
+    padding: 6px 8px !important;
+  }
+  .er-code-box, .er-code-panel {
+    font-size: 0.74rem !important;
+    line-height: 1.35 !important;
+    padding: 6px 8px !important;
   }
   .er-input-row {
     display: flex !important;
     flex-direction: row !important;
-    gap: 3px !important;
-    margin-top: 3px !important;
-  }
-  .er-input {
-    height: 28px !important;
-    font-size: 0.72rem !important;
-    padding: 2px 5px !important;
-    border-radius: 4px !important;
-  }
-  .er-chamber-card button {
-    height: 28px !important;
-    font-size: 0.70rem !important;
-    padding: 0 7px !important;
-    border-radius: 4px !important;
-    white-space: nowrap !important;
-  }
-
-  /* ==============================================================
-     MODE 5: SYNTHESIS & CONCEPT MAP (SƠ ĐỒ TƯ DUY) - FIX CHỮ TO
-     ============================================================== */
-  .synthesis-container {
+    align-items: center !important;
+    gap: 6px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
-  .cmap-card {
-    padding: 5px !important;
-    border-radius: 6px !important;
+  .er-input-row .er-input, #erInput {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    font-size: 0.72rem !important;
+    padding: 4px 8px !important;
+    height: 32px !important;
+    box-sizing: border-box !important;
   }
-  /* Giảm kích thước hộp tiêu đề gốc từ 1.30rem -> 0.78rem */
-  .cmap-root-node {
-    font-size: 0.78rem !important;
-    padding: 5px 8px !important;
-    border-radius: 6px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 4px !important;
+  .er-input-row button, #btnSubmitEscape {
+    flex: 0 0 auto !important;
+    padding: 4px 10px !important;
+    font-size: 0.70rem !important;
+    height: 32px !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
   }
-  /* Giảm kích thước mô tả từ 1.05rem -> 0.68rem */
-  .cmap-subtitle {
+
+  /* ==============================================================
+     PHẦN 5 (SƠ ĐỒ TƯ DUY): TRÌNH BÀY LẦN LƯỢT TỪNG PHẦN MỘT (1 CỘT XẾP DỌC)
+     Khắc phục hoàn toàn lỗi bị nén 4 cột nằm ngang làm xấu và che mất chữ
+     ============================================================== */
+  .synthesis-container {
+    width: 100% !important;
+    padding: 2px !important;
+    box-sizing: border-box !important;
+  }
+    .cmap-step-bar {
+    gap: 4px !important;
+    margin-bottom: 6px !important;
+  }
+  .cmap-step-btn {
     font-size: 0.68rem !important;
-    line-height: 1.2 !important;
-    padding: 0 2px !important;
-    margin-bottom: 5px !important;
+    padding: 3px 8px !important;
   }
+  .cmap-branch-box {
+    scroll-margin-top: 55px !important;
+  }
+  .cmap-card {
+    padding: 8px 6px !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .cmap-root-node {
+    font-size: 0.85rem !important;
+    padding: 6px 10px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+  .cmap-subtitle {
+    font-size: 0.70rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 10px !important;
+  }
+  /* BỐ TRÍ 1 CỘT DUY NHẤT - TRÌNH BÀY LẦN LƯỢT TỪNG PHẦN MỘT */
   .cmap-branches-grid {
     display: flex !important;
     flex-direction: column !important;
-    gap: 4px !important;
+    gap: 12px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
   .cmap-branch-box {
-    padding: 4px 6px !important;
-    border-radius: 5px !important;
-    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-top: 4px solid #2563eb !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04) !important;
   }
   .cmap-branch-title {
-    font-size: 0.70rem !important;
-    margin-bottom: 2px !important;
-    line-height: 1.15 !important;
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    color: #1e3a8a !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 4px !important;
+    border-bottom: 1px dashed #cbd5e1 !important;
   }
   .cmap-items-list {
-    margin-bottom: 3px !important;
-    padding-left: 10px !important;
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
   }
   .cmap-item {
-    font-size: 0.64rem !important;
-    line-height: 1.15 !important;
-    margin-bottom: 1px !important;
+    font-size: 0.76rem !important;
+    line-height: 1.35 !important;
+    color: #334155 !important;
+    display: flex !important;
+    gap: 6px !important;
+    align-items: flex-start !important;
+  }
+  .cmap-item-bullet {
+    color: #059669 !important;
+    font-weight: 800 !important;
+    flex-shrink: 0 !important;
   }
   .cmap-slot-box {
-    padding: 3px !important;
-    border-radius: 4px !important;
+    background: #eff6ff !important;
+    border: 1.5px dashed #3b82f6 !important;
+    border-radius: 6px !important;
+    padding: 8px 10px !important;
+    margin-top: 6px !important;
+  }
+  .cmap-slot-header {
+    display: flex !important;
+    gap: 6px !important;
+    align-items: center !important;
+    margin-bottom: 6px !important;
+  }
+  .cmap-slot-qmark {
+    font-size: 0.85rem !important;
+    flex-shrink: 0 !important;
   }
   .cmap-slot-question {
-    font-size: 0.65rem !important;
-    line-height: 1.2 !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    color: #1e40af !important;
+    line-height: 1.3 !important;
   }
   .cmap-slot-options {
-    gap: 3px !important;
-    margin-top: 2px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    margin-top: 4px !important;
   }
   .cmap-opt-chip {
-    padding: 2px 5px !important;
-    font-size: 0.64rem !important;
-    border-radius: 3px !important;
+    width: 100% !important;
+    padding: 7px 10px !important;
+    font-size: 0.74rem !important;
+    background: #ffffff !important;
+    border: 1.5px solid #bfdbfe !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
   }
   .cmap-chip-letter {
-    font-size: 0.58rem !important;
+    font-weight: 800 !important;
+    color: #2563eb !important;
+    background: #dbeafe !important;
+    border-radius: 4px !important;
+    padding: 1px 6px !important;
+    font-size: 0.72rem !important;
+    flex-shrink: 0 !important;
   }
   .cmap-chip-text {
-    font-size: 0.64rem !important;
+    flex: 1 !important;
+    word-break: break-word !important;
+    color: #1e293b !important;
+    line-height: 1.25 !important;
+  }
+  .cmap-slot-completed {
+    background: #ecfdf5 !important;
+    border: 1.5px solid #10b981 !important;
+    border-radius: 6px !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 6px !important;
+  }
+  .cmap-completed-icon {
+    font-size: 1.1rem !important;
+    color: #059669 !important;
+    flex-shrink: 0 !important;
+  }
+  .cmap-completed-title {
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #065f46 !important;
+  }
+  .cmap-completed-badge {
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    color: #047857 !important;
+    background: #d1fae5 !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+    border: 1px solid #6ee7b7 !important;
+    display: inline-block !important;
+    margin-top: 2px !important;
+    word-break: break-word !important;
   }
   .cmap-footer-actions {
-    margin-top: 5px !important;
-    padding-top: 4px !important;
-    font-size: 0.68rem !important;
-  }
-  .cmap-progress-badge {
-    font-size: 0.72rem !important;
-    padding: 1px 5px !important;
-  }
-
-  /* ==============================================================
-     ACTION BUTTONS & NOTIFICATIONS IN WORKSPACE
-     ============================================================== */
-  #workspaceCanvas .action-btn {
-    font-size: 0.70rem !important;
-    padding: 3px 7px !important;
-    height: 28px !important;
-    border-radius: 4px !important;
-  }
-  #workspaceCanvas div[style*="font-size:1.05rem"] {
-    font-size: 0.72rem !important;
-  }
-  #workspaceCanvas b[style*="font-size:1.30rem"] {
-    font-size: 0.88rem !important;
-  }
-  .alert-banner {
-    font-size: 0.68rem !important;
-    padding: 3px 6px !important;
-    margin: 2px 0 !important;
-    border-radius: 5px !important;
-    line-height: 1.2 !important;
+    margin-top: 12px !important;
+    padding: 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: center !important;
   }
 
-  /* ==============================================================
-     BOTTOM NAVIGATION BAR
-     ============================================================== */
+  /* BOTTOM NAVIGATION BAR */
   .part-navigation-bar {
     width: 100% !important;
-    max-width: 100vw !important;
     padding: 0 3px !important;
     height: 44px !important;
     min-height: 44px !important;
-    max-height: 44px !important;
     display: flex !important;
     overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-    justify-content: flex-start !important;
     align-items: center !important;
     gap: 3px !important;
     box-sizing: border-box !important;
     scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
   .part-navigation-bar::-webkit-scrollbar {
     display: none !important;
   }
-  .part-nav-center {
-    order: 1 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 3px !important;
-    flex: 0 0 auto !important;
-    margin: 0 !important;
-  }
-  .part-nav-left {
-    order: 2 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 3px !important;
-    flex: 0 0 auto !important;
-    margin: 0 !important;
-  }
-  .attendance-pill-btn {
-    order: -1 !important;
-  }
-  .part-nav-right {
-    order: 3 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 3px !important;
-    flex: 0 0 auto !important;
-    margin: 0 !important;
-  }
-  .part-nav-btn {
-    padding: 2px 5px !important;
-    font-size: 0.70rem !important;
-    height: 28px !important;
-    white-space: nowrap !important;
-  }
-  .attendance-pill-btn, .doctor-pill-btn, .floating-expand-btn, .sandbox-pill-btn, .card-pill-btn, .sound-pill-btn {
-    padding: 2px 5px !important;
+  .part-nav-btn, .attendance-pill-btn, .doctor-pill-btn, .sandbox-pill-btn, .card-pill-btn, .sound-pill-btn {
+    padding: 2px 6px !important;
     height: 28px !important;
     font-size: 0.70rem !important;
     white-space: nowrap !important;
-    flex-shrink: 0 !important;
-  }
-  .robot-label {
-    font-size: 0.68rem !important;
-    line-height: 1.05 !important;
-  }
-  .robot-line-1 {
-    font-size: 0.68rem !important;
   }
 
-  /* Modals on Mobile */
-  .modal-overlay {
-    padding: 6px !important;
+  /* THANH ĐIỀU HƯỚNG DƯỚI CÙNG: CÁCH LY KHÔNG ĐỂ LÀM GIÃN ĐỘ RỘNG TRANG WEB */
+  .part-navigation-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: block !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    z-index: 9999 !important;
   }
-  .modal-box {
-    width: 96vw !important;
+  .part-navigation-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .part-nav-left {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    gap: 4px !important;
+    padding: 0 4px !important;
+  }
+  .main-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+  .workspace-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  #workspaceCanvas, .p3-container, .p3-three-columns {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ==============================================================
+     MODAL DIALOGS FIT FORM CHUẨN FORM MÁY TÍNH TRÊN ĐIỆN THOẠI (KHÔNG TRÀN MÀN HÌNH)
+     ============================================================== */
+  .modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 8px 6px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 999999 !important; /* Đảm bảo che phủ hoàn toàn, không bị thanh điều hướng đè lên */
+    background: rgba(15, 23, 42, 0.75) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+  .modal-box,
+  #helpModal .modal-box,
+  #sandboxModal .modal-box,
+  #sandboxModalBox,
+  #attendanceModal .modal-box,
+  #doctorModal .modal-box,
+  #golfResultBox {
     max-width: 96vw !important;
+    width: 96vw !important;
+    height: auto !important;
     max-height: 92vh !important;
     box-sizing: border-box !important;
-    border-radius: 8px !important;
-    margin: auto !important;
-  }
-  .modal-header {
-    padding: 8px 12px !important;
-  }
-  .modal-header h3 {
-    font-size: 1.0rem !important;
-  }
-  .modal-body {
-    padding: 10px 8px !important;
-    max-height: calc(92vh - 54px) !important;
-    overflow-y: auto !important;
-    box-sizing: border-box !important;
-  }
-  .att-student-meta-grid {
-    grid-template-columns: 1fr !important;
-    gap: 8px !important;
-  }
-  #attPartsGrid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-  }
-  .doctor-top-controls {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 6px !important;
-  }
-  .doctor-top-controls > div {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-  #doctorLessonSelect, #doctorSearchInput {
-    min-width: 0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    font-size: 0.82rem !important;
-  }
-  .doctor-layout {
+    border-radius: 12px !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 10px !important;
-    min-height: auto !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4) !important;
+    background: #ffffff !important;
   }
-  .doctor-sidebar {
-    max-height: 160px !important;
+  .modal-header,
+  #helpModal .modal-header,
+  #sandboxModal .modal-header,
+  #attendanceModal .modal-header,
+  #doctorModal .modal-header {
+    padding: 8px 12px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 6px !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+  .modal-header h3,
+  #helpModal .modal-header h3,
+  #sandboxModal .modal-header h3,
+  #attendanceModal .modal-header h3,
+  #doctorModal .modal-header h3 {
+    font-size: 0.90rem !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex: 1 1 auto !important;
+  }
+  .modal-header button,
+  .modal-close {
+    font-size: 1.4rem !important;
+    padding: 2px 8px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+  }
+  .modal-body,
+  #helpModal .modal-body,
+  #sandboxModal .modal-body,
+  #attendanceModal .modal-body,
+  #doctorModal .modal-body {
+    padding: 10px 10px !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+    flex: 1 1 auto !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 1. TRA CỨU THẺ (helpModal) FIT FORM */
+  #helpSearchInput {
+    font-size: 0.80rem !important;
+    padding: 6px 10px !important;
+    margin-bottom: 8px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .help-filter-tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+  }
+  .help-filter-btn {
+    padding: 3px 8px !important;
+    font-size: 0.72rem !important;
+    border-radius: 12px !important;
+  }
+  #allTagsTable {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    font-size: 0.74rem !important;
+    border-collapse: collapse !important;
+  }
+  #allTagsTable th,
+  #allTagsTable td {
+    padding: 6px 6px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  /* 2. TỰ THỰC HÀNH HTML5 (sandboxModal) FIT FORM */
+  #sandboxModal .modal-box,
+  #sandboxModalBox {
+    height: 88vh !important;
+    max-height: 88vh !important;
+  }
+  #sandboxModal .modal-header {
+    flex-wrap: nowrap !important;
+    padding: 8px 10px !important;
+    gap: 4px !important;
+  }
+  #sandboxModal .modal-header h3 {
+    font-size: 0.82rem !important;
+    letter-spacing: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  #sandboxModal .modal-header > div:last-child {
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    flex-shrink: 0 !important;
+  }
+  #sandboxModal .modal-header button {
+    padding: 3px 6px !important;
+    font-size: 0.68rem !important;
+    border-radius: 5px !important;
+    white-space: nowrap !important;
   }
   .sandbox-split-body {
     display: flex !important;
     flex-direction: column !important;
-    overflow-y: auto !important;
-    height: auto !important;
+    gap: 0 !important;
+    flex: 1 1 auto !important;
+    height: calc(100% - 75px) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
   }
-  .sandbox-split-body > div:first-child {
+  .sandbox-split-body > div:first-child,
+  .sandbox-editor-col {
+    height: 46% !important;
+    min-height: 130px !important;
+    max-height: 46% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: none !important;
+    width: 100% !important;
     border-right: none !important;
     border-bottom: 2px solid #cbd5e1 !important;
-    height: auto !important;
-    min-height: 190px !important;
+    overflow: hidden !important;
+  }
+  .sandbox-split-body > div:last-child,
+  .sandbox-preview-col {
+    height: 54% !important;
+    min-height: 160px !important;
+    max-height: 54% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    overflow: hidden !important;
   }
   #sandboxTextarea {
-    min-height: 180px !important;
-    height: 180px !important;
-    font-size: 0.82rem !important;
+    font-size: 0.74rem !important;
+    padding: 6px 8px !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-family: Consolas, monospace !important;
+    resize: none !important;
   }
   #sandboxPreviewIframe {
-    min-height: 200px !important;
-    height: 200px !important;
-  }
-  #allTagsTable {
-    display: block !important;
-    overflow-x: auto !important;
     width: 100% !important;
+    height: 100% !important;
+    flex: 1 1 auto !important;
+    min-height: 120px !important;
+    border: none !important;
+    background: #ffffff !important;
+    display: block !important;
+  }
+
+  /* 3. BÁC SĨ MÃ NGUỒN (doctorModal) FIT FORM */
+  .doctor-top-controls {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    padding: 6px 8px !important;
+    margin-bottom: 8px !important;
+    border-radius: 8px !important;
+  }
+  .doctor-top-controls select,
+  .doctor-top-controls input {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 0.74rem !important;
+    padding: 5px 8px !important;
+    box-sizing: border-box !important;
+  }
+  .doctor-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+  }
+  .doctor-sidebar {
+    width: 100% !important;
+    max-height: 110px !important;
+    overflow-y: auto !important;
+    padding: 6px 8px !important;
+    flex-shrink: 0 !important;
+    border-radius: 8px !important;
+  }
+  .doctor-item {
+    padding: 5px 8px !important;
+    margin-bottom: 4px !important;
+  }
+  .doctor-item-name {
+    font-size: 0.75rem !important;
+  }
+  .doctor-item-cat {
+    font-size: 0.65rem !important;
+  }
+  .doctor-detail-panel {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+  }
+  .doctor-code-compare {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    margin: 8px 0 !important;
+  }
+  .doctor-code-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 6px 8px !important;
+    border-radius: 6px !important;
+  }
+  .doctor-code-card pre {
+    font-size: 0.70rem !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+  }
+
+  /* 4. ĐIỂM DANH & NỘP BÀI (attendanceModal) FIT FORM */
+  .att-student-meta-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    margin-bottom: 8px !important;
+  }
+  .att-meta-field input,
+  .att-meta-field select {
+    font-size: 0.80rem !important;
+    padding: 6px 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  #attPartsGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    margin-bottom: 8px !important;
+  }
+  .att-part-card {
+    padding: 6px 8px !important;
+    border-radius: 8px !important;
+  }
+  .att-part-card-title {
+    font-size: 0.74rem !important;
+  }
+  .att-part-card-status {
+    font-size: 0.70rem !important;
+  }
+  .att-final-score-box {
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+    font-size: 0.80rem !important;
+    margin-bottom: 8px !important;
+  }
+  .att-btn-submit,
+  .att-btn-reset {
+    width: 100% !important;
+    padding: 7px 12px !important;
+    font-size: 0.80rem !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 5. THANH ĐIỀU HƯỚNG DƯỚI CÙNG THU GỌN VÀ HIỂN THỊ NHÃN GỌN GÀNG */
+  .label-mobile {
+    display: inline !important;
+  }
+  .label-full {
+    display: none !important;
+  }
+  .part-navigation-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 2px 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 3px !important;
+    background: #ffffff !important;
+    border-top: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.08) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    box-sizing: border-box !important;
+    z-index: 99990 !important;
+  }
+  .part-navigation-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .part-nav-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    flex-shrink: 0 !important;
+  }
+  .part-nav-center {
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    flex-shrink: 0 !important;
+  }
+  .part-nav-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    flex-shrink: 0 !important;
+  }
+  .floating-pill-btn,
+  .attendance-pill-btn,
+  .doctor-pill-btn,
+  .sandbox-pill-btn,
+  .card-pill-btn {
+    height: 28px !important;
+    padding: 2px 6px !important;
+    border-radius: 14px !important;
+    gap: 3px !important;
+    font-size: 0.70rem !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+  }
+  .floating-pill-icon,
+  .attendance-pill-icon,
+  .doctor-pill-icon {
+    font-size: 11px !important;
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+  .robot-label {
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 1 !important;
+  }
+  .robot-line-1 {
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+  }
+  .sound-floating-btn,
+  .sound-pill-btn,
+  #btnSound {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 13px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+  .part-nav-btn {
+    height: 28px !important;
+    padding: 2px 7px !important;
+    font-size: 0.68rem !important;
+    border-radius: 14px !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .part-nav-btn span {
+    font-size: 0.68rem !important;
+  }
+  .fs-pill-btn,
+  #btnFullscreen {
+    height: 28px !important;
+    padding: 2px 7px !important;
+    font-size: 0.68rem !important;
+    border-radius: 14px !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* ==============================================================
+     THÔNG BÁO LÀM ĐÚNG/SAI & THỐNG KÊ CÂU ĐÚNG/SAI GỌN GÀNG TRÊN ĐIỆN THOẠI
+     ============================================================== */
+  /* THÔNG BÁO BANNER (alertBanner) */
+  .alert-banner {
+    padding: 6px 10px !important;
+    border-radius: 6px !important;
+    font-size: 0.76rem !important;
+    line-height: 1.35 !important;
+    margin: 6px auto !important;
+    max-width: 96vw !important;
+    box-sizing: border-box !important;
+  }
+  .alert-banner b,
+  .alert-banner strong,
+  .alert-banner span {
+    font-size: 0.76rem !important;
+  }
+
+  /* THÔNG BÁO ĐIỂM DANH (attAlertBox) */
+  #attAlertBox {
+    padding: 6px 10px !important;
+    font-size: 0.76rem !important;
+    line-height: 1.35 !important;
+    border-radius: 6px !important;
+    margin-bottom: 8px !important;
+  }
+  #attAlertBox b,
+  #attAlertBox strong {
+    font-size: 0.76rem !important;
+  }
+
+  /* 1. THỐNG KÊ TIẾN ĐỘ PHẦN 1 LEGO */
+  .lego-progress-wrap {
+    font-size: 0.78rem !important;
+  }
+  #legoProgress {
+    font-size: 0.90rem !important;
+    font-weight: 800 !important;
+  }
+  
+  /* 2. THỐNG KÊ CÂU LỆNH PHẦN 2 GHÉP MÃ */
+  .p3-badge {
+    font-size: 0.68rem !important;
+    padding: 2px 6px !important;
+    border-radius: 10px !important;
+  }
+  .p3-instruction-bar {
+    font-size: 0.70rem !important;
+    padding: 4px 8px !important;
+  }
+  .p3-instruction-bar b {
+    font-size: 0.70rem !important;
+  }
+  .p3-col-header {
+    font-size: 0.72rem !important;
+    padding: 5px 8px !important;
+  }
+  .p3-col2-footer button {
+    font-size: 0.75rem !important;
+    padding: 5px 12px !important;
+  }
+
+  /* 3. THỐNG KÊ ĐÁP ÁN ĐÃ CHỌN PHẦN 3 SPEEDRUN */
+  .sr-situation-text {
+    font-size: 0.86rem !important;
+    line-height: 1.35 !important;
+  }
+  .sr-count-wrap {
+    font-size: 0.76rem !important;
+  }
+  #srCount {
+    font-size: 0.84rem !important;
+    font-weight: 800 !important;
+  }
+  .sr-opt-card {
+    padding: 6px 8px !important;
+    font-size: 0.76rem !important;
+    border-radius: 6px !important;
+  }
+  .sr-tag-text {
+    font-size: 0.76rem !important;
+  }
+
+  /* 4. THỐNG KÊ & CÂU HỎI PHẦN 4 VẬN DỤNG */
+  .er-riddle-tablet {
+    padding: 8px 10px !important;
+  }
+  .er-riddle-text {
+    font-size: 0.84rem !important;
+    line-height: 1.4 !important;
+    padding: 0 !important;
+  }
+  .er-code-panel {
+    font-size: 0.74rem !important;
+    padding: 6px 8px !important;
+    margin: 6px 0 !important;
+  }
+  .er-input {
+    font-size: 0.78rem !important;
+    padding: 5px 8px !important;
+  }
+  .er-input-row button {
+    font-size: 0.78rem !important;
+    padding: 5px 12px !important;
+  }
+
+  /* 5. THỐNG KÊ TIẾN ĐỘ & MẮT XÍCH PHẦN 5 SƠ ĐỒ TƯ DUY */
+  .cmap-step-btn {
+    font-size: 0.70rem !important;
+    padding: 3px 6px !important;
+  }
+  .cmap-branch-title {
+    font-size: 0.78rem !important;
+  }
+  .cmap-opt-btn {
+    font-size: 0.72rem !important;
+    padding: 4px 8px !important;
+  }
+  .cmap-slot-completed {
+    padding: 5px 8px !important;
+  }
+  .cmap-completed-title {
+    font-size: 0.68rem !important;
+  }
+  .cmap-completed-badge {
+    font-size: 0.72rem !important;
+  }
+  .cmap-badge-done,
+  .cmap-badge-pending {
+    font-size: 0.66rem !important;
+    padding: 1px 6px !important;
+  }
+  .cmap-progress-badge {
+    font-size: 0.68rem !important;
+    padding: 2px 6px !important;
+  }
+
+  /* 6. HỘP THOẠI POPUP THÔNG BÁO KẾT QUẢ ĐÚNG / SAI (GOLF & ESCAPE RESULT) */
+  #golfResultBox {
+    max-width: 92vw !important;
+    width: 92vw !important;
+    margin: 0 auto !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4) !important;
+  }
+  #golfResultBox .result-header {
+    padding: 10px 12px !important;
+  }
+  #golfResultBox .result-emoji {
+    font-size: 1.6rem !important;
+    margin-bottom: 2px !important;
+  }
+  #golfResultBox .result-title {
+    font-size: 0.95rem !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0 !important;
+    margin: 0 !important;
+  }
+  #golfResultBox .result-subtitle {
+    font-size: 0.76rem !important;
+    margin-top: 3px !important;
+    line-height: 1.3 !important;
+  }
+  #golfResultBox .modal-body {
+    padding: 10px 12px !important;
+  }
+  #golfResultBox .modal-body p {
+    font-size: 0.76rem !important;
+    margin: 0 0 10px 0 !important;
+    line-height: 1.35 !important;
+  }
+  #golfResultBox .modal-body button,
+  #golfResultBox .modal-body .action-btn {
+    padding: 6px 14px !important;
+    font-size: 0.76rem !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+  }
+
+  /* 7. BẢNG VÀNG ĐIỂM DANH & NỘP BÀI THỐNG KÊ CHI TIẾT */
+  #attFinalScore {
+    font-size: 0.88rem !important;
+  }
+  .att-part-card-title {
+    font-size: 0.72rem !important;
+  }
+  .att-part-card-status,
+  #attP1Status, #attP2Status, #attP3Status, #attP4Status, #attP5Status {
+    font-size: 0.70rem !important;
+  }
+  .att-final-score-box {
+    padding: 6px 10px !important;
     font-size: 0.78rem !important;
   }
 }
-
 </style>
 </head>
 <body>
@@ -2911,7 +3717,7 @@
           <div class="attendance-pill-btn" id="attendanceTrigger" onclick="openAttendanceModal()" title="Bấm để Điểm danh và gửi kết quả của bạn cho giáo viên">
             <div class="attendance-pill-icon">📊</div>
             <div class="robot-label">
-              <span class="robot-line-1"><span class="label-full">ĐIỂM DANH &amp; NỘP BÀI</span><span class="label-mobile">Điểm danh &amp; Nộp</span></span>
+              <span class="robot-line-1"><span class="label-full">ĐIỂM DANH &amp; NỘP BÀI</span><span class="label-mobile">Điểm danh</span></span>
             </div>
           </div>
         </div>
@@ -2919,10 +3725,10 @@
         <!-- Ở GIỮA THANH DƯỚI: 2 NÚT ĐIỀU HƯỚNG BÀI/PHẦN -->
         <div class="part-nav-center">
           <button class="part-nav-btn prev-btn" id="btnPrevPart" onclick="navigatePart(-1)">
-            <span class="label-full">⬅ Phần trước</span><span class="label-mobile">⬅ Trước</span>
+            <span class="label-full">⬅ Phần trước</span><span class="label-mobile">⬅</span>
           </button>
           <button class="part-nav-btn next-btn" id="btnNextPart" onclick="navigatePart(1)">
-            <span class="label-full">Phần tiếp ➡</span><span class="label-mobile">Tiếp ➡</span>
+            <span class="label-full">Phần tiếp ➡</span><span class="label-mobile">➡</span>
           </button>
         </div>
 
@@ -3809,7 +4615,7 @@
       <div class="modal-header" style="background: linear-gradient(135deg, #065f46, #059669, #10b981); color: white; padding: 14px 22px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; flex-wrap: wrap; gap: 10px;">
         <div style="display: flex; align-items: center; gap: 10px;">
           <h3 style="color:#ffffff; margin:0; font-size: 1.35rem; font-weight: 900; letter-spacing: 0.3px; display: flex; align-items: center; gap: 8px;">
-            <span>💻</span> TỰ THỰC HÀNH CODE OFFLINE CHUẨN HTML5
+            <span>💻</span> <span class="label-full">TỰ THỰC HÀNH CODE OFFLINE CHUẨN HTML5</span><span class="label-mobile">TỰ THỰC HÀNH HTML5</span>
           </h3>
         </div>
 
@@ -3817,17 +4623,17 @@
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
           <!-- RUN BUTTON -->
           <button onclick="runSandboxCode()" style="background: #facc15; color: #78350f; border: none; padding: 6px 15px; border-radius: 6px; font-weight: 800; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 5px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" title="Chạy cập nhật mã nguồn ngay lập tức">
-            ▶ CHẠY THỬ
+            <span class="label-full">▶ CHẠY THỬ</span><span class="label-mobile">▶ Chạy</span>
           </button>
 
           <!-- DOWNLOAD HTML BUTTON -->
           <button onclick="downloadSandboxFile()" style="background: #ffffff; color: #047857; border: none; padding: 6px 13px; border-radius: 6px; font-weight: 700; font-size: 0.83rem; cursor: pointer; display: flex; align-items: center; gap: 4px;" title="Tải file .html về máy tính để mở bằng trình duyệt">
-            💾 Tải file .html
+            <span class="label-full">💾 Tải file .html</span><span class="label-mobile">💾 Tải</span>
           </button>
 
           <!-- CLEAR BUTTON -->
           <button onclick="clearSandboxCode()" style="background: rgba(255,255,255,0.18); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 0.82rem; cursor: pointer;" title="Xóa trắng toàn bộ để viết lại">
-            🗑 Xóa trắng
+            <span class="label-full">🗑 Xóa trắng</span><span class="label-mobile">🗑 Xóa</span>
           </button>
 
           <!-- CLOSE BUTTON -->
@@ -3856,7 +4662,7 @@
       <div class="sandbox-split-body" style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 0; overflow: hidden; background: #ffffff;">
         
         <!-- LEFT: CODE EDITOR (HOÀN TOÀN TRỐNG TRƠN, KHÔNG CODE MẪU, KHÔNG GỢI Ý) -->
-        <div style="display: flex; flex-direction: column; border-right: 2px solid #cbd5e1; height: 100%; min-height: 0;">
+        <div class="sandbox-editor-col" style="display: flex; flex-direction: column; border-right: 2px solid #cbd5e1; height: 100%; min-height: 0;">
           <textarea id="sandboxTextarea" spellcheck="false" placeholder="Nhập mã HTML và CSS của em tại đây (tự viết từ đầu)..."
             oninput="onSandboxInput()"
             onkeydown="handleSandboxKey(event)"
@@ -7717,9 +8523,13 @@
           `;
         }
 
+        const isBranchDone = isSolved;
         return `
-          <div class="cmap-branch-box">
-            <div class="cmap-branch-title">📌 ${escapeHtml(br.title)}</div>
+          <div class="cmap-branch-box ${isBranchDone ? 'branch-done' : ''}" id="cmap_branch_${idx}">
+            <div class="cmap-branch-header-row">
+              <div class="cmap-branch-title">📌 ${escapeHtml(br.title)}</div>
+              ${isBranchDone ? '<span class="cmap-badge-done">✓ Đã xong</span>' : `<span class="cmap-badge-pending">Phần ${idx + 1}/4</span>`}
+            </div>
             <ul class="cmap-items-list">
               ${br.items.map(it => `
                 <li class="cmap-item">
@@ -7746,6 +8556,18 @@
 
             <div class="cmap-subtitle">
               Em hãy quan sát mạng lưới tri thức và nhấp chọn đáp án chính xác tại từng ô <b>"Mắt xích còn khuyết"</b> bên dưới để hoàn thiện sơ đồ tư duy toàn bài!
+            </div>
+
+            <!-- THANH ĐIỀU HƯỚNG NHANH 4 PHẦN NHỎ -->
+            <div class="cmap-step-bar">
+              ${cmap.branches.map((br, bIdx) => {
+                const bDone = !!solved[br.missing.id];
+                return `
+                  <button type="button" class="cmap-step-btn ${bDone ? 'done' : ''}" onclick="scrollToCmapBranch(${bIdx})">
+                    ${bDone ? '✓' : (bIdx + 1)} Phần ${bIdx + 1}
+                  </button>
+                `;
+              }).join("")}
             </div>
 
             <div class="cmap-branches-grid">
@@ -7776,6 +8598,17 @@
       }
     }
 
+    function scrollToCmapBranch(idx) {
+      setTimeout(() => {
+        const el = document.getElementById(`cmap_branch_${idx}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          el.classList.add('cmap-branch-active');
+          setTimeout(() => el.classList.remove('cmap-branch-active'), 1500);
+        }
+      }, 60);
+    }
+
     function handleConceptSelect(missingId, isCorrect, btn) {
       if (isCorrect === 1) {
         AudioEngine.playSuccess();
@@ -7783,8 +8616,44 @@
           conceptSolvedSlots[currentLessonKey] = {};
         }
         conceptSolvedSlots[currentLessonKey][missingId] = true;
-        renderSynthesis(LESSONS_DATA[currentLessonKey].synthesis);
-        showAlert("success", "🎉 <b>CHÍNH XÁC!</b> Em đã nối đúng mắt xích tri thức vào sơ đồ!");
+
+        const synData = LESSONS_DATA[currentLessonKey].synthesis;
+        const branches = synData.conceptMap.branches;
+        const solvedIdx = branches.findIndex(br => br.missing.id === missingId);
+
+        renderSynthesis(synData);
+
+        // Tìm phần chưa làm tiếp theo: ưu tiên phần ngay sau (solvedIdx + 1)
+        const solved = conceptSolvedSlots[currentLessonKey];
+        let nextIdx = -1;
+        for (let i = solvedIdx + 1; i < branches.length; i++) {
+          if (!solved[branches[i].missing.id]) {
+            nextIdx = i;
+            break;
+          }
+        }
+        // Nếu các phần sau đều đã xong thì tìm phần chưa xong ở phía trước
+        if (nextIdx === -1) {
+          for (let i = 0; i < solvedIdx; i++) {
+            if (!solved[branches[i].missing.id]) {
+              nextIdx = i;
+              break;
+            }
+          }
+        }
+
+        if (nextIdx !== -1) {
+          // CHUYỂN TUẦN TỰ SANG PHẦN TIẾP THEO (làm xong 1 sẽ chuyển sang 2, KHÔNG tự ý nhảy xuống phần cuối cùng)
+          showAlert("success", `🎉 <b>CHÍNH XÁC!</b> Đã hoàn thành Phần ${solvedIdx + 1}. Tự động chuyển tiếp sang <b>Phần ${nextIdx + 1}</b>...`);
+          scrollToCmapBranch(nextIdx);
+        } else {
+          // Hoàn thành cả 4 phần
+          showAlert("success", "🎉 <b>XUẤT SẮC!</b> Em đã hoàn thành trọn vẹn cả 4 phần của sơ đồ tư duy!");
+          setTimeout(() => {
+            const footer = document.querySelector(".cmap-footer-actions");
+            if (footer) footer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 300);
+        }
       } else {
         AudioEngine.playRepel();
         btn.classList.add("wrong-pulse");
@@ -7800,6 +8669,9 @@
       AudioEngine.playPop();
       renderSynthesis(LESSONS_DATA[currentLessonKey].synthesis);
       showAlert("info", "🔄 Đã đặt lại sơ đồ tư duy! Em hãy hoàn thiện lại các mắt xích nhé.");
+      setTimeout(() => {
+        scrollToCmapBranch(0);
+      }, 100);
     }
 
     // APP STATE
@@ -8005,7 +8877,7 @@
       const startMode = params.get("mode") || "lego";
 
       loadLesson(startLesson);
-      switchMode(startMode);
+      switchMode(startMode, true);
 
       if (params.get("modal") === "help") {
         openHelpModal();
@@ -8131,7 +9003,8 @@
         lego: { icon: "🧩", title: "1. LẮP GHÉP CẤU TRÚC" },
         golf: { icon: "💻", title: "2. THỰC HÀNH TẠO TRANG WEB" },
         speedRun: { icon: "📝", title: "3. CỦNG CỐ KIẾN THỨC" },
-        escapeRoom: { icon: "🎯", title: "4. THỬ THÁCH VẬN DỤNG" }
+        escapeRoom: { icon: "🎯", title: "4. THỬ THÁCH VẬN DỤNG" },
+        synthesis: { icon: "📊", title: "5. SƠ ĐỒ TƯ DUY TỔNG HỢP" }
       };
       const cur = modes[currentMode] || modes.lego;
       tagIcon.textContent = cur.icon;
@@ -8264,7 +9137,11 @@
 
       currentMode = modeKey;
       document.querySelectorAll(".mode-btn").forEach(b => {
-        b.classList.toggle("active", b.id === "btnMode_" + modeKey);
+        const isActive = (b.id === "btnMode_" + modeKey);
+        b.classList.toggle("active", isActive);
+        if (isActive && b.scrollIntoView) {
+          b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
       });
       updateWorkspaceActiveTag();
       updatePartNavButtons();
@@ -8325,7 +9202,7 @@
           <div class="sr-options-grid">${optsHtml}</div>
 
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;flex-wrap:wrap;gap:10px;">
-            <div style="font-weight:700;color:#1e3a8a;font-size:0.95rem;">
+            <div class="sr-count-wrap" style="font-weight:700;color:#1e3a8a;font-size:0.95rem;">
               🎯 Đã chọn: <span id="srCount" style="color:#2563eb;">0</span> phương án
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -8453,7 +9330,7 @@
           </div>
 
           <div style="display:flex;align-items:center;gap:14px;margin-top:10px;flex-wrap:wrap;">
-            <div style="font-size:1.05rem;color:#000000;font-weight:700;">
+            <div class="lego-progress-wrap" style="font-size:1.05rem;color:#000000;font-weight:700;">
               Tiến độ lắp: <b id="legoProgress" style="color:#059669;font-size:1.30rem;">0</b>/${data.slots.length} ô
             </div>
             <button class="action-btn btn-secondary" onclick="renderLego(LESSONS_DATA[currentLessonKey].lego)" style="padding:7px 18px;font-size:0.95rem;color:#000000;font-weight:700;border:1.5px solid #cbd5e1;background:#ffffff;border-radius:6px;">
@@ -8536,30 +9413,7 @@
       }
     }
 
-
-    function unsnapSlot(slotEl, event) {
-      if (event) event.stopPropagation();
-      if (!slotEl) return;
-      const slotId = slotEl.dataset.slotId;
-      const blockId = slotEl.dataset.placedBlockId;
-      if (!blockId) return;
-      const blockEl = document.getElementById(blockId);
-      if (blockEl) {
-        blockEl.style.display = "";
-        blockEl.classList.remove("selected");
-      }
-      slotEl.dataset.placedBlockId = blockEl.id;
-        slotEl.querySelector(".lego-slot-content").innerHTML = "";
-      slotEl.classList.remove("snapped");
-      delete slotEl.dataset.placedBlockId;
-      delete legoSnappedSlots[slotId];
-      AudioEngine.playPop();
-      const currentCount = Object.keys(legoSnappedSlots).length;
-      const progEl = document.getElementById("legoProgress");
-      if (progEl) progEl.textContent = currentCount;
-    }
-    
-    function processSnap(slotEl, blockEl) {
+function processSnap(slotEl, blockEl) {
       const slotId = slotEl.dataset.slotId;
       const acceptList = (slotEl.dataset.accept || "").split(",");
       const blockType = blockEl.dataset.type;
@@ -8582,7 +9436,7 @@
 
         slotEl.querySelector(".lego-slot-content").innerHTML = `
           <div style="display:inline-block;max-width:100%;font-weight:800;color:#065f46;background:#d1fae5;padding:4px 10px;border-radius:6px;border:1.5px solid #10b981;font-size:1.02rem;white-space:nowrap;">
-            ✓ ${escapeHtml(blockEl.textContent.trim())} <span style="margin-left:6px;color:#dc2626;font-size:0.75rem;cursor:pointer;" title="Chạm để gỡ ra">✕</span>
+            ✓ ${escapeHtml(blockEl.textContent.trim())}
           </div>
         `;
         blockEl.style.display = "none";
@@ -8671,9 +9525,9 @@
             <span class="p3-row-index">${(idx + 1).toString().padStart(2, '0')}</span>
             <pre class="p3-row-code">${escapeHtml(s.label || s.code)}</pre>
             <div class="p3-row-actions">
-              <button class="p3-action-btn-sm" onclick="moveP3CmdUp(${idx})" title="Chuyển lên trên" ${idx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>▲</button>
-              <button class="p3-action-btn-sm" onclick="moveP3CmdDown(${idx})" title="Chuyển xuống dưới" ${idx === p3Assembled.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>▼</button>
-              <button class="p3-action-btn-sm btn-del" onclick="removeP3CmdFromAssembled(${idx})" title="Gỡ bỏ câu lệnh này">✕</button>
+              <button class="p3-action-btn-sm" onclick="moveP3CmdUp(${idx})" title="Chuyển lên trên" ${idx === 0 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>&#9650;</button>
+              <button class="p3-action-btn-sm" onclick="moveP3CmdDown(${idx})" title="Chuyển xuống dưới" ${idx === p3Assembled.length - 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>&#9660;</button>
+              <button class="p3-action-btn-sm btn-del" onclick="removeP3CmdFromAssembled(${idx})" title="Gỡ bỏ câu lệnh này">&#10005;</button>
             </div>
           </div>
         `).join("");
@@ -8682,7 +9536,7 @@
       canvas.innerHTML = `
         <div class="p3-container">
                               <div class="p3-instruction-bar">
-            <span>💡 <b>HƯỚNG DẪN:</b> Kéo thả hoặc nhấp chuột chọn các câu lệnh từ <b>Cột 1</b> sang <b>Cột 2</b> theo đúng thứ tự. Kết quả trang web sẽ hiển thị trực tiếp ở <b>Cột 3</b>!</span>
+            <span>💡 <b>HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.</b></span>
           </div>
           </div>
 
@@ -8907,10 +9761,10 @@
       if (isAllCorrect) {
         AudioEngine.playSuccess();
         box.innerHTML = `
-          <div style="background:linear-gradient(135deg,#059669,#10b981);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
-            <div style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">🎉 🎆 ✨</div>
-            <h2 style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;">BẠN TRẢ LỜI ĐÚNG!</h2>
-            <div style="font-size:1.05rem;color:#ecfdf5;margin-top:6px;font-weight:700;">Kết quả: ${correctCount}/${totalCount} dòng lệnh chính xác!</div>
+          <div class="result-header" style="background:linear-gradient(135deg,#059669,#10b981);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <div class="result-emoji" style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">🎉 🎆 ✨</div>
+            <h2 class="result-title" style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;">BẠN TRẢ LỜI ĐÚNG!</h2>
+            <div class="result-subtitle" style="font-size:1.05rem;color:#ecfdf5;margin-top:6px;font-weight:700;">Kết quả: ${correctCount}/${totalCount} dòng lệnh chính xác!</div>
           </div>
           <div class="modal-body" style="padding:20px 24px;text-align:center;">
             <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
@@ -8922,10 +9776,10 @@
       } else {
         AudioEngine.playRepel();
         box.innerHTML = `
-          <div style="background:linear-gradient(135deg,#b91c1c,#ef4444);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
-            <div style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">⚠️ 📋</div>
-            <h2 style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;">KẾT QUẢ ĐÃ GHI NHẬN: ${correctCount}/${totalCount} DÒNG ĐÚNG</h2>
-            <div style="font-size:0.98rem;color:#fee2e2;margin-top:6px;font-weight:600;">Kết quả thực tế của em đã được lưu vào hệ thống.</div>
+          <div class="result-header" style="background:linear-gradient(135deg,#b91c1c,#ef4444);color:white;padding:24px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <div class="result-emoji" style="font-size:3rem;margin-bottom:6px;animation:pulse 1s infinite;">⚠️ 📋</div>
+            <h2 class="result-title" style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;">KẾT QUẢ ĐÃ GHI NHẬN: ${correctCount}/${totalCount} DÒNG ĐÚNG</h2>
+            <div class="result-subtitle" style="font-size:0.98rem;color:#fee2e2;margin-top:6px;font-weight:600;">Kết quả thực tế của em đã được lưu vào hệ thống.</div>
           </div>
           <div class="modal-body" style="padding:20px 24px;text-align:center;">
             <p style="color:#475569;font-size:0.95rem;margin:0 0 16px 0;line-height:1.5;">
@@ -8995,14 +9849,14 @@
         <div class="er-container">
           <div class="er-chamber-card">
             <div class="er-riddle-tablet">
-              <div style="color:#ffffff;font-size:1.25rem;font-weight:700;line-height:1.6;letter-spacing:0.2px;padding:2px 0 4px 0;">
+              <div class="er-riddle-text" style="color:#ffffff;font-size:1.25rem;font-weight:700;line-height:1.6;letter-spacing:0.2px;padding:2px 0 4px 0;">
                 ${escapeHtml(data.riddle)}
               </div>
               <div class="er-code-panel">${formatErCodeSnippet(data.codeSnippet)}</div>
               <div class="er-input-row">
                 <input type="text" class="er-input" id="erInput" placeholder="${phText}" autocomplete="off" onkeydown="if(event.key==='Enter') submitEscapeAnswer()">
                 <button class="action-btn btn-primary" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);font-size:1.02rem;padding:10px 24px;font-weight:800;white-space:nowrap;flex-shrink:0;border:2px solid #60a5fa;border-radius:8px;box-shadow:0 4px 14px rgba(37,99,235,0.4);" onclick="submitEscapeAnswer()">
-                  ✅ Kiểm Tra Câu Trả Lời
+                  ✅ Kiểm Tra
                 </button>
               </div>
             </div>
@@ -9138,12 +9992,12 @@
       if (isCorrect) {
         AudioEngine.playSuccess();
         box.innerHTML = `
-          <div style="background:linear-gradient(135deg,#059669,#10b981);color:white;padding:26px 20px;border-radius:12px 12px 0 0;text-align:center;">
-            <div style="font-size:3.2rem;margin-bottom:8px;animation:pulse 1s infinite;">🎉 🎆 ✨</div>
-            <h2 style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;line-height:1.45;">
+          <div class="result-header" style="background:linear-gradient(135deg,#059669,#10b981);color:white;padding:26px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <div class="result-emoji" style="font-size:3.2rem;margin-bottom:8px;animation:pulse 1s infinite;">🎉 🎆 ✨</div>
+            <h2 class="result-title" style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;line-height:1.45;">
               BẠN TRẢ LỜI ĐÚNG! (1/1)
             </h2>
-            <div style="font-size:1.05rem;color:#ecfdf5;margin-top:6px;font-weight:600;">Chúc mừng em đã hiểu sâu và vận dụng xuất sắc kiến thức bài học!</div>
+            <div class="result-subtitle" style="font-size:1.05rem;color:#ecfdf5;margin-top:6px;font-weight:600;">Chúc mừng em đã hiểu sâu và vận dụng xuất sắc kiến thức bài học!</div>
           </div>
           <div class="modal-body" style="padding:20px 24px;text-align:center;">
             <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
@@ -9159,12 +10013,12 @@
       } else {
         AudioEngine.playRepel();
         box.innerHTML = `
-          <div style="background:linear-gradient(135deg,#dc2626,#ef4444);color:white;padding:26px 20px;border-radius:12px 12px 0 0;text-align:center;">
-            <div style="font-size:3.2rem;margin-bottom:8px;animation:pulse 1s infinite;">⚠️ ❌</div>
-            <h2 style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;line-height:1.45;">
+          <div class="result-header" style="background:linear-gradient(135deg,#dc2626,#ef4444);color:white;padding:26px 20px;border-radius:12px 12px 0 0;text-align:center;">
+            <div class="result-emoji" style="font-size:3.2rem;margin-bottom:8px;animation:pulse 1s infinite;">⚠️ ❌</div>
+            <h2 class="result-title" style="margin:0;font-size:1.55rem;font-weight:900;letter-spacing:0.5px;color:#ffffff;line-height:1.45;">
               KẾT QUẢ ĐÃ GHI NHẬN: 0/1
             </h2>
-            <div style="font-size:0.98rem;color:#fee2e2;margin-top:6px;font-weight:600;">Đáp án gợi ý chính xác là: ${formattedAns}</div>
+            <div class="result-subtitle" style="font-size:0.98rem;color:#fee2e2;margin-top:6px;font-weight:600;">Đáp án gợi ý chính xác là: ${formattedAns}</div>
           </div>
           <div class="modal-body" style="padding:20px 24px;text-align:center;">
             <p style="color:#475569;font-size:0.95rem;margin:0 0 16px 0;line-height:1.5;">
@@ -9189,11 +10043,14 @@
     // ==========================================
     // UTILITIES
     // ==========================================
-    function showAlert(type, msg) {
+    function showAlert(type, msg, autoScroll = false) {
       const b = document.getElementById("alertBanner");
+      if (!b) return;
       b.className = `alert-banner show ${type}`;
       b.innerHTML = msg;
-      b.scrollIntoView({ behavior:"smooth", block:"nearest" });
+      if (autoScroll) {
+        b.scrollIntoView({ behavior:"smooth", block:"nearest" });
+      }
     }
     function hideAlert() {
       const b = document.getElementById("alertBanner");
