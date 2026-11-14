@@ -409,7 +409,8 @@
     .alert-banner.success { background: #ecfdf5; color: #065f46; border: 1.5px solid #a7f3d0; }
     .alert-banner.error { background: #fef2f2; color: #991b1b; border: 1.5px solid #fecaca; }
     .alert-banner.info { background: #eff6ff; color: #1e40af; border: 1.5px solid #bfdbfe; }
-    .alert-banner.warning { background: #fffbeb !important; color: #92400e !important; border: 1.5px solid #fde68a !important; }
+    .alert-banner.warning { background: #fffbeb !important; color: #78350f !important; border: 1.5px solid #f59e0b !important; font-weight: 700 !important; }
+    .alert-banner.warning b, .alert-banner.warning strong { color: #9a3412 !important; }
 
     /* ACTION BUTTONS */
     .action-btn {
@@ -2335,8 +2336,11 @@
     border-radius: 6px !important;
   }
   .lego-block {
-    display: block !important;
+    display: block;
     width: 100% !important;
+  }
+  .lego-block.snapped-used, .lego-block[style*="display: none"] {
+    display: none !important;
     box-sizing: border-box !important;
     font-size: 0.72rem !important;
     padding: 5px 6px !important;
@@ -3428,6 +3432,16 @@
   .alert-banner span {
     font-size: 0.76rem !important;
   }
+  .alert-banner.warning {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border: 1.5px solid #f59e0b !important;
+  }
+  .alert-banner.warning b,
+  .alert-banner.warning strong,
+  .alert-banner.warning span {
+    color: #78350f !important;
+  }
 
   /* THÔNG BÁO ĐIỂM DANH (attAlertBox) */
   #attAlertBox {
@@ -3607,6 +3621,62 @@
     font-size: 0.78rem !important;
   }
 }
+
+    /* ========================================================
+       CHẾ ĐỘ KHÓA VÀ LÀM MỜ CÁC PHẦN CHƯA HOÀN THÀNH
+       ======================================================== */
+    .mode-btn.locked-mode {
+      opacity: 0.35 !important;
+      filter: grayscale(90%) !important;
+      background: #f8fafc !important;
+      border: 1.5px dashed #cbd5e1 !important;
+      cursor: not-allowed !important;
+    }
+    .mode-btn.locked-mode:hover {
+      background: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: none !important;
+    }
+    .mode-btn.locked-mode .mode-sub {
+      color: #94a3b8 !important;
+    }
+    .mode-btn.locked-mode .mode-title::after {
+      content: " 🔒";
+      font-size: 0.82em;
+      opacity: 0.75;
+    }
+
+    /* ========================================================
+       CỘT 3: KẾT QUẢ HIỂN THỊ THỜI GIAN THỰC (RESET CHUẨN TRÌNH DUYỆT)
+       Sử dụng :where() để Specificity = 0, đảm bảo HTML nguyên bản
+       không bị ảnh hưởng bởi CSS cha và thẻ <style> của học sinh
+       trong các bài CSS (13-18) áp dụng chính xác 100%.
+       ======================================================== */
+    #p3LiveRenderFrame {
+      background: #ffffff !important;
+      color: #000000 !important;
+      padding: 16px !important;
+      overflow-y: auto !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+      line-height: normal !important;
+    }
+    :where(#p3LiveRenderFrame h1, #p3LiveRenderFrame h2, #p3LiveRenderFrame h3, #p3LiveRenderFrame h4, #p3LiveRenderFrame h5, #p3LiveRenderFrame h6) {
+      color: #000000;
+      border: none;
+      background: transparent;
+      padding: 0;
+      font-weight: bold;
+    }
+    :where(#p3LiveRenderFrame h1) { font-size: 2em; margin: 0.67em 0; }
+    :where(#p3LiveRenderFrame h2) { font-size: 1.5em; margin: 0.75em 0; }
+    :where(#p3LiveRenderFrame h3) { font-size: 1.17em; margin: 0.83em 0; }
+    :where(#p3LiveRenderFrame h4) { font-size: 1em; margin: 1.12em 0; }
+    :where(#p3LiveRenderFrame p) { margin: 1em 0; color: #000000; }
+    :where(#p3LiveRenderFrame a) { color: #0000ee; text-decoration: underline; }
+    :where(#p3LiveRenderFrame hr) { border: 0; border-top: 1px solid #767676; margin: 1em 0; }
+    :where(#p3LiveRenderFrame table[border="1"]) { border-collapse: separate; border-spacing: 2px; border: 1px inset #767676; }
+    :where(#p3LiveRenderFrame table[border="1"] th, #p3LiveRenderFrame table[border="1"] td) { border: 1px inset #767676; padding: 3px 6px; }
+
 </style>
 </head>
 <body>
@@ -3714,10 +3784,10 @@
           </div>
 
           <!-- ĐIỂM DANH & NỘP BÀI GOOGLE SHEET (MÀU VÀNG CAM) -->
-          <div class="attendance-pill-btn" id="attendanceTrigger" onclick="openAttendanceModal()" title="Bấm để Điểm danh và gửi kết quả của bạn cho giáo viên">
+          <div class="attendance-pill-btn" id="attendanceTrigger" onclick="openAttendanceModal()" title="Bấm để Nộp bài và điểm danh gửi kết quả của bạn cho giáo viên">
             <div class="attendance-pill-icon">📊</div>
             <div class="robot-label">
-              <span class="robot-line-1"><span class="label-full">ĐIỂM DANH &amp; NỘP BÀI</span><span class="label-mobile">Điểm danh</span></span>
+              <span class="robot-line-1"><span class="label-full">NỘP BÀI &amp; ĐIỂM DANH</span><span class="label-mobile">Nộp bài</span></span>
             </div>
           </div>
         </div>
@@ -4753,7 +4823,7 @@
         <div style="display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 1.6rem;">📊</span>
           <div>
-            <h3 style="color:#ffffff; margin:0; font-size:1.25rem; font-weight:900;">BẢNG VÀNG TỰ HỌC &amp; ĐIỂM DANH KẾT QUẢ</h3>
+            <h3 style="color:#ffffff; margin:0; font-size:1.25rem; font-weight:900;">BẢNG VÀNG NỘP BÀI &amp; ĐIỂM DANH KẾT QUẢ</h3>
             
           </div>
         </div>
@@ -4850,7 +4920,7 @@
               🔄 Đồng bộ (<span id="offlineCount">0</span>) kết quả Offline
             </button>
             <button id="btnSendAttendance" onclick="submitAttendanceToSheet()" style="background:linear-gradient(135deg, #16a34a, #15803d); color:white; border:none; padding:11px 22px; border-radius:8px; font-weight:900; cursor:pointer; font-size:0.95rem; box-shadow:0 3px 8px rgba(22, 163, 74, 0.4); display:flex; align-items:center; gap:8px;">
-              <span>🚀 GỬI KẾT QUẢ CỦA BẠN CHO GIÁO VIÊN</span>
+              <span>🚀 NỘP BÀI VÀ ĐIỂM DANH VỀ GOOGLE SHEETS</span>
             </button>
           </div>
         </div>
@@ -4922,111 +4992,97 @@
       "hint": "Bộ khung cấu trúc của trang web gồm 3 thẻ chính: thẻ gốc <html>, phần đầu <head> và phần thân <body>. Các thẻ như <title>, <meta>, <p> là thẻ con nằm bên trong."
     },
     "lego": {
-      "title": "Lego Từ Tính: Xây Dựng Cấu Trúc Cây Phân Nhánh",
-      "instruction": "Em hãy kéo các khối thẻ ở cột bên trái thả vào đúng vị trí trên sơ đồ cấu trúc trang web. Thẻ đặt đúng vị trí sẽ khớp vào khung; thẻ đặt sai vị trí sẽ báo lỗi để em nhận biết và sửa lại nhé!",
-      "slots": [
+    "title": "Lego Từ Tính: Xây Dựng Cấu Trúc Cây Phân Nhánh",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_head",
-          "label": "Vùng chứa các thông tin khai báo kỹ thuật và cấu hình của trang web",
-          "accept": [
-            "head"
-          ],
-          "required": "head"
+            "slotId": "s_head",
+            "label": "Vùng chứa các thông tin khai báo kỹ thuật và cấu hình của trang web",
+            "accept": [
+                "head"
+            ],
+            "required": "head"
         },
         {
-          "slotId": "s_meta",
-          "label": "Khai báo bộ mã ký tự để trang web hiển thị đúng tiếng Việt có dấu",
-          "accept": [
-            "meta"
-          ],
-          "required": "meta"
+            "slotId": "s_meta",
+            "label": "Khai báo bộ mã ký tự để trang web hiển thị đúng tiếng Việt có dấu",
+            "accept": [
+                "meta"
+            ],
+            "required": "meta"
         },
         {
-          "slotId": "s_title",
-          "label": "Đặt tên gọi cho trang hiển thị trên thanh tiêu đề của tab trình duyệt",
-          "accept": [
-            "title"
-          ],
-          "required": "title"
+            "slotId": "s_title",
+            "label": "Đặt tên gọi cho trang hiển thị trên thanh tiêu đề của tab trình duyệt",
+            "accept": [
+                "title"
+            ],
+            "required": "title"
         },
         {
-          "slotId": "s_body",
-          "label": "Vùng chứa toàn bộ nội dung hiển thị trước mắt người xem trên trang web",
-          "accept": [
-            "body"
-          ],
-          "required": "body"
+            "slotId": "s_body",
+            "label": "Vùng chứa toàn bộ nội dung trực quan hiển thị trước mắt người xem trên trang web",
+            "accept": [
+                "body"
+            ],
+            "required": "body"
         },
         {
-          "slotId": "s_h1",
-          "label": "Tiêu đề chính có kích thước nổi bật nhất ở đầu trang web",
-          "accept": [
-            "h1"
-          ],
-          "required": "h1"
+            "slotId": "s_h1",
+            "label": "Tiêu đề chính có kích thước nổi bật nhất ở đầu trang web",
+            "accept": [
+                "h1"
+            ],
+            "required": "h1"
         },
         {
-          "slotId": "s_p",
-          "label": "Đoạn văn bản ngắn giới thiệu nội dung mở đầu cho trang web",
-          "accept": [
-            "p"
-          ],
-          "required": "p"
+            "slotId": "s_p",
+            "label": "Đoạn văn bản giới thiệu nội dung mở đầu cho trang web",
+            "accept": [
+                "p"
+            ],
+            "required": "p"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_head",
-          "type": "head",
-          "label": "<head>...</head>",
-          "color": "#0284c7"
+            "id": "b_head",
+            "type": "head",
+            "label": "<head>...</head>",
+            "color": "#0284c7"
         },
         {
-          "id": "b_meta",
-          "type": "meta",
-          "label": "<meta charset='UTF-8'>",
-          "color": "#0369a1"
+            "id": "b_meta",
+            "type": "meta",
+            "label": "<meta charset='UTF-8'>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_title",
-          "type": "title",
-          "label": "<title>Lớp 12A1</title>",
-          "color": "#0369a1"
+            "id": "b_title",
+            "type": "title",
+            "label": "<title>Trường THPT Phan Chu Trinh</title>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_body",
-          "type": "body",
-          "label": "<body>...</body>",
-          "color": "#16a34a"
+            "id": "b_body",
+            "type": "body",
+            "label": "<body>...</body>",
+            "color": "#16a34a"
         },
         {
-          "id": "b_h1",
-          "type": "h1",
-          "label": "<h1>Cổng Tin Chi Đoàn</h1>",
-          "color": "#15803d"
+            "id": "b_h1",
+            "type": "h1",
+            "label": "<h1>Cổng Tin Chi Đoàn 12A1</h1>",
+            "color": "#15803d"
         },
         {
-          "id": "b_p",
-          "type": "p",
-          "label": "<p>Chào mừng năm học mới!</p>",
-          "color": "#15803d"
-        },
-        {
-          "id": "b_err_p_in_head",
-          "type": "p_err",
-          "label": "<p>Thông tin bản quyền</p>",
-          "color": "#0284c7",
-          "ruleViolation": "Thẻ đoạn văn <p> chứa nội dung bài viết nên phải nằm trong phần thân <body>, không thể đặt trong phần đầu <head> em nhé!"
-        },
-        {
-          "id": "b_err_title_in_body",
-          "type": "title_err",
-          "label": "<title>Trang chủ</title>",
-          "color": "#15803d",
-          "ruleViolation": "Thẻ <title> dùng để đặt tên cho tab trình duyệt nên bắt buộc phải nằm trong phần đầu <head>, không đặt trong <body> em nhé!"
+            "id": "b_p",
+            "type": "p",
+            "label": "<p>Chào mừng năm học mới 2025 - 2026!</p>",
+            "color": "#15803d"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "HTML Golf: Dựng Trang Giới Thiệu Bản Thân",
       "goalDesc": "Mục tiêu: Đạt 100% khớp với sản phẩm mẫu gồm tiêu đề h1 màu xanh, 1 đoạn văn p giới thiệu có ngắt dòng br và khai báo UTF-8.",
@@ -5117,42 +5173,42 @@
       ],
       "statements": [
         {
-          "id": "b7_1",
-          "order": 1,
-          "code": "<!DOCTYPE html>\n<html lang=\"vi\">",
-          "label": "<!DOCTYPE html>\n<html lang=\"vi\">"
+                "id": "b7_1",
+                "order": 1,
+                "code": "<!DOCTYPE html>\n<html lang=\"vi\">",
+                "label": "<!DOCTYPE html>\n<html lang=\"vi\">"
         },
         {
-          "id": "b7_2",
-          "order": 2,
-          "code": "<head>\n  <meta charset=\"UTF-8\">\n  <title>Giới thiệu bản thân</title>\n</head>",
-          "label": "<head>\n  <meta charset=\"UTF-8\">\n  <title>Giới thiệu</title>\n</head>"
+                "id": "b7_2",
+                "order": 2,
+                "code": "<head>\n  <meta charset=\"UTF-8\">\n  <title>Giới thiệu bản thân</title>\n</head>",
+                "label": "<head>\n  <meta charset=\"UTF-8\">\n  <title>Giới thiệu bản thân</title>\n</head>"
         },
         {
-          "id": "b7_3",
-          "order": 3,
-          "code": "<body>",
-          "label": "<body>"
+                "id": "b7_3",
+                "order": 3,
+                "code": "<body>",
+                "label": "<body>"
         },
         {
-          "id": "b7_4",
-          "order": 4,
-          "code": "  <h1>THƯ GIỚI THIỆU BẢN THÂN</h1>",
-          "label": "<h1>THƯ GIỚI THIỆU BẢN THÂN</h1>"
+                "id": "b7_4",
+                "order": 4,
+                "code": "<h1>THƯ GIỚI THIỆU BẢN THÂN</h1>",
+                "label": "<h1>THƯ GIỚI THIỆU BẢN THÂN</h1>"
         },
         {
-          "id": "b7_5",
-          "order": 5,
-          "code": "  <p>Tôi là học sinh lớp 12 chuyên Tin.<br>Ước mơ trở thành kỹ sư phần mềm.</p>",
-          "label": "<p>Tôi là học sinh lớp 12 chuyên Tin.<br>Ước mơ trở thành kỹ sư phần mềm.</p>"
+                "id": "b7_5",
+                "order": 5,
+                "code": "<p>Tôi là học sinh lớp 12 chuyên Tin.<br>Ước mơ trở thành kỹ sư phần mềm.</p>",
+                "label": "<p>Tôi là học sinh lớp 12 chuyên Tin.<br>Ước mơ trở thành kỹ sư phần mềm.</p>"
         },
         {
-          "id": "b7_6",
-          "order": 6,
-          "code": "</body>\n</html>",
-          "label": "</body>\n</html>"
+                "id": "b7_6",
+                "order": 6,
+                "code": "</body>\n</html>",
+                "label": "</body>\n</html>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -5310,90 +5366,97 @@
       "hint": "Thẻ khối tự xuống dòng gồm: h1..h6, p, hr. Các thẻ b, i, sup, sub, del, mark là thẻ cùng dòng."
     },
     "lego": {
-      "title": "Lego Từ Tính: Ghép Công Thức Toán & Hóa",
-      "instruction": "Em hãy kéo các thẻ định dạng ký tự (sup, sub, mark, del) vào đúng vị trí để hoàn thành công thức toán học, hóa học và bảng giá khuyến mãi nhé:",
-      "slots": [
+    "title": "Lego Từ Tính: Ghép Các Thẻ Định Dạng Văn Bản",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_math_sup",
-          "label": "Nâng chữ số 2 lên góc trên để tạo số mũ cho biến số x: ax...",
-          "accept": [
-            "sup"
-          ],
-          "required": "sup"
+            "slotId": "s_sup",
+            "label": "Tạo số mũ ở góc trên cho công thức toán học (ví dụ: ax² + bx + c = 0)",
+            "accept": [
+                "sup"
+            ],
+            "required": "sup"
         },
         {
-          "slotId": "s_chem_sub1",
-          "label": "Hạ chữ số 2 xuống chân chữ H để tạo chỉ số nguyên tử: H...",
-          "accept": [
-            "sub"
-          ],
-          "required": "sub"
+            "slotId": "s_sub",
+            "label": "Tạo chỉ số ở dưới chân cho công thức hóa học (ví dụ: H₂SO₄)",
+            "accept": [
+                "sub"
+            ],
+            "required": "sub"
         },
         {
-          "slotId": "s_chem_sub2",
-          "label": "Hạ chữ số 4 xuống chân nhóm SO để hoàn thành công thức: ...SO...",
-          "accept": [
-            "sub"
-          ],
-          "required": "sub"
+            "slotId": "s_b",
+            "label": "In đậm đoạn chữ để nhấn mạnh thông điệp quan trọng trên trang",
+            "accept": [
+                "b"
+            ],
+            "required": "b"
         },
         {
-          "slotId": "s_price_del",
-          "label": "Gạch một đường ngang qua mức giá cũ để báo hiệu đã hết hạn: ...",
-          "accept": [
-            "del"
-          ],
-          "required": "del"
+            "slotId": "s_i",
+            "label": "In nghiêng đoạn chữ dùng cho thuật ngữ nước ngoài hoặc chú thích",
+            "accept": [
+                "i"
+            ],
+            "required": "i"
         },
         {
-          "slotId": "s_highlight_mark",
-          "label": "Tô màu nền nổi bật (dạ quang) cho mức giá ưu đãi đặc biệt: ...",
-          "accept": [
-            "mark"
-          ],
-          "required": "mark"
+            "slotId": "s_del",
+            "label": "Gạch một đường ngang qua mức giá cũ để báo hiệu đã hết hạn khuyến mãi",
+            "accept": [
+                "del"
+            ],
+            "required": "del"
+        },
+        {
+            "slotId": "s_mark",
+            "label": "Tô màu nền nổi bật (dạ quang) cho từ khóa ưu đãi đặc biệt",
+            "accept": [
+                "mark"
+            ],
+            "required": "mark"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_sup",
-          "type": "sup",
-          "label": "<sup>2</sup>",
-          "color": "#0284c7"
+            "id": "b_sup",
+            "type": "sup",
+            "label": "<sup>2</sup>",
+            "color": "#0284c7"
         },
         {
-          "id": "b_sub1",
-          "type": "sub",
-          "label": "<sub>2</sub>",
-          "color": "#059669"
+            "id": "b_sub",
+            "type": "sub",
+            "label": "<sub>2</sub>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_sub2",
-          "type": "sub",
-          "label": "<sub>4</sub>",
-          "color": "#059669"
+            "id": "b_b",
+            "type": "b",
+            "label": "<b>Đặc biệt quan trọng</b>",
+            "color": "#16a34a"
         },
         {
-          "id": "b_del",
-          "type": "del",
-          "label": "<del>150.000đ</del>",
-          "color": "#7c3aed"
+            "id": "b_i",
+            "type": "i",
+            "label": "<i>(HTML & CSS 12)</i>",
+            "color": "#15803d"
         },
         {
-          "id": "b_mark",
-          "type": "mark",
-          "label": "<mark>Chỉ 99k</mark>",
-          "color": "#d97706"
+            "id": "b_del",
+            "type": "del",
+            "label": "<del>150.000đ</del>",
+            "color": "#d97706"
         },
         {
-          "id": "b_err_p",
-          "type": "p_err",
-          "label": "<p>Phương trình</p>",
-          "color": "#0284c7",
-          "ruleViolation": "Thẻ đoạn văn <p> sẽ tự ngắt dòng mới, không thể chèn vào giữa dòng công thức toán hay hóa học đang viết dở đâu em nhé!"
+            "id": "b_mark",
+            "type": "mark",
+            "label": "<mark>Chỉ 99k</mark>",
+            "color": "#eab308"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "HTML Golf: Trang Ôn Tập Khoa Học Tự Nhiên",
       "goalDesc": "Mục tiêu: Đạt 100% khớp với sản phẩm mẫu: hiển thị phương trình bậc 2 (ax² + bx + c = 0), axit sunfuric (H₂SO₄), giá sách cũ bị gạch (<del>) và khuyến mãi (<mark>).",
@@ -5480,30 +5543,30 @@
       ],
       "statements": [
         {
-          "id": "b8_1",
-          "order": 1,
-          "code": "<h2 style=\"color:#0284c7;border-bottom:2px solid #0284c7;padding-bottom:6px;margin-top:0;\">ÔN TẬP KHOA HỌC TỰ NHIÊN</h2>",
-          "label": "<h2>ÔN TẬP KHOA HỌC TỰ NHIÊN</h2>"
+                "id": "b8_1",
+                "order": 1,
+                "code": "<h2>ÔN TẬP KHOA HỌC TỰ NHIÊN</h2>",
+                "label": "<h2>ÔN TẬP KHOA HỌC TỰ NHIÊN</h2>"
         },
         {
-          "id": "b8_2",
-          "order": 2,
-          "code": "<p><b>1. Toán học:</b> Phương trình bậc 2: ax<sup>2</sup> + bx + c = 0 (với a ≠ 0)</p>",
-          "label": "<p>1. Toán học: ax<sup>2</sup> + bx + c = 0</p>"
+                "id": "b8_2",
+                "order": 2,
+                "code": "<p>1. Toán học: ax<sup>2</sup> + bx + c = 0</p>",
+                "label": "<p>1. Toán học: ax<sup>2</sup> + bx + c = 0</p>"
         },
         {
-          "id": "b8_3",
-          "order": 3,
-          "code": "<p><b>2. Hóa học:</b> Axit sunfuric đặc nóng: H<sub>2</sub>SO<sub>4</sub></p>",
-          "label": "<p>2. Hóa học: H<sub>2</sub>SO<sub>4</sub> đặc nóng</p>"
+                "id": "b8_3",
+                "order": 3,
+                "code": "<p>2. Hóa học: H<sub>2</sub>SO<sub>4</sub> đặc nóng</p>",
+                "label": "<p>2. Hóa học: H<sub>2</sub>SO<sub>4</sub> đặc nóng</p>"
         },
         {
-          "id": "b8_4",
-          "order": 4,
-          "code": "<p><b>3. Sách ôn thi:</b> Giá cũ: <del>150.000đ</del> - Giá ưu đãi: <mark style=\"background:#fef08a;padding:2px 6px;border-radius:4px;\">99.000đ</mark></p>",
-          "label": "<p>3. Sách ôn thi: <del>150.000đ</del> <mark>99.000đ</mark></p>"
+                "id": "b8_4",
+                "order": 4,
+                "code": "<p>3. Sách ôn thi: <del>150.000đ</del> <mark>99.000đ</mark></p>",
+                "label": "<p>3. Sách ôn thi: <del>150.000đ</del> <mark>99.000đ</mark></p>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -5655,90 +5718,97 @@
       "hint": "Gộp hàng theo chiều dọc dùng rowspan, gộp cột theo chiều ngang dùng colspan, ô tiêu đề dùng th, tạo đường viền dùng border."
     },
     "lego": {
-      "title": "Lego Từ Tính: Lắp Bảng Thời Khóa Biểu",
-      "instruction": "Em hãy kéo các khối thẻ vào đúng vị trí để tạo bảng Thời khóa biểu hoàn chỉnh. Chú ý: các ô dữ liệu phải luôn nằm bên trong từng hàng <tr> nhé!",
-      "slots": [
+    "title": "Lego Từ Tính: Xây Dựng Bảng Biểu & Gộp Ô",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_tr1",
-          "label": "Tạo hàng đầu tiên của bảng để chứa tiêu đề chung",
-          "accept": [
-            "tr"
-          ],
-          "required": "tr"
+            "slotId": "s_table",
+            "label": "Thẻ bao bọc định nghĩa toàn bộ cấu trúc bảng hiển thị",
+            "accept": [
+                "table"
+            ],
+            "required": "table"
         },
         {
-          "slotId": "s_th_colspan",
-          "label": "Ô tiêu đề chính in đậm trải rộng qua cả 3 cột của bảng",
-          "accept": [
-            "th_colspan"
-          ],
-          "required": "th_colspan"
+            "slotId": "s_tr",
+            "label": "Thẻ tạo một hàng ngang trong bảng để chứa các ô",
+            "accept": [
+                "tr"
+            ],
+            "required": "tr"
         },
         {
-          "slotId": "s_tr2",
-          "label": "Tạo hàng tiếp theo để bắt đầu điền các môn học cụ thể",
-          "accept": [
-            "tr"
-          ],
-          "required": "tr"
+            "slotId": "s_th",
+            "label": "Thẻ tạo ô tiêu đề cột (tự động in đậm và căn giữa nội dung)",
+            "accept": [
+                "th"
+            ],
+            "required": "th"
         },
         {
-          "slotId": "s_td_rowspan",
-          "label": "Ô dữ liệu phân loại buổi học kéo dài xuyên suốt cả 2 hàng liên tiếp",
-          "accept": [
-            "td_rowspan"
-          ],
-          "required": "td_rowspan"
+            "slotId": "s_td",
+            "label": "Thẻ tạo ô chứa dữ liệu thông thường trong một hàng",
+            "accept": [
+                "td"
+            ],
+            "required": "td"
         },
         {
-          "slotId": "s_td_mon",
-          "label": "Ô dữ liệu ghi tên môn học đầu tiên của buổi sáng",
-          "accept": [
-            "td"
-          ],
-          "required": "td"
+            "slotId": "s_colspan",
+            "label": "Ô tiêu đề gộp trải rộng qua 3 cột theo chiều ngang",
+            "accept": [
+                "th_colspan"
+            ],
+            "required": "th_colspan"
+        },
+        {
+            "slotId": "s_rowspan",
+            "label": "Ô dữ liệu phân loại kéo dài xuyên suốt cả 2 hàng liên tiếp theo chiều dọc",
+            "accept": [
+                "td_rowspan"
+            ],
+            "required": "td_rowspan"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_tr1",
-          "type": "tr",
-          "label": "<tr>...</tr>",
-          "color": "#0284c7"
+            "id": "b_table",
+            "type": "table",
+            "label": "<table border='1'>...</table>",
+            "color": "#0284c7"
         },
         {
-          "id": "b_th_col",
-          "type": "th_colspan",
-          "label": "<th colspan='3'>THỜI KHÓA BIỂU</th>",
-          "color": "#0369a1"
+            "id": "b_tr",
+            "type": "tr",
+            "label": "<tr>...</tr>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_tr2",
-          "type": "tr",
-          "label": "<tr>...</tr>",
-          "color": "#0284c7"
+            "id": "b_th",
+            "type": "th",
+            "label": "<th>Môn Học</th>",
+            "color": "#16a34a"
         },
         {
-          "id": "b_td_row",
-          "type": "td_rowspan",
-          "label": "<td rowspan='2'>SÁNG</td>",
-          "color": "#059669"
+            "id": "b_td",
+            "type": "td",
+            "label": "<td>Tin học 12</td>",
+            "color": "#15803d"
         },
         {
-          "id": "b_td_mon",
-          "type": "td",
-          "label": "<td>Toán học</td>",
-          "color": "#10b981"
+            "id": "b_th_col",
+            "type": "th_colspan",
+            "label": "<th colspan='3'>THỜI KHÓA BIỂU</th>",
+            "color": "#2563eb"
         },
         {
-          "id": "b_err_td_direct",
-          "type": "td_err",
-          "label": "<td>Chiều</td>",
-          "color": "#059669",
-          "ruleViolation": "Thẻ ô dữ liệu <td> bắt buộc phải nằm trong hàng <tr>, không thể đặt tự do trực tiếp trong bảng <table> em nhé!"
+            "id": "b_td_row",
+            "type": "td_rowspan",
+            "label": "<td rowspan='2'>BUỔI SÁNG</td>",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "HTML Golf: Bảng Thời Khóa Biểu Gộp Ô",
       "goalDesc": "Mục tiêu: Đạt 100% khớp sản phẩm mẫu: bảng có border='1', tiêu đề gộp 3 cột (colspan='3'), ô SÁNG gộp 2 hàng (rowspan='2').",
@@ -5822,42 +5892,42 @@
       ],
       "statements": [
         {
-          "id": "b9_1",
-          "order": 1,
-          "code": "<table border=\"1\" style=\"width:100%;border-collapse:collapse;text-align:center;font-family:sans-serif;\">",
-          "label": "<table border=\"1\">"
+                "id": "b9_1",
+                "order": 1,
+                "code": "<table border=\"1\">",
+                "label": "<table border=\"1\">"
         },
         {
-          "id": "b9_2",
-          "order": 2,
-          "code": "  <tr style=\"background:#0284c7;color:white;\">\n    <th colspan=\"3\" style=\"padding:8px;\">THỜI KHÓA BIỂU LỚP 12A1</th>\n  </tr>",
-          "label": "<tr><th colspan=\"3\">THỜI KHÓA BIỂU LỚP 12A1</th></tr>"
+                "id": "b9_2",
+                "order": 2,
+                "code": "<tr><th colspan=\"3\">THỜI KHÓA BIỂU LỚP 12A1</th></tr>",
+                "label": "<tr><th colspan=\"3\">THỜI KHÓA BIỂU LỚP 12A1</th></tr>"
         },
         {
-          "id": "b9_3",
-          "order": 3,
-          "code": "  <tr style=\"background:#e0f2fe;font-weight:bold;\">\n    <th style=\"padding:6px;\">Buổi</th><th style=\"padding:6px;\">Tiết</th><th style=\"padding:6px;\">Môn học</th>\n  </tr>",
-          "label": "<tr><th>Buổi</th><th>Tiết</th><th>Môn học</th></tr>"
+                "id": "b9_3",
+                "order": 3,
+                "code": "<tr><th>Buổi</th><th>Tiết</th><th>Môn học</th></tr>",
+                "label": "<tr><th>Buổi</th><th>Tiết</th><th>Môn học</th></tr>"
         },
         {
-          "id": "b9_4",
-          "order": 4,
-          "code": "  <tr>\n    <td rowspan=\"2\" style=\"background:#fef3c7;font-weight:bold;\">SÁNG</td><td>1</td><td>Toán học</td>\n  </tr>",
-          "label": "<tr><td rowspan=\"2\">SÁNG</td><td>1</td><td>Toán học</td></tr>"
+                "id": "b9_4",
+                "order": 4,
+                "code": "<tr><td rowspan=\"2\">SÁNG</td><td>1</td><td>Toán học</td></tr>",
+                "label": "<tr><td rowspan=\"2\">SÁNG</td><td>1</td><td>Toán học</td></tr>"
         },
         {
-          "id": "b9_5",
-          "order": 5,
-          "code": "  <tr>\n    <td>2</td><td>Vật lí</td>\n  </tr>",
-          "label": "<tr><td>2</td><td>Vật lí</td></tr>"
+                "id": "b9_5",
+                "order": 5,
+                "code": "<tr><td>2</td><td>Vật lí</td></tr>",
+                "label": "<tr><td>2</td><td>Vật lí</td></tr>"
         },
         {
-          "id": "b9_6",
-          "order": 6,
-          "code": "</table>",
-          "label": "</table>"
+                "id": "b9_6",
+                "order": 6,
+                "code": "</table>",
+                "label": "</table>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -6009,62 +6079,83 @@
       "hint": "Chuyển đến mục trong trang dùng dấu thăng (#), mở tab mới dùng target='_blank', gọi điện dùng tel:, gửi thư dùng mailto:."
     },
     "lego": {
-      "title": "Lego Từ Tính: Xây Dựng Thanh Menu Điều Hướng Trang (Navbar)",
-      "instruction": "Em hãy kéo các thẻ liên kết vào đúng vị trí trên thanh điều hướng để mở trang web mới, chuyển đến mục trong trang hoặc gọi điện thoại tư vấn nhé:",
-      "slots": [
+    "title": "Lego Từ Tính: Xây Dựng Hệ Thống Liên Kết Đa Năng",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_ext",
-          "label": "Nút bấm dẫn đến Cổng thông tin Bộ GD&ĐT mở riêng ở một tab mới",
-          "accept": [
-            "a_ext"
-          ],
-          "required": "a_ext"
+            "slotId": "s_ext",
+            "label": "Liên kết dẫn đến Cổng thông tin Bộ GD&ĐT mở riêng ở một tab mới",
+            "accept": [
+                "a_ext"
+            ],
+            "required": "a_ext"
         },
         {
-          "slotId": "s_bm",
-          "label": "Nút bấm cuộn nhảy tức thì đến phần bài học Chủ đề 4 ở phía dưới cùng trang",
-          "accept": [
-            "a_bm"
-          ],
-          "required": "a_bm"
+            "slotId": "s_bm",
+            "label": "Liên kết Bookmark cuộn nhảy tức thì đến phần bài học có id='chuong4' trong cùng trang",
+            "accept": [
+                "a_bm"
+            ],
+            "required": "a_bm"
         },
         {
-          "slotId": "s_tel",
-          "label": "Nút bấm chạm để mở ngay ứng dụng gọi điện thoại tư vấn học tập",
-          "accept": [
-            "a_tel"
-          ],
-          "required": "a_tel"
+            "slotId": "s_tel",
+            "label": "Liên kết bấm để mở ngay ứng dụng gọi điện thoại tư vấn học tập",
+            "accept": [
+                "a_tel"
+            ],
+            "required": "a_tel"
+        },
+        {
+            "slotId": "s_mail",
+            "label": "Liên kết bấm để tự động mở ứng dụng gửi thư điện tử góp ý",
+            "accept": [
+                "a_mail"
+            ],
+            "required": "a_mail"
+        },
+        {
+            "slotId": "s_internal",
+            "label": "Liên kết điều hướng dẫn đến một tệp trang web khác trong cùng website",
+            "accept": [
+                "a_internal"
+            ],
+            "required": "a_internal"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_a_ext",
-          "type": "a_ext",
-          "label": "<a href='https://moet.gov.vn' target='_blank'>Bộ GD</a>",
-          "color": "#0284c7"
+            "id": "b_a_ext",
+            "type": "a_ext",
+            "label": "<a href='https://moet.gov.vn' target='_blank'>Cổng Bộ GD&ĐT</a>",
+            "color": "#0284c7"
         },
         {
-          "id": "b_a_bm",
-          "type": "a_bm",
-          "label": "<a href='#chuong4'>Xem Chủ đề 4</a>",
-          "color": "#059669"
+            "id": "b_a_bm",
+            "type": "a_bm",
+            "label": "<a href='#chuong4'>Xem Chủ đề 4</a>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_a_tel",
-          "type": "a_tel",
-          "label": "<a href='tel:0988123456'>Gọi Thầy</a>",
-          "color": "#d97706"
+            "id": "b_a_tel",
+            "type": "a_tel",
+            "label": "<a href='tel:0988123456'>Gọi Tư Vấn</a>",
+            "color": "#16a34a"
         },
         {
-          "id": "b_err_bm",
-          "type": "a_bm_err",
-          "label": "<a href='chuong4'>Xem Chủ đề 4</a>",
-          "color": "#059669",
-          "ruleViolation": "Để nhảy đến một mục trong cùng trang web, em phải đặt dấu thăng (#) trước tên id (ví dụ: href='#chuong4') để trình duyệt nhận diện nhé!"
+            "id": "b_a_mail",
+            "type": "a_mail",
+            "label": "<a href='mailto:admin@thpt.edu.vn'>Gửi Góp Ý</a>",
+            "color": "#d97706"
+        },
+        {
+            "id": "b_a_internal",
+            "type": "a_internal",
+            "label": "<a href='gioithieu.html'>Trang Giới Thiệu</a>",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "HTML Golf: Hệ Thống Menu Điều Hướng & Bookmark",
       "goalDesc": "Mục tiêu: Đạt 100% khớp sản phẩm mẫu: link ngoài mở tab mới (target='_blank'), link neo nhảy tới id='chuong4' và link gọi điện thoại tel:.",
@@ -6144,36 +6235,36 @@
       ],
       "statements": [
         {
-          "id": "b10_1",
-          "order": 1,
-          "code": "<nav style=\"background:#f1f5f9;padding:10px 14px;border-radius:8px;margin-bottom:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;\">",
-          "label": "<nav>"
+                "id": "b10_1",
+                "order": 1,
+                "code": "<nav>",
+                "label": "<nav>"
         },
         {
-          "id": "b10_2",
-          "order": 2,
-          "code": "  <a href=\"https://moet.gov.vn\" target=\"_blank\" style=\"color:#0284c7;font-weight:bold;text-decoration:none;\">🌐 Cổng Bộ GD&ĐT (Tab mới)</a> |",
-          "label": "<a href=\"https://moet.gov.vn\" target=\"_blank\">Cổng Bộ GD&ĐT</a> |"
+                "id": "b10_2",
+                "order": 2,
+                "code": "  <a href=\"https://moet.gov.vn\" target=\"_blank\">🌐 Cổng Bộ GD&ĐT (Tab mới)</a> |",
+                "label": "<a href=\"https://moet.gov.vn\" target=\"_blank\">🌐 Cổng Bộ GD&ĐT (Tab mới)</a> |"
         },
         {
-          "id": "b10_3",
-          "order": 3,
-          "code": "  <a href=\"#chuong4\" style=\"color:#059669;font-weight:bold;text-decoration:none;\">⬇ Nhảy tới Chủ đề 4 (#chuong4)</a> |",
-          "label": "<a href=\"#chuong4\">Nhảy tới Chủ đề 4</a> |"
+                "id": "b10_3",
+                "order": 3,
+                "code": "  <a href=\"#chuong4\">⬇ Nhảy tới Chủ đề 4</a> |",
+                "label": "<a href=\"#chuong4\">⬇ Nhảy tới Chủ đề 4</a> |"
         },
         {
-          "id": "b10_4",
-          "order": 4,
-          "code": "  <a href=\"tel:02438695712\" style=\"color:#d97706;font-weight:bold;text-decoration:none;\">📞 Hotline: 024.3869.5712</a>\n</nav>",
-          "label": "<a href=\"tel:02438695712\">Hotline Tư Vấn</a></nav>"
+                "id": "b10_4",
+                "order": 4,
+                "code": "  <a href=\"tel:02438695712\">📞 Hotline: 024.3869.5712</a>\n</nav>",
+                "label": "<a href=\"tel:02438695712\">📞 Hotline: 024.3869.5712</a>\n</nav>"
         },
         {
-          "id": "b10_5",
-          "order": 5,
-          "code": "<div style=\"margin-top:16px;padding:12px 16px;background:#ecfdf5;border-left:4px solid #059669;border-radius:6px;\">\n  <h2 id=\"chuong4\" style=\"color:#065f46;margin:0 0 6px 0;\">📍 Chủ đề 4: Ứng dụng Tin học 12</h2>\n  <p style=\"margin:0;color:#334155;\">Trang giới thiệu chương trình Tin học 12 (Kết nối tri thức).</p>\n</div>",
-          "label": "<h2 id=\"chuong4\">Chủ đề 4: Ứng dụng Tin học 12</h2>\n<p>...</p>"
+                "id": "b10_5",
+                "order": 5,
+                "code": "<h2 id=\"chuong4\">📍 Chủ đề 4: Ứng dụng Tin học 12</h2>\n<p>Trang giới thiệu chương trình Tin học 12 (Kết nối tri thức).</p>",
+                "label": "<h2 id=\"chuong4\">📍 Chủ đề 4: Ứng dụng Tin học 12</h2>\n<p>Trang giới thiệu chương trình Tin học 12 (Kết nối tri thức).</p>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -6325,76 +6416,83 @@
       "hint": "Ảnh cần alt để hiển thị văn bản thay thế, video/audio cần controls để có nút bấm phát, khung nhúng dùng iframe."
     },
     "lego": {
-      "title": "Lego Từ Tính: Lắp Cấu Trúc Trình Phát Video & Âm Thanh",
-      "instruction": "Em hãy kéo các thẻ hình ảnh, video, nguồn tệp và khung nhúng vào đúng vị trí để hoàn thiện góc đa phương tiện của lớp mình nhé:",
-      "slots": [
+    "title": "Lego Từ Tính: Lắp Khung Đa Phương Tiện & Nhúng Bản Đồ",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_img",
-          "label": "Chèn hình ảnh biểu trưng của nhà trường có kèm lời mô tả phòng khi ảnh lỗi",
-          "accept": [
-            "img"
-          ],
-          "required": "img"
+            "slotId": "s_img",
+            "label": "Chèn hình ảnh biểu trưng của nhà trường có kèm lời mô tả phòng khi ảnh lỗi",
+            "accept": [
+                "img"
+            ],
+            "required": "img"
         },
         {
-          "slotId": "s_video",
-          "label": "Khung phát đoạn phim tư liệu có sẵn các nút bấm phát, tạm dừng và âm lượng",
-          "accept": [
-            "video"
-          ],
-          "required": "video"
+            "slotId": "s_audio",
+            "label": "Khung phát tệp âm thanh bài nghe có sẵn thanh điều khiển phát/dừng",
+            "accept": [
+                "audio"
+            ],
+            "required": "audio"
         },
         {
-          "slotId": "s_source",
-          "label": "Chỉ định tệp tin video bài giảng và định dạng tệp đưa vào khung phát",
-          "accept": [
-            "source"
-          ],
-          "required": "source"
+            "slotId": "s_video",
+            "label": "Khung phát đoạn phim tư liệu bài giảng có sẵn các nút bấm điều khiển",
+            "accept": [
+                "video"
+            ],
+            "required": "video"
         },
         {
-          "slotId": "s_iframe",
-          "label": "Cửa sổ nhúng trực tiếp bản đồ định vị của trường từ một địa chỉ bên ngoài",
-          "accept": [
-            "iframe"
-          ],
-          "required": "iframe"
+            "slotId": "s_source",
+            "label": "Chỉ định tệp tin video bài giảng và định dạng tệp đưa vào khung phát",
+            "accept": [
+                "source"
+            ],
+            "required": "source"
+        },
+        {
+            "slotId": "s_iframe",
+            "label": "Cửa sổ nhúng trực tiếp bản đồ số định vị trường từ một địa chỉ bên ngoài",
+            "accept": [
+                "iframe"
+            ],
+            "required": "iframe"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_img",
-          "type": "img",
-          "label": "<img src='logo.png' alt='Logo Trường'>",
-          "color": "#0284c7"
+            "id": "b_img",
+            "type": "img",
+            "label": "<img src='logo.png' alt='Logo Trường'>",
+            "color": "#0284c7"
         },
         {
-          "id": "b_video",
-          "type": "video",
-          "label": "<video width='320' controls>...</video>",
-          "color": "#059669"
+            "id": "b_audio",
+            "type": "audio",
+            "label": "<audio src='baihoc.mp3' controls></audio>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_source",
-          "type": "source",
-          "label": "<source src='clip.mp4' type='video/mp4'>",
-          "color": "#10b981"
+            "id": "b_video",
+            "type": "video",
+            "label": "<video width='320' controls>...</video>",
+            "color": "#16a34a"
         },
         {
-          "id": "b_iframe",
-          "type": "iframe",
-          "label": "<iframe src='map.html'></iframe>",
-          "color": "#d97706"
+            "id": "b_source",
+            "type": "source",
+            "label": "<source src='clip.mp4' type='video/mp4'>",
+            "color": "#15803d"
         },
         {
-          "id": "b_err_source_out",
-          "type": "src_err",
-          "label": "<source src='audio.mp3'>",
-          "color": "#10b981",
-          "ruleViolation": "Thẻ <source> không thể đứng một mình mà bắt buộc phải nằm bên trong thẻ <video> hoặc <audio> để chỉ định tệp đa phương tiện em nhé!"
+            "id": "b_iframe",
+            "type": "iframe",
+            "label": "<iframe src='bando.html'></iframe>",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "HTML Golf: Khu Vực Media Kỷ Yếu Lớp Học",
       "goalDesc": "Mục tiêu: Đạt 100% khớp sản phẩm mẫu: ảnh có alt cứu cánh, video có controls điều khiển và iframe nhúng bản đồ.",
@@ -6478,36 +6576,36 @@
       ],
       "statements": [
         {
-          "id": "b11_1",
-          "order": 1,
-          "code": "<h3 style=\"color:#1e293b;border-bottom:2px solid #e2e8f0;padding-bottom:6px;margin-top:0;\">GÓC ĐA PHƯƠNG TIỆN LỚP 12A1</h3>",
-          "label": "<h3>GÓC ĐA PHƯƠNG TIỆN LỚP 12A1</h3>"
+                "id": "b11_1",
+                "order": 1,
+                "code": "<h3>GÓC ĐA PHƯƠNG TIỆN LỚP 12A1</h3>",
+                "label": "<h3>GÓC ĐA PHƯƠNG TIỆN LỚP 12A1</h3>"
         },
         {
-          "id": "b11_2",
-          "order": 2,
-          "code": "<p style=\"margin:8px 0 4px 0;\"><b>1. Ảnh kỷ yếu:</b></p>\n<img src=\"https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=320\" alt=\"Kỷ yếu lớp 12A1\" style=\"width:100%;max-width:260px;border-radius:8px;display:block;\">",
-          "label": "<img src=\"anh.jpg\" alt=\"Kỷ yếu lớp 12A1\" width=\"200\">"
+                "id": "b11_2",
+                "order": 2,
+                "code": "<p>1. Ảnh kỷ yếu:</p>\n<img src=\"https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=320\" alt=\"Kỷ yếu lớp 12A1\" width=\"260\">",
+                "label": "<p>1. Ảnh kỷ yếu:</p>\n<img src=\"https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=320\" alt=\"Kỷ yếu lớp 12A1\" width=\"260\">"
         },
         {
-          "id": "b11_3",
-          "order": 3,
-          "code": "<p style=\"margin:12px 0 4px 0;\"><b>2. Video lễ bế giảng:</b></p>\n<video width=\"100%\" style=\"max-width:260px;border-radius:8px;display:block;\" controls>\n  <source src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\" type=\"video/mp4\">\n</video>",
-          "label": "<video width=\"320\" controls><source src=\"video.mp4\"></video>"
+                "id": "b11_3",
+                "order": 3,
+                "code": "<p>2. Video lễ bế giảng:</p>\n<video width=\"260\" controls>\n  <source src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\" type=\"video/mp4\">\n</video>",
+                "label": "<p>2. Video lễ bế giảng:</p>\n<video width=\"260\" controls>\n  <source src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\" type=\"video/mp4\">\n</video>"
         },
         {
-          "id": "b11_4",
-          "order": 4,
-          "code": "<p style=\"margin:12px 0 4px 0;\"><b>3. Bản đồ vị trí trường học (Khung nội tuyến):</b></p>",
-          "label": "<p>Bản đồ vị trí trường học:</p>"
+                "id": "b11_4",
+                "order": 4,
+                "code": "<p>3. Bản đồ vị trí trường học:</p>",
+                "label": "<p>3. Bản đồ vị trí trường học:</p>"
         },
         {
-          "id": "b11_5",
-          "order": 5,
-          "code": "<iframe src=\"https://maps.google.com/maps?q=Hanoi&t=&z=13&ie=UTF8&iwloc=&output=embed\" width=\"100%\" height=\"140\" style=\"border:1px solid #cbd5e1;border-radius:8px;\"></iframe>",
-          "label": "<iframe src=\"map.html\" width=\"100%\"></iframe>"
+                "id": "b11_5",
+                "order": 5,
+                "code": "<iframe src=\"https://maps.google.com/maps?q=Hanoi&t=&z=13&ie=UTF8&iwloc=&output=embed\" width=\"100%\" height=\"140\"></iframe>",
+                "label": "<iframe src=\"https://maps.google.com/maps?q=Hanoi&t=&z=13&ie=UTF8&iwloc=&output=embed\" width=\"100%\" height=\"140\"></iframe>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -6659,90 +6757,97 @@
       "hint": "Quy tắc biểu mẫu: password che mật khẩu, radio chọn 1 trong nhóm cùng name, checkbox chọn có/không, submit gửi dữ liệu; còn <select> và <textarea> là các thẻ riêng biệt, không phải giá trị type của thẻ <input>."
     },
     "lego": {
-      "title": "Lego Từ Tính: Xây Dựng Nhóm Radio Chọn 1 Duy Nhất",
-      "instruction": "Em hãy kéo các ô nhập liệu vào Biểu mẫu khảo sát. Chú ý: hai nút chọn giới tính phải có cùng thuộc tính name để người dùng chỉ chọn được một lựa chọn nhé:",
-      "slots": [
+    "title": "Lego Từ Tính: Xây Dựng Các Thành Phần Biểu Mẫu (Form)",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_user",
-          "label": "Ô trống cho phép người dùng gõ tên tài khoản dạng chữ bình thường",
-          "accept": [
-            "inp_user"
-          ],
-          "required": "inp_user"
+            "slotId": "s_form",
+            "label": "Thẻ định nghĩa biểu mẫu chứa các ô nhập liệu và chỉ định phương thức gửi dữ liệu",
+            "accept": [
+                "form"
+            ],
+            "required": "form"
         },
         {
-          "slotId": "s_pass",
-          "label": "Ô nhập mã bảo mật tự động che giấu ký tự thành các chấm tròn kín đáo",
-          "accept": [
-            "inp_pass"
-          ],
-          "required": "inp_pass"
+            "slotId": "s_text",
+            "label": "Ô trống cho phép người dùng gõ tên tài khoản hoặc họ tên dạng chữ bình thường",
+            "accept": [
+                "inp_text"
+            ],
+            "required": "inp_text"
         },
         {
-          "slotId": "s_radio_nam",
-          "label": "Nút bấm hình tròn chọn giới tính Nam (chỉ được chọn 1 trong 2 giới tính)",
-          "accept": [
-            "radio_nam"
-          ],
-          "required": "radio_nam"
+            "slotId": "s_pass",
+            "label": "Ô nhập mã bảo mật tự động che giấu ký tự thành các chấm tròn kín đáo",
+            "accept": [
+                "inp_pass"
+            ],
+            "required": "inp_pass"
         },
         {
-          "slotId": "s_radio_nu",
-          "label": "Nút bấm hình tròn chọn giới tính Nữ có nhóm chọn liên kết đồng bộ với nút Nam",
-          "accept": [
-            "radio_nu"
-          ],
-          "required": "radio_nu"
+            "slotId": "s_radio",
+            "label": "Nút bấm hình tròn chọn giới tính (chỉ được chọn 1 phương án duy nhất trong nhóm)",
+            "accept": [
+                "inp_radio"
+            ],
+            "required": "inp_radio"
         },
         {
-          "slotId": "s_submit",
-          "label": "Nút bấm hoàn tất để gửi toàn bộ thông tin biểu mẫu lên máy chủ",
-          "accept": [
-            "btn_submit"
-          ],
-          "required": "btn_submit"
+            "slotId": "s_checkbox",
+            "label": "Hộp kiểm hình vuông cho phép người dùng đánh dấu chọn nhiều sở thích cùng lúc",
+            "accept": [
+                "inp_checkbox"
+            ],
+            "required": "inp_checkbox"
+        },
+        {
+            "slotId": "s_submit",
+            "label": "Nút bấm hoàn tất để gửi toàn bộ thông tin biểu mẫu lên máy chủ xử lý",
+            "accept": [
+                "btn_submit"
+            ],
+            "required": "btn_submit"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_user",
-          "type": "inp_user",
-          "label": "<input type='text' name='user'>",
-          "color": "#0284c7"
+            "id": "b_form",
+            "type": "form",
+            "label": "<form action='xuly.php' method='POST'>",
+            "color": "#0284c7"
         },
         {
-          "id": "b_pass",
-          "type": "inp_pass",
-          "label": "<input type='password' name='pass'>",
-          "color": "#0369a1"
+            "id": "b_text",
+            "type": "inp_text",
+            "label": "<input type='text' name='hoten'>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_r_nam",
-          "type": "radio_nam",
-          "label": "<input type='radio' name='gioitinh' value='nam'> Nam",
-          "color": "#059669"
+            "id": "b_pass",
+            "type": "inp_pass",
+            "label": "<input type='password' name='matkhau'>",
+            "color": "#16a34a"
         },
         {
-          "id": "b_r_nu",
-          "type": "radio_nu",
-          "label": "<input type='radio' name='gioitinh' value='nu'> Nữ",
-          "color": "#059669"
+            "id": "b_radio",
+            "type": "inp_radio",
+            "label": "<input type='radio' name='gioitinh' value='nam'> Nam",
+            "color": "#15803d"
         },
         {
-          "id": "b_sub",
-          "type": "btn_submit",
-          "label": "<input type='submit' value='Đăng Nhập'>",
-          "color": "#d97706"
+            "id": "b_checkbox",
+            "type": "inp_checkbox",
+            "label": "<input type='checkbox' name='sothich' value='thethao'> Thể thao",
+            "color": "#d97706"
         },
         {
-          "id": "b_err_radio",
-          "type": "radio_err",
-          "label": "<input type='radio' name='gioitinh_khac' value='khac'> Khác",
-          "color": "#059669",
-          "ruleViolation": "Nếu hai nút chọn giới tính khác thuộc tính name thì người dùng sẽ chọn được cả hai cùng lúc. Em phải đặt chung name='gioitinh' để chỉ chọn được một nút thôi nhé!"
+            "id": "b_submit",
+            "type": "btn_submit",
+            "label": "<input type='submit' value='Gửi Biểu Mẫu'>",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "HTML Golf: Phiếu Khảo Sát Nguyện Vọng Lớp 12",
       "goalDesc": "Mục tiêu: Đạt 100% khớp biểu sản phẩm mẫu: form dùng method='POST', có input text, radio cùng name, select chọn tỉnh thành và nút submit.",
@@ -6815,42 +6920,42 @@
       ],
       "statements": [
         {
-          "id": "b12_1",
-          "order": 1,
-          "code": "<form action=\"xuly.php\" method=\"POST\" style=\"background:#f8fafc;padding:14px;border:1.5px solid #cbd5e1;border-radius:10px;font-family:sans-serif;\">\n  <h4 style=\"margin:0 0 10px 0;color:#1e40af;font-size:1.1rem;\">PHIẾU KHẢO SÁT NGUYỆN VỌNG</h4>",
-          "label": "<form action=\"xuly.php\" method=\"POST\">\n  <h4>PHIẾU KHẢO SÁT</h4>"
+                "id": "b12_1",
+                "order": 1,
+                "code": "<form action=\"xuly.php\" method=\"POST\">\n  <h4>PHIẾU KHẢO SÁT NGUYỆN VỌNG</h4>",
+                "label": "<form action=\"xuly.php\" method=\"POST\">\n  <h4>PHIẾU KHẢO SÁT NGUYỆN VỌNG</h4>"
         },
         {
-          "id": "b12_2",
-          "order": 2,
-          "code": "  <div style=\"margin-bottom:8px;\">\n    <label><b>Họ và tên:</b> <input type=\"text\" name=\"hoten\" placeholder=\"Nhập họ tên\" style=\"padding:4px 8px;border:1px solid #94a3b8;border-radius:4px;\"></label>\n  </div>",
-          "label": "<label>Họ tên: <input type=\"text\" name=\"hoten\"></label>"
+                "id": "b12_2",
+                "order": 2,
+                "code": "  <p><label>Họ và tên: <input type=\"text\" name=\"hoten\" placeholder=\"Nhập họ tên\"></label></p>",
+                "label": "<p><label>Họ và tên: <input type=\"text\" name=\"hoten\" placeholder=\"Nhập họ tên\"></label></p>"
         },
         {
-          "id": "b12_3",
-          "order": 3,
-          "code": "  <div style=\"margin-bottom:8px;\">\n    <label><b>Mật khẩu:</b> <input type=\"password\" name=\"matkhau\" placeholder=\"Nhập mật khẩu\" style=\"padding:4px 8px;border:1px solid #94a3b8;border-radius:4px;\"></label>\n  </div>",
-          "label": "<label>Mật khẩu: <input type=\"password\" name=\"matkhau\"></label>"
+                "id": "b12_3",
+                "order": 3,
+                "code": "  <p><label>Mật khẩu: <input type=\"password\" name=\"matkhau\" placeholder=\"Nhập mật khẩu\"></label></p>",
+                "label": "<p><label>Mật khẩu: <input type=\"password\" name=\"matkhau\" placeholder=\"Nhập mật khẩu\"></label></p>"
         },
         {
-          "id": "b12_4",
-          "order": 4,
-          "code": "  <div style=\"margin-bottom:8px;\">\n    <b>Giới tính:</b>\n    <label><input type=\"radio\" name=\"gt\" value=\"nam\"> Nam</label>\n    <label style=\"margin-left:8px;\"><input type=\"radio\" name=\"gt\" value=\"nu\"> Nữ</label>\n  </div>",
-          "label": "<input type=\"radio\" name=\"gt\" value=\"nam\"> Nam / Nữ"
+                "id": "b12_4",
+                "order": 4,
+                "code": "  <p>Giới tính: <label><input type=\"radio\" name=\"gt\" value=\"nam\"> Nam</label> <label><input type=\"radio\" name=\"gt\" value=\"nu\"> Nữ</label></p>",
+                "label": "<p>Giới tính: <label><input type=\"radio\" name=\"gt\" value=\"nam\"> Nam</label> <label><input type=\"radio\" name=\"gt\" value=\"nu\"> Nữ</label></p>"
         },
         {
-          "id": "b12_5",
-          "order": 5,
-          "code": "  <div style=\"margin-bottom:10px;\">\n    <label><b>Tỉnh/Thành phố:</b>\n      <select name=\"tinh\" style=\"padding:4px 8px;border:1px solid #94a3b8;border-radius:4px;\">\n        <option>Hà Nội</option><option>TP.HCM</option><option>Đà Nẵng</option>\n      </select>\n    </label>\n  </div>",
-          "label": "<select name=\"tinh\"><option>Hà Nội</option>..."
+                "id": "b12_5",
+                "order": 5,
+                "code": "<p><label>Tỉnh/Thành phố: <select name=\"tinh\"><option>Hà Nội</option><option>TP.HCM</option><option>Đà Nẵng</option></select></label></p>",
+                "label": "<p><label>Tỉnh/Thành phố: <select name=\"tinh\"><option>Hà Nội</option><option>TP.HCM</option><option>Đà Nẵng</option></select></label></p>"
         },
         {
-          "id": "b12_6",
-          "order": 6,
-          "code": "  <div>\n    <input type=\"submit\" value=\"Gửi Hồ Sơ\" style=\"background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white;padding:6px 18px;border:none;border-radius:6px;font-weight:bold;cursor:pointer;\">\n  </div>\n</form>",
-          "label": "<input type=\"submit\" value=\"Gửi Hồ Sơ\">\n</form>"
+                "id": "b12_6",
+                "order": 6,
+                "code": "  <p><input type=\"submit\" value=\"Gửi Hồ Sơ\"></p>\n</form>",
+                "label": "<p><input type=\"submit\" value=\"Gửi Hồ Sơ\"></p>\n</form>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -7002,111 +7107,118 @@
       "hint": "Cú pháp CSS chuẩn dùng ngoặc nhọn { thuộc_tính: giá_trị; }. 3 cách thiết lập: thẻ <style> (CSS trong), thẻ <link> (CSS ngoài) và thuộc tính style (CSS nội tuyến)."
     },
     "lego": {
-      "title": "Lego Từ Tính: Xây Dựng 3 Cách Thiết Lập CSS Trong Trang Web",
-      "instruction": "Em hãy kéo các khối lệnh CSS ở cột bên trái thả vào đúng vị trí thiết lập (CSS ngoài, CSS trong hoặc CSS nội tuyến) để hoàn chỉnh cấu trúc liên kết định dạng:",
-      "slots": [
+    "title": "Lego Từ Tính: Xây Dựng 3 Cách Thiết Lập CSS Trong Trang Web",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_ext",
-          "label": "Liên kết tệp định dạng CSS bên ngoài (External CSS) vào phần đầu trang web",
-          "accept": [
-            "css_ext"
-          ],
-          "required": "css_ext"
+            "slotId": "s_ext",
+            "label": "Liên kết tệp định dạng CSS bên ngoài (External CSS) vào phần đầu trang web",
+            "accept": [
+                "css_ext"
+            ],
+            "required": "css_ext"
         },
         {
-          "slotId": "s_int",
-          "label": "Khai báo mã định dạng CSS nội bộ (Internal CSS) để đổi màu chữ cho tiêu đề h1",
-          "accept": [
-            "css_int"
-          ],
-          "required": "css_int"
+            "slotId": "s_int",
+            "label": "Khai báo mã định dạng CSS nội bộ (Internal CSS) để định kiểu cho các thẻ trên trang",
+            "accept": [
+                "css_int"
+            ],
+            "required": "css_int"
         },
         {
-          "slotId": "s_inline",
-          "label": "Áp dụng phương pháp CSS nội tuyến (Inline CSS) để căn thụt lề dòng đầu đoạn văn",
-          "accept": [
-            "css_inline"
-          ],
-          "required": "css_inline"
+            "slotId": "s_inline",
+            "label": "Áp dụng phương pháp CSS nội tuyến (Inline CSS) áp dụng trực tiếp cho một phần tử duy nhất",
+            "accept": [
+                "css_inline"
+            ],
+            "required": "css_inline"
         },
         {
-          "slotId": "s_comment",
-          "label": "Dòng chú thích thông tin tác giả và bản quyền đúng quy chuẩn trong tệp CSS",
-          "accept": [
-            "css_comment"
-          ],
-          "required": "css_comment"
+            "slotId": "s_rule",
+            "label": "Cấu trúc quy tắc CSS chuẩn gồm bộ chọn (Selector) và khối khai báo thuộc tính",
+            "accept": [
+                "css_rule"
+            ],
+            "required": "css_rule"
+        },
+        {
+            "slotId": "s_comment",
+            "label": "Dòng chú thích thông tin tác giả và bản quyền đúng quy chuẩn trong tệp CSS",
+            "accept": [
+                "css_comment"
+            ],
+            "required": "css_comment"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_ext",
-          "type": "css_ext",
-          "label": "<link rel='stylesheet' href='styles.css'>",
-          "color": "#2563eb"
+            "id": "b_ext",
+            "type": "css_ext",
+            "label": "<link rel='stylesheet' href='styles.css'>",
+            "color": "#0284c7"
         },
         {
-          "id": "b_int",
-          "type": "css_int",
-          "label": "<style>\n  h1 { color: red; border: 2px solid blue; }\n</style>",
-          "color": "#059669"
+            "id": "b_int",
+            "type": "css_int",
+            "label": "<style>\n  h1 { color: red; border: 2px solid blue; }\n</style>",
+            "color": "#0369a1"
         },
         {
-          "id": "b_inline",
-          "type": "css_inline",
-          "label": "<p style='text-indent: 15px;'>Nội dung bài viết...</p>",
-          "color": "#d97706"
+            "id": "b_inline",
+            "type": "css_inline",
+            "label": "<p style='color: blue; text-indent: 15px;'>Nội dung bài viết...</p>",
+            "color": "#16a34a"
         },
         {
-          "id": "b_comment",
-          "type": "css_comment",
-          "label": "/* Thông tin thiết kế CSS lớp 12 */",
-          "color": "#475569"
+            "id": "b_rule",
+            "type": "css_rule",
+            "label": "h1 { color: #0284c7; text-align: center; }",
+            "color": "#15803d"
         },
         {
-          "id": "b_err_comment",
-          "type": "err_comment",
-          "label": "<!-- Ghi chú thiết kế CSS -->",
-          "color": "#dc2626",
-          "ruleViolation": "Cú pháp <!-- ... --> là của HTML, trong CSS chú thích bắt buộc dùng /* ... */!"
+            "id": "b_comment",
+            "type": "css_comment",
+            "label": "/* Thông tin thiết kế CSS lớp 12 */",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "Thực Hành Tạo Trang Web: Trang Lịch Sử Phát Triển HTML & CSS",
       "goalDesc": "Mục tiêu: Ghép đúng các câu lệnh theo thứ tự tạo trang web Lịch sử HTML & CSS hoàn chỉnh có thẻ <style> định dạng tiêu đề h1 và thụt lề đoạn văn p.",
       "statements": [
         {
-          "id": "b13_1",
-          "order": 1,
-          "code": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <title>Lịch sử phát triển HTML & CSS</title>",
-          "label": "<!DOCTYPE html>\n<html><head>\n  <title>Lịch sử phát triển</title>"
+                "id": "b13_1",
+                "order": 1,
+                "code": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <title>Lịch sử phát triển HTML & CSS</title>",
+                "label": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <title>Lịch sử phát triển HTML & CSS</title>"
         },
         {
-          "id": "b13_2",
-          "order": 2,
-          "code": "  <style>\n    h1 { color: red; border: 2px solid blue; }\n    p { text-indent: 15px; }\n  </style>\n</head>",
-          "label": "  <style>\n    h1 { color: red; border: 2px solid blue; }\n    p { text-indent: 15px; }\n  </style>\n</head>"
+                "id": "b13_2",
+                "order": 2,
+                "code": "  <style>\n    h1 { color: red; border: 2px solid blue; }\n    p { text-indent: 15px; }\n  </style>\n</head>",
+                "label": "  <style>\n    h1 { color: red; border: 2px solid blue; }\n    p { text-indent: 15px; }\n  </style>\n</head>"
         },
         {
-          "id": "b13_3",
-          "order": 3,
-          "code": "<body>\n  <h1>Lịch sử phát triển HTML</h1>",
-          "label": "<body>\n  <h1>Lịch sử phát triển HTML</h1>"
+                "id": "b13_3",
+                "order": 3,
+                "code": "<body>\n  <h1>Lịch sử phát triển HTML</h1>",
+                "label": "<body>\n  <h1>Lịch sử phát triển HTML</h1>"
         },
         {
-          "id": "b13_4",
-          "order": 4,
-          "code": "  <p>Các chuẩn HTML của trang web hiện nay được nhà vật lí Tim Berners-Lee đưa ra lần đầu tiên vào những năm 1990 tại CERN.</p>",
-          "label": "  <p>Các chuẩn HTML... Tim Berners-Lee đưa ra lần đầu tiên năm 1990 tại CERN.</p>"
+                "id": "b13_4",
+                "order": 4,
+                "code": "  <p>Các chuẩn HTML của trang web hiện nay được nhà vật lí Tim Berners-Lee đưa ra lần đầu tiên vào những năm 1990 tại CERN.</p>",
+                "label": "  <p>Các chuẩn HTML của trang web hiện nay được nhà vật lí Tim Berners-Lee đưa ra lần đầu tiên vào những năm 1990 tại CERN.</p>"
         },
         {
-          "id": "b13_5",
-          "order": 5,
-          "code": "  <p>Ý tưởng ban đầu của Berners-Lee là muốn thiết lập một chuẩn chung để thể hiện và chia sẻ các văn bản trao đổi nội bộ.</p>\n</body>\n</html>",
-          "label": "  <p>Ý tưởng ban đầu... thiết lập chuẩn chung chia sẻ văn bản.</p>\n</body></html>"
+                "id": "b13_5",
+                "order": 5,
+                "code": "  <p>Ý tưởng ban đầu của Berners-Lee là muốn thiết lập một chuẩn chung để thể hiện và chia sẻ các văn bản trao đổi nội bộ.</p>\n</body>\n</html>",
+                "label": "  <p>Ý tưởng ban đầu của Berners-Lee là muốn thiết lập một chuẩn chung để thể hiện và chia sẻ các văn bản trao đổi nội bộ.</p>\n</body>\n</html>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -7258,105 +7370,126 @@
       "hint": "Họ phông gồm serif, sans-serif, monospace, cursive, fantasy. text-align căn lề, text-decoration không kế thừa, !important ưu tiên cao nhất, bộ chọn * ưu tiên thấp nhất."
     },
     "lego": {
-      "title": "Lego Từ Tính: Thiết Lập Định Dạng Phông Chữ & Văn Bản Chuẩn Mực",
-      "instruction": "Em hãy kéo các thuộc tính CSS vào đúng vị trí mô tả để hoàn thiện bảng quy cách định dạng cho bài viết khoa học:",
-      "slots": [
+    "title": "Lego Từ Tính: Thiết Lập Định Dạng Phông Chữ & Văn Bản Chuẩn Mực",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_font",
-          "label": "Chỉ định danh sách phông chữ ưu tiên có họ phông không chân làm dự phòng",
-          "accept": [
-            "f_font"
-          ],
-          "required": "f_font"
+            "slotId": "s_font",
+            "label": "Chỉ định danh sách phông chữ hiển thị ưu tiên có họ phông dự phòng",
+            "accept": [
+                "f_font"
+            ],
+            "required": "f_font"
         },
         {
-          "slotId": "s_align",
-          "label": "Căn thẳng đều hai bên lề và thụt lề đầu dòng cho các đoạn văn bản",
-          "accept": [
-            "f_align"
-          ],
-          "required": "f_align"
+            "slotId": "s_size",
+            "label": "Thiết lập kích thước cỡ chữ hiển thị cho nội dung văn bản",
+            "accept": [
+                "f_size"
+            ],
+            "required": "f_size"
         },
         {
-          "slotId": "s_line",
-          "label": "Tăng chiều cao khoảng cách giữa các dòng văn bản để trang thoáng và dễ đọc",
-          "accept": [
-            "f_line"
-          ],
-          "required": "f_line"
+            "slotId": "s_weight",
+            "label": "Tùy chỉnh độ đậm của nét chữ để làm nổi bật từ ngữ quan trọng",
+            "accept": [
+                "f_weight"
+            ],
+            "required": "f_weight"
         },
         {
-          "slotId": "s_important",
-          "label": "Gán màu đỏ nổi bật và bắt buộc ưu tiên tuyệt đối không bị ghi đè cho tiêu đề",
-          "accept": [
-            "f_imp"
-          ],
-          "required": "f_imp"
+            "slotId": "s_color",
+            "label": "Thiết lập màu sắc hiển thị cho các ký tự văn bản trên trang",
+            "accept": [
+                "f_color"
+            ],
+            "required": "f_color"
+        },
+        {
+            "slotId": "s_align",
+            "label": "Căn chỉnh lề văn bản (thẳng đều hai bên hoặc căn giữa nội dung)",
+            "accept": [
+                "f_align"
+            ],
+            "required": "f_align"
+        },
+        {
+            "slotId": "s_line",
+            "label": "Tăng khoảng cách chiều cao giữa các dòng chữ giúp trang thoáng và dễ đọc",
+            "accept": [
+                "f_line"
+            ],
+            "required": "f_line"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_font",
-          "type": "f_font",
-          "label": "font-family: 'Times New Roman', Tahoma, sans-serif;",
-          "color": "#0284c7"
+            "id": "b_font",
+            "type": "f_font",
+            "label": "font-family: 'Times New Roman', Tahoma, sans-serif;",
+            "color": "#0284c7"
         },
         {
-          "id": "b_align",
-          "type": "f_align",
-          "label": "text-align: justify; text-indent: 2em;",
-          "color": "#0369a1"
+            "id": "b_size",
+            "type": "f_size",
+            "label": "font-size: 16px;",
+            "color": "#0369a1"
         },
         {
-          "id": "b_line",
-          "type": "f_line",
-          "label": "line-height: 1.8;",
-          "color": "#059669"
+            "id": "b_weight",
+            "type": "f_weight",
+            "label": "font-weight: bold;",
+            "color": "#16a34a"
         },
         {
-          "id": "b_imp",
-          "type": "f_imp",
-          "label": "color: red !important;",
-          "color": "#dc2626"
+            "id": "b_color",
+            "type": "f_color",
+            "label": "color: #0284c7;",
+            "color": "#15803d"
         },
         {
-          "id": "b_err_textcolor",
-          "type": "err_textcolor",
-          "label": "text-color: red;",
-          "color": "#ef4444",
-          "ruleViolation": "Trong CSS không tồn tại thuộc tính text-color, thuộc tính chuẩn đổi màu chữ là color!"
+            "id": "b_align",
+            "type": "f_align",
+            "label": "text-align: justify;",
+            "color": "#d97706"
+        },
+        {
+            "id": "b_line",
+            "type": "f_line",
+            "label": "line-height: 1.6;",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "Thực Hành Tạo Trang Web: Bài Thơ Trời Hà Nội Xanh & Định Dạng Chữ",
       "goalDesc": "Mục tiêu: Sắp xếp các câu lệnh CSS và HTML để định dạng tiêu đề h2 căn giữa màu xanh và bài thơ thụt lề, in đậm tên tác giả.",
       "statements": [
         {
-          "id": "b14_1",
-          "order": 1,
-          "code": "<style>\n  body { font-family: 'Times New Roman', serif; }\n  h2 { color: #0284c7; text-align: center; font-size: 22px; }\n  .author { text-align: right; font-style: italic; color: #b91c1c; font-weight: bold; }\n  .poem { text-align: center; line-height: 1.8; color: #0f172a; }\n</style>",
-          "label": "<style>\n  body { font-family: serif; }\n  h2 { color: #0284c7; text-align: center; }\n  .author { text-align: right; font-style: italic; }\n  .poem { text-align: center; line-height: 1.8; }\n</style>"
+                "id": "b14_1",
+                "order": 1,
+                "code": "<style>\n  body { font-family: 'Times New Roman', serif; }\n  h2 { color: #0284c7; text-align: center; font-size: 22px; }\n  .author { text-align: right; font-style: italic; color: #b91c1c; font-weight: bold; }\n  .poem { text-align: center; line-height: 1.8; color: #0f172a; }\n</style>",
+                "label": "<style>\n  body { font-family: 'Times New Roman', serif; }\n  h2 { color: #0284c7; text-align: center; font-size: 22px; }\n  .author { text-align: right; font-style: italic; color: #b91c1c; font-weight: bold; }\n  .poem { text-align: center; line-height: 1.8; color: #0f172a; }\n</style>"
         },
         {
-          "id": "b14_2",
-          "order": 2,
-          "code": "<h2>Trời Hà Nội xanh</h2>",
-          "label": "<h2>Trời Hà Nội xanh</h2>"
+                "id": "b14_2",
+                "order": 2,
+                "code": "<h2>Trời Hà Nội xanh</h2>",
+                "label": "<h2>Trời Hà Nội xanh</h2>"
         },
         {
-          "id": "b14_3",
-          "order": 3,
-          "code": "<p class=\"author\">Sáng tác: Văn Ký</p>",
-          "label": "<p class=\"author\">Sáng tác: Văn Ký</p>"
+                "id": "b14_3",
+                "order": 3,
+                "code": "<p class=\"author\">Sáng tác: Văn Ký</p>",
+                "label": "<p class=\"author\">Sáng tác: Văn Ký</p>"
         },
         {
-          "id": "b14_4",
-          "order": 4,
-          "code": "<div class=\"poem\">\n  <p>Xanh xanh thắm bầu trời xanh Hà Nội</p>\n  <p>Hồ Gươm xanh như mái tóc em xanh</p>\n</div>",
-          "label": "<div class=\"poem\">\n  <p>Xanh xanh thắm bầu trời xanh Hà Nội</p>\n  <p>Hồ Gươm xanh như mái tóc em xanh</p>\n</div>"
+                "id": "b14_4",
+                "order": 4,
+                "code": "<div class=\"poem\">\n  <p>Xanh xanh thắm bầu trời xanh Hà Nội</p>\n  <p>Hồ Gươm xanh như mái tóc em xanh</p>\n</div>",
+                "label": "<div class=\"poem\">\n  <p>Xanh xanh thắm bầu trời xanh Hà Nội</p>\n  <p>Hồ Gươm xanh như mái tóc em xanh</p>\n</div>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -7508,105 +7641,112 @@
       "hint": "E F: con cháu; E > F: con trực tiếp; E + F: anh em liền kề; E ~ F: anh em cùng cha; border không có tính kế thừa."
     },
     "lego": {
-      "title": "Lego Từ Tính: Lắp Ghép Bộ Chọn Tổ Hợp & Mã Màu",
-      "instruction": "Em hãy kéo các bộ chọn tổ hợp và giá trị màu sắc thích hợp vào đúng mục đích áp dụng của trang web:",
-      "slots": [
+    "title": "Lego Từ Tính: Hệ Thống Màu Sắc & Bộ Chọn Tổ Hợp Quan Hệ",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_child",
-          "label": "Bộ chọn con trực tiếp: Định dạng chữ in nghiêng là con cấp một nằm ngay dưới đoạn văn",
-          "accept": [
-            "sel_child"
-          ],
-          "required": "sel_child"
+            "slotId": "s_child",
+            "label": "Bộ chọn con trực tiếp: Định dạng phần tử in nghiêng là con cấp một nằm ngay dưới thẻ p",
+            "accept": [
+                "sel_child"
+            ],
+            "required": "sel_child"
         },
         {
-          "slotId": "s_adj",
-          "label": "Bộ chọn liền kề: Đổi màu chữ cho phần tử in đậm đứng ngay sau phần tử in nghiêng",
-          "accept": [
-            "sel_adj"
-          ],
-          "required": "sel_adj"
+            "slotId": "s_adj",
+            "label": "Bộ chọn liền kề: Đổi màu chữ cho phần tử in đậm đứng ngay sát sau phần tử in nghiêng",
+            "accept": [
+                "sel_adj"
+            ],
+            "required": "sel_adj"
         },
         {
-          "slotId": "s_rgb",
-          "label": "Thiết lập màu nền bằng hàm RGB cho độ sáng đồng đều ba kênh 50% (màu xám)",
-          "accept": [
-            "sel_rgb"
-          ],
-          "required": "sel_rgb"
+            "slotId": "s_rgb",
+            "label": "Thiết lập màu nền bằng hàm RGB chỉ định cường độ 3 kênh màu đỏ, lục, lam",
+            "accept": [
+                "sel_rgb"
+            ],
+            "required": "sel_rgb"
         },
         {
-          "slotId": "s_border",
-          "label": "Tạo đường viền bao quanh liền nét màu xanh lá có độ dày 2px",
-          "accept": [
-            "sel_bdr"
-          ],
-          "required": "sel_bdr"
+            "slotId": "s_hex",
+            "label": "Thiết lập màu chữ sử dụng mã màu Hex bắt đầu bằng ký tự thăng (#)",
+            "accept": [
+                "sel_hex"
+            ],
+            "required": "sel_hex"
+        },
+        {
+            "slotId": "s_border",
+            "label": "Tạo đường viền bao quanh phần tử có độ dày 2px, nét liền và màu xanh lá",
+            "accept": [
+                "sel_bdr"
+            ],
+            "required": "sel_bdr"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_child",
-          "type": "sel_child",
-          "label": "p > em { color: red; }",
-          "color": "#0284c7"
+            "id": "b_child",
+            "type": "sel_child",
+            "label": "p > em { color: red; }",
+            "color": "#0284c7"
         },
         {
-          "id": "b_adj",
-          "type": "sel_adj",
-          "label": "em + strong { color: blue; }",
-          "color": "#0369a1"
+            "id": "b_adj",
+            "type": "sel_adj",
+            "label": "em + strong { color: blue; }",
+            "color": "#0369a1"
         },
         {
-          "id": "b_rgb",
-          "type": "sel_rgb",
-          "label": "background-color: rgb(128, 128, 128);",
-          "color": "#475569"
+            "id": "b_rgb",
+            "type": "sel_rgb",
+            "label": "background-color: rgb(128, 128, 128);",
+            "color": "#16a34a"
         },
         {
-          "id": "b_bdr",
-          "type": "sel_bdr",
-          "label": "border: 2px solid green;",
-          "color": "#059669"
+            "id": "b_hex",
+            "type": "sel_hex",
+            "label": "color: #2563eb;",
+            "color": "#d97706"
         },
         {
-          "id": "b_err_tilde",
-          "type": "err_tilde",
-          "label": "p ~ em { color: red; }",
-          "color": "#ef4444",
-          "ruleViolation": "Ký hiệu ~ là bộ chọn anh em chung, không phải bộ chọn con trực tiếp cấp một (> )!"
+            "id": "b_bdr",
+            "type": "sel_bdr",
+            "label": "border: 2px solid green;",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "Thực Hành Tạo Trang Web: Trình Bày Bài Lịch Sử CSS Đa Sắc",
       "goalDesc": "Mục tiêu: Sắp xếp các đoạn mã CSS thiết lập màu nền vàng nhạt, tiêu đề h1 chữ đỏ viền xanh, và bộ chọn p > em đổi màu nhấn mạnh tên tác giả.",
       "statements": [
         {
-          "id": "b15_1",
-          "order": 1,
-          "code": "<style>\n  body { background-color: #f8fafc; font-family: serif; padding: 10px; }\n  h1 { color: #dc2626; background-color: #fef08a; border: 2px solid #2563eb; padding: 8px; text-align: center; }",
-          "label": "<style>\n  body { background-color: #f8fafc; }\n  h1 { color: #dc2626; background: #fef08a; border: 2px solid #2563eb; }"
+                "id": "b15_1",
+                "order": 1,
+                "code": "<style>\n  body { background-color: #f8fafc; font-family: serif; padding: 10px; }\n  h1 { color: #dc2626; background-color: #fef08a; border: 2px solid #2563eb; padding: 8px; text-align: center; }",
+                "label": "<style>\n  body { background-color: #f8fafc; font-family: serif; padding: 10px; }\n  h1 { color: #dc2626; background-color: #fef08a; border: 2px solid #2563eb; padding: 8px; text-align: center; }"
         },
         {
-          "id": "b15_2",
-          "order": 2,
-          "code": "  p { line-height: 1.6; color: #1e293b; font-size: 16px; }\n  p > em { color: #059669; font-weight: bold; }\n  em + strong { color: #7c3aed; }\n</style>",
-          "label": "  p { line-height: 1.6; }\n  p > em { color: #059669; font-weight: bold; }\n  em + strong { color: #7c3aed; }\n</style>"
+                "id": "b15_2",
+                "order": 2,
+                "code": "  p { line-height: 1.6; color: #1e293b; font-size: 16px; }\n  p > em { color: #059669; font-weight: bold; }\n  em + strong { color: #7c3aed; }\n</style>",
+                "label": "  p { line-height: 1.6; color: #1e293b; font-size: 16px; }\n  p > em { color: #059669; font-weight: bold; }\n  em + strong { color: #7c3aed; }\n</style>"
         },
         {
-          "id": "b15_3",
-          "order": 3,
-          "code": "<h1>Lịch sử CSS</h1>",
-          "label": "<h1>Lịch sử CSS</h1>"
+                "id": "b15_3",
+                "order": 3,
+                "code": "<h1>Lịch sử CSS</h1>",
+                "label": "<h1>Lịch sử CSS</h1>"
         },
         {
-          "id": "b15_4",
-          "order": 4,
-          "code": "<p>Ý tưởng của CSS do kĩ sư <em>Håkon Wium Lie</em>, người Na Uy thiết lập năm 1994 khi làm việc với <strong>Tim Berners-Lee</strong> tại CERN.</p>",
-          "label": "<p>Ý tưởng CSS do <em>Håkon Wium Lie</em>... làm việc với <strong>Tim Berners-Lee</strong> tại CERN.</p>"
+                "id": "b15_4",
+                "order": 4,
+                "code": "<p>Ý tưởng của CSS do kĩ sư <em>Håkon Wium Lie</em>, người Na Uy thiết lập năm 1994 khi làm việc với <strong>Tim Berners-Lee</strong> tại CERN.</p>",
+                "label": "<p>Ý tưởng của CSS do kĩ sư <em>Håkon Wium Lie</em>, người Na Uy thiết lập năm 1994 khi làm việc với <strong>Tim Berners-Lee</strong> tại CERN.</p>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -7758,105 +7898,112 @@
       "hint": "Box model: content -> padding -> border -> margin (không kế thừa). Bộ chọn lớp dùng dấu chấm (.test), id dùng dấu thăng (#home). display: none dùng để ẩn."
     },
     "lego": {
-      "title": "Lego Từ Tính: Lắp Ráp Mô Hình Hộp (Box Model) 4 Lớp",
-      "instruction": "Em hãy kéo các khối CSS vào đúng 4 lớp của mô hình hộp từ trong ra ngoài (Nội dung -> Vùng đệm -> Đường viền -> Lề ngoài):",
-      "slots": [
+    "title": "Lego Từ Tính: Lắp Ghép Mô Hình Hộp (CSS Box Model)",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_content",
-          "label": "Kích thước vùng chứa nội dung (Content) bên trong của phần tử khối",
-          "accept": [
-            "box_content"
-          ],
-          "required": "box_content"
+            "slotId": "s_content",
+            "label": "Kích thước chiều rộng và chiều cao của vùng chứa nội dung (Content)",
+            "accept": [
+                "box_content"
+            ],
+            "required": "box_content"
         },
         {
-          "slotId": "s_padding",
-          "label": "Khoảng cách đệm (Padding) từ nội dung bên trong đến đường viền khung",
-          "accept": [
-            "box_padding"
-          ],
-          "required": "box_padding"
+            "slotId": "s_padding",
+            "label": "Khoảng cách vùng đệm (Padding) từ nội dung bên trong đến đường viền khung",
+            "accept": [
+                "box_padding"
+            ],
+            "required": "box_padding"
         },
         {
-          "slotId": "s_border",
-          "label": "Đường viền (Border) bao quanh phần tử với độ dày, kiểu nét và màu sắc",
-          "accept": [
-            "box_border"
-          ],
-          "required": "box_border"
+            "slotId": "s_border",
+            "label": "Đường viền (Border) bao quanh phần tử với độ dày, kiểu nét và màu sắc",
+            "accept": [
+                "box_border"
+            ],
+            "required": "box_border"
         },
         {
-          "slotId": "s_margin",
-          "label": "Khoảng cách lề ngoài (Margin) từ đường viền đến các phần tử xung quanh",
-          "accept": [
-            "box_margin"
-          ],
-          "required": "box_margin"
+            "slotId": "s_margin",
+            "label": "Khoảng cách lề ngoài (Margin) từ đường viền đến các phần tử lân cận xung quanh",
+            "accept": [
+                "box_margin"
+            ],
+            "required": "box_margin"
+        },
+        {
+            "slotId": "s_radius",
+            "label": "Độ cong bo tròn các góc khung giúp giao diện mềm mại và hiện đại hơn",
+            "accept": [
+                "box_radius"
+            ],
+            "required": "box_radius"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_cnt",
-          "type": "box_content",
-          "label": "width: 280px; height: 120px;",
-          "color": "#0284c7"
+            "id": "b_cnt",
+            "type": "box_content",
+            "label": "width: 280px; height: 120px;",
+            "color": "#0284c7"
         },
         {
-          "id": "b_pad",
-          "type": "box_padding",
-          "label": "padding: 15px;",
-          "color": "#059669"
+            "id": "b_pad",
+            "type": "box_padding",
+            "label": "padding: 15px;",
+            "color": "#0369a1"
         },
         {
-          "id": "b_bdr",
-          "type": "box_border",
-          "label": "border: 2px solid #2563eb;",
-          "color": "#d97706"
+            "id": "b_bdr",
+            "type": "box_border",
+            "label": "border: 2px solid #2563eb;",
+            "color": "#16a34a"
         },
         {
-          "id": "b_mar",
-          "type": "box_margin",
-          "label": "margin: 20px;",
-          "color": "#7c3aed"
+            "id": "b_mar",
+            "type": "box_margin",
+            "label": "margin: 20px;",
+            "color": "#d97706"
         },
         {
-          "id": "b_err_outline",
-          "type": "err_outline",
-          "label": "outline: 3px solid red;",
-          "color": "#ef4444",
-          "ruleViolation": "outline là đường viền ngoài trang trí, không thuộc 4 lớp cấu thành mô hình hộp Box Model (Content, Padding, Border, Margin)!"
+            "id": "b_rad",
+            "type": "box_radius",
+            "label": "border-radius: 8px;",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "Thực Hành Tạo Trang Web: Bảng Màu CSS Đóng Khung Chuyên Nghiệp",
       "goalDesc": "Mục tiêu: Sắp xếp mã tạo bảng 16 tên màu cơ bản với thẻ <caption> viền xanh, tiêu đề <th> nền vàng và các ô hiển thị màu sắc trực quan.",
       "statements": [
         {
-          "id": "b16_1",
-          "order": 1,
-          "code": "<style>\n  table { border-collapse: collapse; width: 100%; border: 3px solid #1e3a8a; }\n  caption { font-size: 1.3rem; font-weight: bold; color: #dc2626; padding: 6px; margin-bottom: 8px; }\n  th, td { border: 1.5px solid #64748b; padding: 6px 10px; text-align: center; }\n  th { background-color: #dbeafe; color: #1e3a8a; }\n</style>",
-          "label": "<style>\n  table { border-collapse: collapse; border: 3px solid #1e3a8a; }\n  caption { color: #dc2626; font-weight: bold; }\n  th, td { border: 1.5px solid #64748b; }\n</style>"
+                "id": "b16_1",
+                "order": 1,
+                "code": "<style>\n  table { border-collapse: collapse; width: 100%; border: 3px solid #1e3a8a; }\n  caption { font-size: 1.3rem; font-weight: bold; color: #dc2626; padding: 6px; margin-bottom: 8px; }\n  th, td { border: 1.5px solid #64748b; padding: 6px 10px; text-align: center; }\n  th { background-color: #dbeafe; color: #1e3a8a; }\n</style>",
+                "label": "<style>\n  table { border-collapse: collapse; width: 100%; border: 3px solid #1e3a8a; }\n  caption { font-size: 1.3rem; font-weight: bold; color: #dc2626; padding: 6px; margin-bottom: 8px; }\n  th, td { border: 1.5px solid #64748b; padding: 6px 10px; text-align: center; }\n  th { background-color: #dbeafe; color: #1e3a8a; }\n</style>"
         },
         {
-          "id": "b16_2",
-          "order": 2,
-          "code": "<table>\n  <caption>BẢNG MÀU CƠ BẢN CSS</caption>\n  <tr><th>Tên màu</th><th>Mã #hex</th><th>Mã rgb</th><th>Mẫu hiển thị</th></tr>",
-          "label": "<table>\n  <caption>BẢNG MÀU CƠ BẢN CSS</caption>\n  <tr><th>Tên màu</th><th>Mã #hex</th><th>Mã rgb</th><th>Mẫu hiển thị</th></tr>"
+                "id": "b16_2",
+                "order": 2,
+                "code": "<table>\n  <caption>BẢNG MÀU CƠ BẢN CSS</caption>\n  <tr><th>Tên màu</th><th>Mã #hex</th><th>Mã rgb</th><th>Mẫu hiển thị</th></tr>",
+                "label": "<table>\n  <caption>BẢNG MÀU CƠ BẢN CSS</caption>\n  <tr><th>Tên màu</th><th>Mã #hex</th><th>Mã rgb</th><th>Mẫu hiển thị</th></tr>"
         },
         {
-          "id": "b16_3",
-          "order": 3,
-          "code": "  <tr>\n    <td>red</td><td>#FF0000</td><td>rgb(255,0,0)</td>\n    <td style=\"background-color: #FF0000;\"></td>\n  </tr>",
-          "label": "  <tr><td>red</td><td>#FF0000</td><td>rgb(255,0,0)</td><td style=\"background:#FF0000;\"></td></tr>"
+                "id": "b16_3",
+                "order": 3,
+                "code": "<tr><td>red</td><td>#FF0000</td><td>rgb(255,0,0)</td><td style=\"background-color: #FF0000;\"></td></tr>",
+                "label": "<tr><td>red</td><td>#FF0000</td><td>rgb(255,0,0)</td><td style=\"background-color: #FF0000;\"></td></tr>"
         },
         {
-          "id": "b16_4",
-          "order": 4,
-          "code": "  <tr>\n    <td>blue</td><td>#0000FF</td><td>rgb(0,0,255)</td>\n    <td style=\"background-color: #0000FF;\"></td>\n  </tr>\n</table>",
-          "label": "  <tr><td>blue</td><td>#0000FF</td><td>rgb(0,0,255)</td><td style=\"background:#0000FF;\"></td></tr>\n</table>"
+                "id": "b16_4",
+                "order": 4,
+                "code": "<tr><td>blue</td><td>#0000FF</td><td>rgb(0,0,255)</td><td style=\"background-color: #0000FF;\"></td></tr>\n</table>",
+                "label": "<tr><td>blue</td><td>#0000FF</td><td>rgb(0,0,255)</td><td style=\"background-color: #0000FF;\"></td></tr>\n</table>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -8008,112 +8155,112 @@
       "hint": "Pseudo-class dùng dấu : (:hover, :link - 10 điểm). Pseudo-element dùng :: (::first-line, ::first-letter - 1 điểm). Trọng số: ID (100), Class (10), Element (1), * (0)."
     },
     "lego": {
-      "title": "Lego Từ Tính: Ghép Bộ Chọn Tương Tác & Tính Trọng Số Ưu Tiên",
-      "instruction": "Em hãy kéo các bộ chọn CSS vào đúng ô mô tả tính năng tương tác chuột và giá trị trọng số tương ứng:",
-      "slots": [
+    "title": "Lego Từ Tính: Các Mức Ưu Tiên Của Bộ Chọn CSS (Specificity)",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_hover",
-          "label": "Đổi màu nền và màu chữ khi người dùng rê con trỏ chuột qua liên kết",
-          "accept": [
-            "sel_hover"
-          ],
-          "required": "sel_hover"
+            "slotId": "s_hov",
+            "label": "Lớp giả trạng thái: Đổi màu chữ và màu nền khi người dùng rê chuột qua liên kết",
+            "accept": [
+                "sel_hover"
+            ],
+            "required": "sel_hover"
         },
         {
-          "slotId": "s_first_letter",
-          "label": "Phóng to chữ cái đầu tiên của đoạn văn bản và tô màu đỏ nổi bật",
-          "accept": [
-            "sel_first_letter"
-          ],
-          "required": "sel_first_letter"
+            "slotId": "s_fl",
+            "label": "Phần tử giả cấu trúc: Phóng to kích thước và đổi màu đỏ cho chữ cái đầu tiên của đoạn văn",
+            "accept": [
+                "sel_first_letter"
+            ],
+            "required": "sel_first_letter"
         },
         {
-          "slotId": "s_calc_110",
-          "label": "Bộ chọn kết hợp có trọng số ưu tiên chính xác bằng 110",
-          "accept": [
-            "sel_110"
-          ],
-          "required": "sel_110"
+            "slotId": "s_110",
+            "label": "Bộ chọn kết hợp gồm 1 ID (#p11: 100đ) và 1 Class (.test: 10đ) có tổng trọng số bằng 110",
+            "accept": [
+                "sel_110"
+            ],
+            "required": "sel_110"
         },
         {
-          "slotId": "s_calc_2",
-          "label": "Bộ chọn kết hợp gồm 2 phần tử có trọng số ưu tiên chính xác bằng 2",
-          "accept": [
-            "sel_2"
-          ],
-          "required": "sel_2"
+            "slotId": "s_2",
+            "label": "Bộ chọn kết hợp gồm 2 thẻ phần tử (p: 1đ, em: 1đ) có tổng trọng số ưu tiên bằng 2",
+            "accept": [
+                "sel_2"
+            ],
+            "required": "sel_2"
+        },
+        {
+            "slotId": "s_imp",
+            "label": "Quy tắc áp dụng độ ưu tiên tuyệt đối ghi đè mọi trọng số Specificity thông thường",
+            "accept": [
+                "sel_imp"
+            ],
+            "required": "sel_imp"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_hov",
-          "type": "sel_hover",
-          "label": "a:hover { color: red; background-color: cyan; }",
-          "color": "#0284c7"
+            "id": "b_hov",
+            "type": "sel_hover",
+            "label": "a:hover { color: red; background-color: cyan; }",
+            "color": "#0284c7"
         },
         {
-          "id": "b_fl",
-          "type": "sel_first_letter",
-          "label": "p::first-letter { font-size: 200%; color: red; }",
-          "color": "#0369a1"
+            "id": "b_fl",
+            "type": "sel_first_letter",
+            "label": "p::first-letter { font-size: 200%; color: red; }",
+            "color": "#0369a1"
         },
         {
-          "id": "b_110",
-          "type": "sel_110",
-          "label": ".test #p11 { color: green; }",
-          "color": "#059669"
+            "id": "b_110",
+            "type": "sel_110",
+            "label": ".test #p11 { color: green; }",
+            "color": "#16a34a"
         },
         {
-          "id": "b_2",
-          "type": "sel_2",
-          "label": "p > em { color: red; }",
-          "color": "#d97706"
+            "id": "b_2",
+            "type": "sel_2",
+            "label": "p > em { color: red; }",
+            "color": "#d97706"
         },
         {
-          "id": "b_err_hov",
-          "type": "err_hover",
-          "label": "a::hover { color: red; }",
-          "color": "#ef4444",
-          "ruleViolation": ":hover là pseudo-class (lớp giả) chỉ dùng 1 dấu hai chấm (:), không dùng 2 dấu (::)!"
-        },
-        {
-          "id": "b_err_spec",
-          "type": "err_spec",
-          "label": "p.test #p11 { color: green; }",
-          "color": "#ef4444",
-          "ruleViolation": "Bộ chọn này gồm 1 phần tử p (1) + 1 class .test (10) + 1 ID #p11 (100) = 111, không phải 110!"
+            "id": "b_imp",
+            "type": "sel_imp",
+            "label": "color: blue !important;",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "Thực Hành Tạo Trang Web: Menu Điều Hướng Đổi Màu Khi Di Chuột",
       "goalDesc": "Mục tiêu: Sắp xếp các câu lệnh CSS và HTML tạo thanh menu điều hướng nằm ngang, khi rê chuột qua mục nào thì mục đó đổi màu nền nổi bật.",
       "statements": [
         {
-          "id": "b17_1",
-          "order": 1,
-          "code": "<style>\n  nav { text-align: right; background-color: #0f172a; padding: 10px; border-radius: 8px; }\n  nav ul { list-style: none; margin: 0; padding: 0; }\n  nav li { display: inline-block; margin-left: 10px; }\n  nav a { color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; background-color: #2563eb; transition: 0.2s; }",
-          "label": "<style>\n  nav { text-align: right; background: #0f172a; padding: 10px; }\n  nav li { display: inline-block; }\n  nav a { color: #fff; background: #2563eb; }"
+                "id": "b17_1",
+                "order": 1,
+                "code": "<style>\n  nav { text-align: right; background-color: #0f172a; padding: 10px; border-radius: 8px; }\n  nav ul { list-style: none; margin: 0; padding: 0; }\n  nav li { display: inline-block; margin-left: 10px; }\n  nav a { color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; background-color: #2563eb; transition: 0.2s; }",
+                "label": "<style>\n  nav { text-align: right; background-color: #0f172a; padding: 10px; border-radius: 8px; }\n  nav ul { list-style: none; margin: 0; padding: 0; }\n  nav li { display: inline-block; margin-left: 10px; }\n  nav a { color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; background-color: #2563eb; transition: 0.2s; }"
         },
         {
-          "id": "b17_2",
-          "order": 2,
-          "code": "  nav a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>",
-          "label": "  nav a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>"
+                "id": "b17_2",
+                "order": 2,
+                "code": "  nav a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>",
+                "label": "  nav a:hover { background-color: #f59e0b; color: #000000; }\n  p::first-line { font-weight: bold; color: #2563eb; }\n</style>"
         },
         {
-          "id": "b17_3",
-          "order": 3,
-          "code": "<nav>\n  <ul>\n    <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n    <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n  </ul>\n</nav>",
-          "label": "<nav><ul>\n  <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n  <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n</ul></nav>"
+                "id": "b17_3",
+                "order": 3,
+                "code": "<nav>\n  <ul>\n    <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n    <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n  </ul>\n</nav>",
+                "label": "<nav>\n  <ul>\n    <li><a href=\"#p1\">Giới thiệu HTML</a></li>\n    <li><a href=\"#p2\">Giới thiệu CSS</a></li>\n  </ul>\n</nav>"
         },
         {
-          "id": "b17_4",
-          "order": 4,
-          "code": "<p style=\"margin-top:14px;line-height:1.6;\">\n  HTML là ngôn ngữ đánh dấu siêu văn bản dùng để thiết kế nội dung trang web.<br>\n  CSS là ngôn ngữ định dạng quy định cách thức hiển thị đẹp mắt và chuyên nghiệp.\n</p>",
-          "label": "<p>HTML là ngôn ngữ đánh dấu... CSS là ngôn ngữ định dạng...</p>"
+                "id": "b17_4",
+                "order": 4,
+                "code": "<p style=\"margin-top:14px;line-height:1.6;\">\n  HTML là ngôn ngữ đánh dấu siêu văn bản dùng để thiết kế nội dung trang web.<br>\n  CSS là ngôn ngữ định dạng quy định cách thức hiển thị đẹp mắt và chuyên nghiệp.\n</p>",
+                "label": "<p style=\"margin-top:14px;line-height:1.6;\">\n  HTML là ngôn ngữ đánh dấu siêu văn bản dùng để thiết kế nội dung trang web.<br>\n  CSS là ngôn ngữ định dạng quy định cách thức hiển thị đẹp mắt và chuyên nghiệp.\n</p>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -8265,105 +8412,112 @@
       "hint": "Dùng chung style.css; Flexbox (display: flex; flex-wrap: wrap); width: 33.33% chia 3 cột; background-size: cover phủ hình nền banner."
     },
     "lego": {
-      "title": "Lego Từ Tính: Ghép Bố Cục Trang Chủ Website CLB Trường Học",
-      "instruction": "Em hãy kéo các khối CSS bố cục vào đúng các thành phần của trang web (Banner -> Hàng Slogan 3 cột -> Nội dung CLB -> Chân trang):",
-      "slots": [
+    "title": "Lego Từ Tính: Ghép Bố Cục Trang Chủ Website Hoàn Chỉnh",
+    "instruction": "HƯỚNG DẪN: NHẤP CHUỘT CHỌN CÁC CÂU LỆNH TỪ CỘT 1 SANG CỘT 2.",
+    "slots": [
         {
-          "slotId": "s_banner",
-          "label": "Khối Đầu trang (Banner) có hình ảnh nền phủ kín và tiêu đề nổi bật",
-          "accept": [
-            "lay_ban"
-          ],
-          "required": "lay_ban"
+            "slotId": "s_banner",
+            "label": "Khối Đầu trang (Banner) có hình ảnh nền phủ kín và tiêu đề màu trắng nổi bật",
+            "accept": [
+                "lay_ban"
+            ],
+            "required": "lay_ban"
         },
         {
-          "slotId": "s_slogan_row",
-          "label": "Hàng Slogan linh hoạt Flexbox cho phép bọc dòng khi thu nhỏ màn hình",
-          "accept": [
-            "lay_row"
-          ],
-          "required": "lay_row"
+            "slotId": "s_nav",
+            "label": "Thanh menu điều hướng gồm các liên kết xếp ngang và bỏ gạch chân",
+            "accept": [
+                "lay_nav"
+            ],
+            "required": "lay_nav"
         },
         {
-          "slotId": "s_slogan_col",
-          "label": "Ô Slogan con chiếm độ rộng một phần ba (1/3) hàng ngang căn giữa nội dung",
-          "accept": [
-            "lay_col3"
-          ],
-          "required": "lay_col3"
+            "slotId": "s_slogan_row",
+            "label": "Hàng chứa Flexbox linh hoạt cho phép các ô con tự động xuống dòng khi màn hình nhỏ",
+            "accept": [
+                "lay_row"
+            ],
+            "required": "lay_row"
         },
         {
-          "slotId": "s_footer",
-          "label": "Cuối trang (Footer) chứa thông tin liên hệ và bản quyền trang web",
-          "accept": [
-            "lay_ftr"
-          ],
-          "required": "lay_ftr"
+            "slotId": "s_slogan_col",
+            "label": "Ô con chiếm độ rộng một phần ba (1/3 hay 33.33%) hàng ngang căn giữa nội dung",
+            "accept": [
+                "lay_col3"
+            ],
+            "required": "lay_col3"
+        },
+        {
+            "slotId": "s_footer",
+            "label": "Khối Chân trang (Footer) chứa thông tin liên hệ và bản quyền ở cuối trang",
+            "accept": [
+                "lay_ftr"
+            ],
+            "required": "lay_ftr"
         }
-      ],
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "id": "b_ban",
-          "type": "lay_ban",
-          "label": ".banner { background: url('masthead.jpg') center/cover; padding: 6rem 1rem; color: white; }",
-          "color": "#0284c7"
+            "id": "b_ban",
+            "type": "lay_ban",
+            "label": ".banner { background: url('masthead.jpg') center/cover; padding: 6rem 1rem; color: white; }",
+            "color": "#0284c7"
         },
         {
-          "id": "b_row",
-          "type": "lay_row",
-          "label": ".row { display: flex; flex-wrap: wrap; margin: 0 -10px; }",
-          "color": "#0369a1"
+            "id": "b_nav",
+            "type": "lay_nav",
+            "label": "nav a { display: inline-block; text-decoration: none; padding: 10px 15px; }",
+            "color": "#0369a1"
         },
         {
-          "id": "b_col3",
-          "type": "lay_col3",
-          "label": ".block_3 { flex: 0 0 auto; width: 33.333333%; text-align: center; }",
-          "color": "#059669"
+            "id": "b_row",
+            "type": "lay_row",
+            "label": ".row { display: flex; flex-wrap: wrap; margin: 0 -10px; }",
+            "color": "#16a34a"
         },
         {
-          "id": "b_ftr",
-          "type": "lay_ftr",
-          "label": "footer { background: #0f172a; color: white; text-align: center; padding: 20px; }",
-          "color": "#475569"
+            "id": "b_col3",
+            "type": "lay_col3",
+            "label": ".block_3 { flex: 0 0 auto; width: 33.333333%; text-align: center; }",
+            "color": "#d97706"
         },
         {
-          "id": "b_err_col",
-          "type": "err_col",
-          "label": ".block_3 { width: 50%; }",
-          "color": "#ef4444",
-          "ruleViolation": "Độ rộng 50% là chia một nửa (2 cột), để chia 3 cột đều (1/3) thì độ rộng phải là 33.333333%!"
+            "id": "b_ftr",
+            "type": "lay_ftr",
+            "label": "footer { background: #0f172a; color: white; text-align: center; padding: 20px; }",
+            "color": "#7c3aed"
         }
-      ]
-    },
+    ]
+},
     "golf": {
       "title": "Thực Hành Tạo Trang Web: Dựng Khung Trang Chủ Website CLB Ngoại Khoá",
       "goalDesc": "Mục tiêu: Sắp xếp các đoạn mã tạo khung Banner, dải Slogan 3 ô flexbox và các liên kết câu lạc bộ hoàn chỉnh.",
       "statements": [
         {
-          "id": "b18_1",
-          "order": 1,
-          "code": "<style>\n  .banner { background: linear-gradient(135deg, #1e3a8a, #0284c7); color: white; padding: 28px 16px; text-align: center; border-radius: 8px; }\n  .banner h2 { margin: 0; font-size: 1.6rem; letter-spacing: 0.5px; }\n  .row { display: flex; flex-wrap: wrap; margin-top: 14px; gap: 10px; }",
-          "label": "<style>\n  .banner { background: linear-gradient(...); color: white; padding: 28px; }\n  .row { display: flex; flex-wrap: wrap; gap: 10px; }"
+                "id": "b18_1",
+                "order": 1,
+                "code": "<style>\n  .banner { background: linear-gradient(135deg, #1e3a8a, #0284c7); color: white; padding: 28px 16px; text-align: center; border-radius: 8px; }\n  .banner h2 { margin: 0; font-size: 1.6rem; letter-spacing: 0.5px; }\n  .row { display: flex; flex-wrap: wrap; margin-top: 14px; gap: 10px; }",
+                "label": "<style>\n  .banner { background: linear-gradient(135deg, #1e3a8a, #0284c7); color: white; padding: 28px 16px; text-align: center; border-radius: 8px; }\n  .banner h2 { margin: 0; font-size: 1.6rem; letter-spacing: 0.5px; }\n  .row { display: flex; flex-wrap: wrap; margin-top: 14px; gap: 10px; }"
         },
         {
-          "id": "b18_2",
-          "order": 2,
-          "code": "  .block_3 { flex: 1; min-width: 140px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 12px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }\n  .block_3 h3 { margin: 0 0 6px 0; color: #2563eb; font-size: 1.1rem; }\n</style>",
-          "label": "  .block_3 { flex: 1; background: #fff; border: 1.5px solid #cbd5e1; padding: 12px; text-align: center; }\n</style>"
+                "id": "b18_2",
+                "order": 2,
+                "code": "  .block_3 { flex: 1; min-width: 140px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 12px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }\n  .block_3 h3 { margin: 0 0 6px 0; color: #2563eb; font-size: 1.1rem; }\n</style>",
+                "label": "  .block_3 { flex: 1; min-width: 140px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 12px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }\n  .block_3 h3 { margin: 0 0 6px 0; color: #2563eb; font-size: 1.1rem; }\n</style>"
         },
         {
-          "id": "b18_3",
-          "order": 3,
-          "code": "<div class=\"banner\">\n  <h2>CLB NGOẠI KHOÁ TRƯỜNG THPT NGUYỄN BỈNH KHIÊM</h2>\n  <p style=\"margin-top:6px;color:#fef08a;\">Năng động - Đam mê - Toả sáng</p>\n</div>",
-          "label": "<div class=\"banner\">\n  <h2>CLB NGOẠI KHOÁ TRƯỜNG THPT NGUYỄN BỈNH KHIÊM</h2>\n</div>"
+                "id": "b18_3",
+                "order": 3,
+                "code": "<div class=\"banner\">\n  <h2>CLB NGOẠI KHOÁ TRƯỜNG THPT NGUYỄN BỈNH KHIÊM</h2>\n  <p style=\"margin-top:6px;color:#fef08a;\">Năng động - Đam mê - Toả sáng</p>\n</div>",
+                "label": "<div class=\"banner\">\n  <h2>CLB NGOẠI KHOÁ TRƯỜNG THPT NGUYỄN BỈNH KHIÊM</h2>\n  <p style=\"margin-top:6px;color:#fef08a;\">Năng động - Đam mê - Toả sáng</p>\n</div>"
         },
         {
-          "id": "b18_4",
-          "order": 4,
-          "code": "<div class=\"row\">\n  <div class=\"block_3\"><h3>Năng động</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Rèn luyện thể chất & kỹ năng</p></div>\n  <div class=\"block_3\"><h3>Đam mê</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Cháy hết mình trong mọi hoạt động</p></div>\n  <div class=\"block_3\"><h3>Toả sáng</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Tự tin khẳng định bản lĩnh</p></div>\n</div>",
-          "label": "<div class=\"row\">\n  <div class=\"block_3\"><h3>Năng động</h3></div>\n  <div class=\"block_3\"><h3>Đam mê</h3></div>\n  <div class=\"block_3\"><h3>Toả sáng</h3></div>\n</div>"
+                "id": "b18_4",
+                "order": 4,
+                "code": "<div class=\"row\">\n  <div class=\"block_3\"><h3>Năng động</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Rèn luyện thể chất & kỹ năng</p></div>\n  <div class=\"block_3\"><h3>Đam mê</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Cháy hết mình trong mọi hoạt động</p></div>\n  <div class=\"block_3\"><h3>Toả sáng</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Tự tin khẳng định bản lĩnh</p></div>\n</div>",
+                "label": "<div class=\"row\">\n  <div class=\"block_3\"><h3>Năng động</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Rèn luyện thể chất & kỹ năng</p></div>\n  <div class=\"block_3\"><h3>Đam mê</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Cháy hết mình trong mọi hoạt động</p></div>\n  <div class=\"block_3\"><h3>Toả sáng</h3><p style=\"margin:0;font-size:0.9rem;color:#475569;\">Tự tin khẳng định bản lĩnh</p></div>\n</div>"
         }
-      ]
+]
     },
     "escapeRoom": {
       "title": "Câu hỏi Vận dụng",
@@ -8883,6 +9037,8 @@
         openHelpModal();
       } else if (params.get("modal") === "golfWrong") {
         checkGolfResult();
+      } else if (params.get("golfAssembled") === "1") {
+        applyGolfSolution();
       } else if (params.get("modal") === "golfCorrect") {
         applyGolfSolution();
         checkGolfResult();
@@ -9358,6 +9514,11 @@
 
     function snapToSlot(slotEl) {
       if (!legoSelectedBlock) return;
+      const slotId = slotEl.dataset.slotId;
+      if (legoSnappedSlots[slotId]) {
+        showAlert("info", "Ô này đã được ghép khối thẻ rồi. Em hãy chọn ô còn trống khác nhé!");
+        return;
+      }
       processSnap(slotEl, legoSelectedBlock);
     }
 
@@ -9384,12 +9545,16 @@
         s.addEventListener("drop", (e) => {
           e.preventDefault();
           s.classList.remove("drag-over");
+          if (legoSnappedSlots[s.dataset.slotId]) {
+            showAlert("info", "Ô này đã được ghép khối thẻ rồi. Em hãy chọn ô còn trống khác nhé!");
+            return;
+          }
           if (legoSelectedBlock) processSnap(s, legoSelectedBlock);
         });
       });
     }
 
-        function submitLegoResult() {
+    function submitLegoResult() {
       const data = LESSONS_DATA[currentLessonKey].lego;
       let correctCount = 0;
       data.slots.forEach(s => {
@@ -9406,20 +9571,20 @@
 
       if (correctCount === totalSlots) {
         AudioEngine.playSuccess();
-        showAlert("success", `🎉 <b>XUẤT SẮC!</b> Em đã lắp đúng <b>${correctCount}/${totalSlots}</b> khối HTML. Em có thể bấm <b>'Sang Phần 2 ➡'</b> để tiếp tục!`);
+        showAlert("success", `🎉 <b>XUẤT SẮC!</b> Em đã ghép đúng hoàn toàn <b>${correctCount}/${totalSlots}</b> khối HTML. Em có thể bấm <b>'Sang Phần 2: Thực Hành ➡'</b> để tiếp tục!`);
       } else {
-        AudioEngine.playRepel();
+        AudioEngine.playPop();
         showAlert("warning", `⚠️ <b>KẾT QUẢ ĐÃ GHI NHẬN: ${correctCount}/${totalSlots} KHỐI ĐÚNG</b><br>Em có thể bấm <b>'↺ Làm Lại'</b> để xếp lại, hoặc bấm <b>'Sang Phần 2: Thực Hành ➡'</b> để tiếp tục bài học nhé!`);
       }
     }
 
-function processSnap(slotEl, blockEl) {
+    function processSnap(slotEl, blockEl) {
       const slotId = slotEl.dataset.slotId;
       const acceptList = (slotEl.dataset.accept || "").split(",");
       const blockType = blockEl.dataset.type;
       const violation = blockEl.dataset.violation;
 
-      // Check W3C rule violation
+      // Check W3C rule violation (nếu có)
       if (violation) {
         AudioEngine.playRepel();
         slotEl.classList.add("repelled");
@@ -9439,31 +9604,43 @@ function processSnap(slotEl, blockEl) {
             ✓ ${escapeHtml(blockEl.textContent.trim())}
           </div>
         `;
+        blockEl.classList.add("snapped-used");
         blockEl.style.display = "none";
-        legoSnappedSlots[slotId] = true;
+        
+        // LƯU ĐẦY ĐỦ THÔNG TIN OBJECT:
+        legoSnappedSlots[slotId] = {
+          id: blockEl.dataset.id,
+          type: blockType,
+          text: blockEl.textContent.trim()
+        };
         legoSelectedBlock = null;
 
         const total = LESSONS_DATA[currentLessonKey].lego.slots.length;
         const currentCount = Object.keys(legoSnappedSlots).length;
-        document.getElementById("legoProgress").textContent = currentCount;
+        const progEl = document.getElementById("legoProgress");
+        if (progEl) progEl.textContent = currentCount;
+
+        // TỰ ĐỘNG CẬP NHẬT KẾT QUẢ ĐÚNG / TỔNG THEO THỜI GIAN THỰC!
+        recordPartResult(1, currentCount, total);
+
+        const nextBtn = document.getElementById("btnLegoNextPart");
 
         if (currentCount === total) {
           AudioEngine.playSuccess();
-          markPartCorrect(1, true, `${total}/${total} khối (Hoàn thành)`);
-          showAlert("success", `🎉 <b>XUẤT SẮC!</b> Em đã hoàn thành chính xác 100% cấu trúc tài liệu HTML! Thầy/Cô và các em có thể quan sát lại toàn bộ bài làm bên dưới.`);
+          if (nextBtn) nextBtn.style.display = "inline-flex";
+          showAlert("success", `🎉 <b>XUẤT SẮC!</b> Em đã hoàn thành chính xác 100% (${total}/${total} khối)! Bấm <b>'Sang Phần 2: Thực Hành ➡'</b> để tiếp tục.`);
         } else {
-          showAlert("info", `✓ Đã khớp khối thẻ vào đúng vị trí! Tiếp tục lắp các khối còn lại.`);
+          showAlert("info", `✓ Đã khớp chính xác! Em đã ghép đúng <b>${currentCount}/${total}</b> khối. Tiếp tục ghép các khối còn lại nhé!`);
         }
       } else {
         AudioEngine.playRepel();
         slotEl.classList.add("repelled");
         setTimeout(() => slotEl.classList.remove("repelled"), 500);
-        showAlert("error", `❌ Khối thẻ này không thuộc vị trí này. Hãy quan sát quy tắc phân nhánh của cấu trúc cây!`);
+        showAlert("error", `❌ Khối thẻ này chưa phù hợp với vị trí đã chọn. Em hãy đọc kỹ phần mô tả và chọn lại nhé!`);
       }
     }
 
     // ==========================================
-        // ==========================================
     // MODULE 3 MỚI: GHÉP MÃ THEO THỨ TỰ (3 CỘT)
     // CỘT 1: CÁC CÂU LỆNH
     // CỘT 2: Ô TRỐNG KÉO CÂU LỆNH THEO THỨ TỰ
