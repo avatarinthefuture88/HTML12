@@ -3825,13 +3825,7 @@
             </div>
           </div>
 
-          <!-- NỘP BÀI (MÀU VÀNG CAM) -->
-          <div class="attendance-pill-btn" id="attendanceTrigger" onclick="openAttendanceModal()" title="Bấm để Nộp bài gửi kết quả của bạn cho giáo viên">
-            <div class="attendance-pill-icon">📊</div>
-            <div class="robot-label">
-              <span class="robot-line-1"><span class="label-full">NỘP BÀI</span><span class="label-mobile">Nộp bài</span></span>
-            </div>
-          </div>
+
         </div>
 
         <!-- Ở GIỮA THANH DƯỚI: 2 NÚT ĐIỀU HƯỚNG BÀI/PHẦN -->
@@ -8668,7 +8662,23 @@
         // ==========================================
     // MODULE 5: SƠ ĐỒ TƯ DUY TƯƠNG TÁC (KỸ THUẬT BẢN ĐỒ KHÁI NIỆM)
     // ==========================================
-    let conceptSolvedSlots = {};
+let conceptSolvedSlots = {};
+    const ATT_CONCEPT_KEY = "weblab12_concept_slots_v4";
+
+    function checkAll5PartsCompleted(lessonKey = currentLessonKey) {
+      const stats = (lessonStats && lessonStats[lessonKey]) || {};
+      const totalSlots = (LESSONS_DATA[lessonKey]?.synthesis?.conceptMap?.branches?.length) || 4;
+      const p5Solved = (conceptSolvedSlots && conceptSolvedSlots[lessonKey]) ? Object.keys(conceptSolvedSlots[lessonKey]).length : 0;
+      return Boolean(stats.p1 && stats.p2 && stats.p3 && stats.p4 && (p5Solved === totalSlots));
+    }
+
+    function persistConceptSlots() {
+      try {
+        localStorage.setItem(ATT_CONCEPT_KEY, JSON.stringify(conceptSolvedSlots));
+      } catch (e) {
+        console.warn("Lỗi lưu conceptSolvedSlots:", e);
+      }
+    }
 
     function renderSynthesis(data) {
       const canvas = document.getElementById("workspaceCanvas");
@@ -8739,9 +8749,10 @@
         `;
       }).join("");
 
-      const totalSlots = cmap.branches.length;
+const totalSlots = cmap.branches.length;
       const currentCount = Object.keys(solved).length;
       const isAllDone = (currentCount === totalSlots);
+      const isAll5Done = checkAll5PartsCompleted(currentLessonKey);
 
       canvas.innerHTML = `
         <div class="synthesis-container">
@@ -8778,13 +8789,19 @@
                 </span>
                 ${isAllDone ? '<span class="cmap-celebrate-text">🎉 XUẤT SẮC! ĐÃ HOÀN TẤT TOÀN BỘ SƠ ĐỒ TƯ DUY!</span>' : ''}
               </div>
-              <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
                 <button class="action-btn btn-secondary cmap-btn-reset" onclick="resetConceptMap()" style="padding:8px 18px;font-size:0.92rem;font-weight:700;color:#000000;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:6px;cursor:pointer;">
                   ↺ Đặt Lại Sơ Đồ
                 </button>
-                <button class="action-btn btn-primary" onclick="openAttendanceModal()" style="padding:8px 22px;font-size:0.95rem;font-weight:800;background:linear-gradient(135deg,#ea580c,#f97316);border:none;border-radius:6px;color:#ffffff;box-shadow:0 3px 10px rgba(234,88,12,0.4);cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
-                  <span>📊</span> <span>Nộp Bài</span>
-                </button>
+                ${isAll5Done ? `
+                  <button class="action-btn btn-primary" onclick="openAttendanceModal()" style="padding:9px 24px;font-size:0.96rem;font-weight:800;background:linear-gradient(135deg,#ea580c,#f97316);border:none;border-radius:6px;color:#ffffff;box-shadow:0 3px 12px rgba(234,88,12,0.45);cursor:pointer;display:inline-flex;align-items:center;gap:7px;">
+                    <span>📊</span> <span>NỘP BÀI 🚀</span>
+                  </button>
+                ` : `
+                  <span style="font-size:0.86rem;color:#64748b;font-weight:600;background:#f8fafc;padding:7px 14px;border-radius:6px;border:1px dashed #cbd5e1;display:inline-flex;align-items:center;gap:6px;">
+                    <span>🔒</span> <span>Nút Nộp Bài sẽ mở khi hoàn thành đủ 5 phần</span>
+                  </span>
+                `}
               </div>
             </div>
           </div>
@@ -8792,8 +8809,19 @@
       `;
 
       const solvedNow = (conceptSolvedSlots[currentLessonKey] ? Object.keys(conceptSolvedSlots[currentLessonKey]).length : 0);
-      if (solvedNow > 0 || isAllDone) {
+      if (solvedNow > 0) {
         recordPartResult(5, solvedNow, totalSlots);
+      } else {
+        if (lessonStats[currentLessonKey]) {
+          lessonStats[currentLessonKey].p5 = false;
+        }
+        if (lessonPartDetails[currentLessonKey]) {
+          delete lessonPartDetails[currentLessonKey].p5;
+        }
+        if (lessonPartScores[currentLessonKey]) {
+          delete lessonPartScores[currentLessonKey].p5;
+        }
+        persistLessonStats();
       }
     }
 
@@ -8815,6 +8843,7 @@
           conceptSolvedSlots[currentLessonKey] = {};
         }
         conceptSolvedSlots[currentLessonKey][missingId] = true;
+        persistConceptSlots();
 
         const synData = LESSONS_DATA[currentLessonKey].synthesis;
         const branches = synData.conceptMap.branches;
@@ -8862,6 +8891,19 @@
 
     function resetConceptMap() {
       conceptSolvedSlots[currentLessonKey] = {};
+      persistConceptSlots();
+      if (lessonStats[currentLessonKey]) {
+        lessonStats[currentLessonKey].p5 = false;
+      }
+      if (lessonPartDetails[currentLessonKey]) {
+        delete lessonPartDetails[currentLessonKey].p5;
+      }
+      if (lessonPartScores[currentLessonKey]) {
+        delete lessonPartScores[currentLessonKey].p5;
+      }
+      persistLessonStats();
+      updateStatsUI();
+      if (typeof updatePartNavButtons === "function") updatePartNavButtons();
       AudioEngine.playPop();
       renderSynthesis(LESSONS_DATA[currentLessonKey].synthesis);
       showAlert("info", "🔄 Đã đặt lại sơ đồ tư duy! Em hãy hoàn thiện lại các mắt xích nhé.");
@@ -9413,7 +9455,7 @@
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;">
               <button class="action-btn btn-secondary" onclick="renderSpeedRun(LESSONS_DATA[currentLessonKey].speedRun)" style="border:1.5px solid #cbd5e1;background:#ffffff;color:#000000;border-radius:6px;font-weight:700;">↺ Làm Lại</button>
-              <button class="action-btn btn-primary" onclick="submitSpeedRun()" style="background:linear-gradient(135deg,#059669,#10b981);border:none;border-radius:6px;font-weight:800;">✅ Nộp Bài & Ghi Nhận</button>
+<button class="action-btn btn-primary" onclick="submitSpeedRun()" style="background:linear-gradient(135deg,#059669,#10b981);border:none;border-radius:6px;font-weight:800;">✅ Ghi Nhận Kết Quả</button>
               <button class="action-btn btn-primary" id="btnSrNextPart" onclick="switchMode('escapeRoom')" style="display:none;background:linear-gradient(135deg,#2563eb,#1d4ed8);border:none;border-radius:6px;font-weight:800;">Sang Phần 4: Vận Dụng ➡</button>
             </div>
           </div>
@@ -9789,7 +9831,7 @@
                 <button class="action-btn btn-primary" 
                         onclick="checkGolfResult()" 
                         style="padding:8px 22px;font-size:0.92rem;font-weight:800;background:linear-gradient(135deg,#059669,#10b981);border:none;box-shadow:0 4px 12px rgba(16,185,129,0.35);border-radius:6px;white-space:nowrap;">
-                  🚀 Nộp Bài
+                  🚀 Ghi Nhận Kết Quả
                 </button>
               </div>
             </div>
@@ -11601,6 +11643,39 @@
         if (savedScores) {
           lessonPartScores = JSON.parse(savedScores);
         }
+        const savedConcept = localStorage.getItem(ATT_CONCEPT_KEY);
+        if (savedConcept) {
+          try {
+            conceptSolvedSlots = JSON.parse(savedConcept) || {};
+          } catch(e) {
+            conceptSolvedSlots = {};
+          }
+        }
+
+        // TỰ ĐỘNG DỌN DẸP DỮ LIỆU CŨ PHẦN 5: Đảm bảo số câu đúng khớp chính xác với số mắt xích thực tế
+        Object.keys(lessonStats).forEach(k => {
+          const solvedCount = (conceptSolvedSlots[k] ? Object.keys(conceptSolvedSlots[k]).length : 0);
+          const totalSlots = (LESSONS_DATA[k]?.synthesis?.conceptMap?.branches?.length) || 4;
+          if (solvedCount === 0) {
+            if (lessonStats[k]) lessonStats[k].p5 = false;
+            if (lessonPartDetails[k] && lessonPartDetails[k].p5) delete lessonPartDetails[k].p5;
+            if (lessonPartScores[k] && lessonPartScores[k].p5) delete lessonPartScores[k].p5;
+          } else {
+            const isDone = (solvedCount === totalSlots);
+            const scoreVal = Math.round((solvedCount / totalSlots) * 2.0 * 10) / 10;
+            if (lessonStats[k]) lessonStats[k].p5 = true;
+            if (!lessonPartDetails[k]) lessonPartDetails[k] = {};
+            lessonPartDetails[k].p5 = `${solvedCount}/${totalSlots}`;
+            if (!lessonPartScores[k]) lessonPartScores[k] = {};
+            lessonPartScores[k].p5 = {
+              correct: solvedCount,
+              total: totalSlots,
+              score: scoreVal,
+              text: `${solvedCount}/${totalSlots}`
+            };
+          }
+        });
+        persistLessonStats();
       } catch (e) {
         console.warn("Lỗi đọc lessonStats:", e);
       }
@@ -11667,7 +11742,32 @@
       const p2Obj = getPart("p2", 5);
       const p3Obj = getPart("p3", 4);
       const p4Obj = getPart("p4", 1);
-      const p5Obj = getPart("p5", 4);
+
+      // Phần 5: Tính điểm thực tế dựa trên số mắt xích đã giải trong Sơ đồ tư duy
+      const totalP5Slots = (LESSONS_DATA[lessonKey]?.synthesis?.conceptMap?.branches?.length) || 4;
+      const actualP5Solved = (conceptSolvedSlots && conceptSolvedSlots[lessonKey]) ? Object.keys(conceptSolvedSlots[lessonKey]).length : 0;
+      let p5Obj;
+      if (actualP5Solved > 0) {
+        const p5Score = Math.round((actualP5Solved / totalP5Slots) * 2.0 * 10) / 10;
+        const isAllDone = (actualP5Solved === totalP5Slots);
+        p5Obj = {
+          submitted: true,
+          done: isAllDone,
+          text: `${actualP5Solved}/${totalP5Slots}`,
+          score: p5Score,
+          correct: actualP5Solved,
+          total: totalP5Slots
+        };
+      } else {
+        p5Obj = {
+          submitted: false,
+          done: false,
+          text: "Chưa làm",
+          score: 0.0,
+          correct: 0,
+          total: totalP5Slots
+        };
+      }
 
       const totalScoreRaw = (p1Obj.score + p2Obj.score + p3Obj.score + p4Obj.score + p5Obj.score);
       const totalScore = Math.round(totalScoreRaw * 10) / 10;
@@ -11704,6 +11804,7 @@
         if (conceptSolvedSlots[currentLessonKey]) {
           delete conceptSolvedSlots[currentLessonKey];
         }
+        persistConceptSlots();
         legoSnappedSlots = {};
         p3Assembled = [];
         srSelectedOptions.clear();
